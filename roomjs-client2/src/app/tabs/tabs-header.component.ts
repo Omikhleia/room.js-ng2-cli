@@ -26,11 +26,11 @@ export class TabsHeaderComponent {
     });
   }
 
-  private selectTab(index) {
+  private selectTab(index: number) {
     this.tabs.setCurrentTab(index);
   }
   
-  private closeTab(index) {
+  private closeTab(index: number) {
     this.tabs.closeTab(index);
   }
 }

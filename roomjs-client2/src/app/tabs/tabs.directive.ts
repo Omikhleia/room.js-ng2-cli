@@ -16,7 +16,7 @@ import { TabsService } from './tabs.service';
 })
 export class TabDirective implements OnInit {
   @Input('content') content: any; // Component for contents (shall not change after init)
-  @Input('index') index: string;  // Tab index
+  @Input('index') index: number;  // Tab index
   @Input('data') data: any;       // Data for contents
   
   constructor(
