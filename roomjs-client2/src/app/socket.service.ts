@@ -86,6 +86,18 @@ export class SocketService {
       fn(data);
     });
   }
+
+  saveVerb(params: any, fn: any) {
+    this.socket.emit('save-verb', params, response => {
+      fn(response);
+    });
+  }
+  
+  saveFunction(params: any, fn: any) {
+    this.socket.emit('save-function', params, response => {
+      fn(response);
+    });
+  }
   
   // Private methods
     

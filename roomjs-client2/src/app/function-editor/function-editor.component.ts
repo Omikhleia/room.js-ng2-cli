@@ -40,13 +40,29 @@ export class FunctionEditorComponent implements OnInit {
 
     if ((ctrl && sKey) || (meta && sKey)) {
       event.preventDefault();
-      
-      console.log("SAVE"); // FIXME TODO
-      setTimeout(() => { alert("Save not implemented yet") }, 0);;
-      
-      this.data.src = this.src;
-      this.dirty.emit(false);
+      this.save();
     }
+  }
+  
+  private save() {
+    const params = {
+      name: this.data.name,
+      src: this.src,
+      objectId: this.data.objectId,
+    };
+    
+    setTimeout(() => { alert("Save not implemented yet") }, 0); // FIXME
+    /*  
+    socketService.saveVerb(params, response => {
+      if (response === 'saved') {
+        this.data.src = this.src;
+        this.dirty.emit(false);
+      } else {
+        // eslint-disable-next-line no-alert
+        alert(response);
+      }
+    }
+    */
   }
   
 }
