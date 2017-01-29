@@ -39,7 +39,7 @@ export class TabsService implements OnDestroy {
     this.subscriptions.push(sub);
   }
 
-  public setCurrentTab(index) {
+  public setCurrentTab(index: number) {
     this.currentTab = index;
     this.currentTabSubject.next(index);
   }
@@ -49,19 +49,32 @@ export class TabsService implements OnDestroy {
     this.subscriptions.push(sub);
   }
   
-  public setDirty(index, dirty) {
+  public setDirty(index: number, dirty: boolean) {
     this.tabs[index].dirty = dirty;
     this.tabsSubject.next(this.tabs);
   }
   
   public closeTab(index) {
-    // Assumption: never remove the first tab...
+    // Assumption: never remove the first tab...     
     if (index !== 1) {
-      this.setCurrentTab(index - 1);
-      // FIXME We should require user confirm for dirty tabs
-      this.tabs.splice(index - 1, 1);
-      this.tabsSubject.next(this.tabs);
+      if (this.canCloseTab(index - 1)) {
+        this.setCurrentTab(index - 1);
+        this.tabs.splice(index - 1, 1);
+        this.tabsSubject.next(this.tabs);
+      }
     }
+  }
+  
+  private canCloseTab(index: number) {
+    const msg = [
+      'Are you sure you want to close this tab?',
+      'You have unsaved changes that will be lost.',
+    ].join(' ');
+
+    return (this.tabs[index].dirty)
+      // eslint-disable-next-line no-alert
+      ? confirm(msg) // FIXME later have our own widget
+      : true;
   }
 
   ngOnDestroy() {
