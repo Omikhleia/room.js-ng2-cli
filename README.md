@@ -16,3 +16,15 @@ Additionaly, this client aims at offering some sort of Graphical MOO/MUD, rather
 - ...
 
 For that purpose, the client expects some JSON structures to be sent from the game world. A specific  game world is therefore included, to be used in place of the standard demonstration provided with Room.JS.
+
+High level features and TODO list:
+- [x] Basic communication logic (login, command line, text view...)
+- [x] Sound system
+  - [X] Effects (one-shot) sounds
+  - [X] Ambiant sounds
+  - [ ] User settings control (UI)
+- [ ] Image/Map system
+- [ ] Inventory system
+- [ ] Verb/Function editing (as in original client)
+  - [x] Look-up, code retrieval and display
+  - [ ] Save to game engine
