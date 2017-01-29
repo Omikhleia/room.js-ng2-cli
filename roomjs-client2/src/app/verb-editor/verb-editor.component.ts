@@ -19,7 +19,7 @@ export class VerbEditorComponent implements OnInit {
     theme: 'solarized light'
   };
 
-  private src: string;
+  private code: string;
   private pattern: string;
   private dobjarg: string;
   private iobjarg: string;
@@ -29,15 +29,20 @@ export class VerbEditorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.src = this.data.verb.code;
+    this.code = this.data.verb.code;
     this.pattern = this.data.verb.pattern;
     this.dobjarg = this.data.verb.dobjarg;
     this.iobjarg = this.data.verb.iobjarg;
     this.preparg = this.data.verb.preparg;
   }
   
-  onChange() {
-    this.dirty.emit(this.data.verb.code !== this.src);
+  onModelChange() {
+    let dirty = this.pattern !== this.data.verb.pattern ||
+                this.dobjarg !== this.data.verb.dobjarg ||
+                this.preparg !== this.data.verb.preparg ||
+                this.iobjarg !== this.data.verb.iobjarg ||
+                this.code !== this.data.verb.code;
+    this.dirty.emit(dirty);
   }
   
   onKeyDown(event: KeyboardEvent) {
@@ -48,13 +53,40 @@ export class VerbEditorComponent implements OnInit {
 
     if ((ctrl && sKey) || (meta && sKey)) {
       event.preventDefault();
-      
-      console.log("SAVE"); // FIXME TODO
-      setTimeout(() => { alert("Save not implemented yet") }, 0);;
-
-      this.data.verb.code = this.src;
-      this.dirty.emit(false);
+      this.save();
     }
+  }
+  
+  private save() {
+    const newVerb = {
+      name: this.data.verb.name,
+      pattern: this.pattern,
+      dobjarg: this.dobjarg,
+      preparg: this.preparg,
+      iobjarg: this.iobjarg,
+      code: this.code,
+    };
+    const params = {
+      objectId: this.data.objectId,
+      verb: newVerb,
+    };
+    
+    setTimeout(() => { alert("Save not implemented yet") }, 0); // FIXME
+    /*  
+    socketService.saveVerb(params, response => {
+      if (response === 'saved') {
+        this.data.verb.code = this.code;
+        this.data.verb.pattern = this.pattern;
+        this.data.verb.dobjarg = this.dobjarg;
+        this.data.verb.iobjarg = this.iobjarg;
+        this.data.verb.preparg = this.preparg;
+        this.dirty.emit(false);        
+      } else {
+        // eslint-disable-next-line no-alert
+        alert(response);
+      }
+    }
+    */
   }
 
 }
