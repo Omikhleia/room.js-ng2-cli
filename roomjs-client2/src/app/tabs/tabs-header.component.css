@@ -1,0 +1,51 @@
+.tabs-headers {
+  overflow: hidden;
+  display: flex;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.tabs-headers .tabs-header {
+  flex-grow: 1;
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid #4b6e4e;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background: #83b086;
+}
+.tabs-headers .tabs-header.active {
+  color: white;
+  font-weight: bold;
+  background: #4b6e4e;
+  position: relative;
+}
+.tab-name {
+  white-space: nowrap;
+  padding-left: 20px;
+}
+  
+.tab-name.tab-dirty {
+  color: orange;
+}
+  
+.tab-close-button {
+  width: 20px;
+  position: absolute;
+}
+
+.tab-close-button:before {
+  content: '✕';
+}
+
+.tab-dirty.tab-close-button:before {
+  font-size: 90%;
+  content: '◯';
+  color: orange;
+}
+
+.tab-close-button:hover:before {
+  font-size: 100%;
+  content: '✕';
+  color: #8c2a2a;
+}

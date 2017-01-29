@@ -1,0 +1,8 @@
+.wrapper {
+  background: #dfa941;
+  display: flex;
+  padding: 0px 2px 5px 2px;
+}
+.cmdline {
+  flex: 0 0 100%;
+}

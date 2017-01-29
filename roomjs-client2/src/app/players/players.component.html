@@ -1,0 +1,14 @@
+<div class="lists">
+  <div>ROOM</div>
+</div>
+<div class="players" slimScroll size="7px" 
+                     height="50vh"
+                     scrollToBottom="true"
+                     railVisible="true"
+                     disableFadeOut="true"
+                     railColor="#bc94b7"
+                     opacity=".5"
+                     distance="3px"
+                     color="#000">
+  <div *ngFor="let player of players">{{player}}</div>
+</div>

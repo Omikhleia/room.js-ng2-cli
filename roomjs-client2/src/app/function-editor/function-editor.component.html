@@ -1,0 +1,6 @@
+<div (keydown)="onKeyDown($event)">
+  <codemirror [(ngModel)]="src" 
+              [config]="cmconfig"
+              (change)="onChange()">
+  </codemirror>
+</div>

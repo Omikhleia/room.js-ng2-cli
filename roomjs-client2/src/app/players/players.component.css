@@ -1,0 +1,19 @@
+.lists {
+  background: #3e313c;
+  border-bottom: 1px solid #4d394b;
+}
+.lists div {
+  color: white;
+  font-weight: bold;
+  padding: 2px 10px 30px 10px;
+}
+.players {
+  background: #4D394B;
+  height: 50vh;
+  overflow-y: auto;
+}
+.players div {
+  white-space: pre-wrap;
+  color: #ab9ba9;
+  padding: 2px 10px;
+}

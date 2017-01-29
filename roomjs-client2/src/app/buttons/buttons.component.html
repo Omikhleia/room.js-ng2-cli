@@ -1,0 +1,10 @@
+<div class="dialog-modal">
+  <div class="dialog-box">
+    <header><div class="title">{{title}}</div></header>
+    <div class="dialog-content">
+      <p *ngFor="let field of fields">
+        <button (click)="onClicked(field.name)" class="btn btn-default">{{field.label}}</button>
+      </p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="tabs-headers">
+  <div class="tabs-header" *ngFor="let _tab of tabsData; let i = index" 
+      (click)="selectTab(i+1)" [ngClass]="{active: (i+1) == currentTab}">
+    <span *ngIf="_tab.close && _tab.dirty" [ngClass]="{'tab-dirty': true, 'tab-close-button': true}"
+          (click)="closeTab(i+1)"></span>
+    <span *ngIf="_tab.close && !_tab.dirty" [ngClass]="{'tab-dirty': false, 'tab-close-button': true}"
+          (click)="closeTab(i+1)"></span>
+    <span class="tab-name" [ngClass]="{'tab-dirty': _tab.dirty}">{{_tab.title}}</span>
+  </div>
+</div>

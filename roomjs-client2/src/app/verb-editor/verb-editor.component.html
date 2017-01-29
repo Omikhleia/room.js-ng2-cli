@@ -1,0 +1,51 @@
+<div (keydown)="onKeyDown($event)">
+  <div class='verb-editor-palette'>
+    <label>
+      <span>Match Pattern:</span>
+      <input type='text' [(ngModel)]="pattern">
+    </label>
+    <label>
+      <span>Direct Object:</span>
+      <select [(ngModel)]="dobjarg">
+        <option value='none'>none</option>
+        <option value='this'>this</option>
+        <option value='any'>any</option>
+      </select>
+    </label>
+    <label>
+      <span>Preposition:</span>
+      <select [(ngModel)]="preparg">
+        <option value='none'>none</option>
+        <option value='any'>any</option>
+        <option value='with/using'>with/using</option>
+        <option value='at/to'>at/to</option>
+        <option value='in front of'>in front of</option>
+        <option value='in/inside/into'>in/inside/into</option>
+        <option value='on top of/on/onto/upon'>on top of/on/onto/upon</option>
+        <option value='out of/from inside/from'>out of/from inside/from</option>
+        <option value='over'>over</option>
+        <option value='through'>through</option>
+        <option value='under/underneath/beneath'>under/underneath/beneath</option>
+        <option value='behind'>behind</option>
+        <option value='beside'>beside</option>
+        <option value='for/about'>for/about</option>
+        <option value='is'>is</option>
+        <option value='as'>as</option>
+        <option value='off/off of'>off/off of</option>
+      </select>
+    </label>
+    <label>
+      <span>Indirect Object:</span>
+      <select [(ngModel)]="iobjarg">
+        <option value='none'>none</option>
+        <option value='this'>this</option>
+        <option value='any'>any</option>
+      </select>
+    </label>
+  </div>
+
+  <codemirror [(ngModel)]="src" 
+              [config]="cmconfig"
+              (change)="onChange()">
+  </codemirror>
+</div>

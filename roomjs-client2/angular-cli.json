@@ -1,0 +1,70 @@
+{
+  "project": {
+    "version": "1.0.0-beta.25.5",
+    "name": "roomjs-client"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.json",
+      "prefix": "app",
+      "mobile": false,
+      "styles": [
+        "../resources/bootstrap/css/bootstrap.min.css",
+        "../resources/fonts/quattrocentosans.css",
+        "styles.css",
+         "../node_modules/codemirror/lib/codemirror.css",
+         "../node_modules/codemirror/addon/scroll/simplescrollbars.css",
+         "../node_modules/codemirror/theme/solarized.css"
+      ],
+      "scripts": [
+        "../node_modules/codemirror/lib/codemirror.js",
+        "../node_modules/codemirror/mode/javascript/javascript.js",
+        "../node_modules/codemirror/addon/edit/matchbrackets.js",
+        "../node_modules/codemirror/addon/edit/closebrackets.js",
+        "../node_modules/codemirror/addon/scroll/simplescrollbars.js"
+      ],
+      "environments": {
+        "source": "environments/environment.ts",
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts"
+      }
+    }
+  ],
+  "addons": [],
+  "packages": [],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "prefixInterfaces": false,
+    "inline": {
+      "style": false,
+      "template": false
+    },
+    "spec": {
+      "class": false,
+      "component": true,
+      "directive": true,
+      "module": false,
+      "pipe": true,
+      "service": true
+    }
+  }
+}

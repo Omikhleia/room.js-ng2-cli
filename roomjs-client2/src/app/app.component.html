@@ -1,0 +1,9 @@
+<h1>RoomJS angular2 client</h1>
+<!-- Do not use *ngIf here, as we want to keep the bootstrapped search object
+     so that previous searches are displayed -->
+<div [style.display]="searchBoxVisible ? 'inherit' : 'none'">
+  <app-search (choice)="onSearchResult($event)" [refocus]="searchBoxVisible"></app-search>
+</div>
+
+<tabs-header></tabs-header>
+<tabs-body></tabs-body>

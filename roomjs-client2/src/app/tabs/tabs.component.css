@@ -1,0 +1,9 @@
+.tabs .tabs-body {
+  overflow: hidden;
+}
+.tabs .tabs-body .tab {
+  display: none;
+}
+.tabs .tabs-body .tab.visible {
+  display: block;
+}

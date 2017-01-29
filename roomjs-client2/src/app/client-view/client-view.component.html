@@ -1,0 +1,20 @@
+<div appDialogAnchor></div>
+<div class="wrapper">
+  <div class="left">
+    <app-players [players]="players"></app-players>
+  </div>
+  <div class="middle">
+    <app-mappane [exits]="exits"
+                 (commandEntered)="onCommand($event)"></app-mappane>
+  </div>
+  <div class="right">
+    <app-textpane (commandEntered)="onCommand($event)">
+    </app-textpane>
+  </div>
+</div>
+<div *ngIf="showCmdLine" [@appearAnimation]>
+  <app-cmdline [prompt]="prompt"
+               (commandEntered)="onCommand($event)" 
+               (modeChange)="onModeChange($event)">
+  </app-cmdline>
+<div>
