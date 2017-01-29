@@ -2,7 +2,7 @@
 
 The sound system relies on the fact that [transferable](https://www.w3.org/TR/html5/infrastructure.html#transferable-objects) JavaScript objects can be conveyed on Websockets (Socket.IO).
 
-Therefore, instead of raw text, an object may also be sent to the client side. The client an object having the following structure:
+Therefore, instead of raw text, an object may also be sent to the client side. The client expects an object having the following structure:
 
 ```javascript
   { ambiant: Array, 
