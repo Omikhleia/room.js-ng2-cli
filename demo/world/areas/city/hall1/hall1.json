@@ -1,0 +1,36 @@
+{
+  "name": "Southern hall",
+  "aliases": [],
+  "traitIds": [
+    "lib_room"
+  ],
+  "locationId": null,
+  "properties": {
+    "exits": {
+      "object": {
+        "south": {
+          "ref": "areas_city_tradersgate"
+        },
+        "north": {
+          "ref": "areas_city_hall2"
+        },
+        "east": {
+          "ref": "areas_city_halldoor1"
+        }
+      }
+    },
+    "extraMatchObjects": {
+      "array": [
+        {
+          "ref": "areas_city_halldoor1"
+        }
+      ]
+    },
+    "ambiant": {
+      "value": "street"
+    },
+    "description": {
+      "value": "The southern part of the Great Hall is an elaborate building. The cobblestone road moves to the south and to the north."
+    }
+  }
+}

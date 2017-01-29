@@ -1,0 +1,36 @@
+{
+  "name": "East street",
+  "aliases": [],
+  "traitIds": [
+    "lib_room"
+  ],
+  "locationId": null,
+  "properties": {
+    "exits": {
+      "object": {
+        "west": {
+          "ref": "areas_city_greatmarket"
+        },
+        "east": {
+          "ref": "areas_city_tradersgate"
+        },
+        "north": {
+          "ref": "areas_city_eastdoor1"
+        }
+      }
+    },
+    "description": {
+      "value": "The cobblestone road moves to the west and east here. The Great Market is to the west. Many shops and buildings can be seen all around."
+    },
+    "ambiant": {
+      "value": "street"
+    },
+    "extraMatchObjects": {
+      "array": [
+        {
+          "ref": "areas_city_eastdoor1"
+        }
+      ]
+    }
+  }
+}

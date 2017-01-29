@@ -1,0 +1,230 @@
+{
+  "name": "sounds",
+  "aliases": [],
+  "traitIds": [
+    "lib_root"
+  ],
+  "locationId": null,
+  "properties": {
+    "street": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "crickets"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "market": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "crickets"
+            },
+            {
+              "value": 5
+            }
+          ]
+        },
+        {
+          "array": [
+            {
+              "value": "market"
+            },
+            {
+              "value": 10
+            }
+          ]
+        }
+      ]
+    },
+    "tavern": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "medieval_music"
+            },
+            {
+              "value": 25
+            }
+          ]
+        }
+      ]
+    },
+    "kitchen": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "kitchen"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "lock": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "key_lock1"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "unlock": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "key_lock2"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "eat": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "crunch"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "drink": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "drink"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "doorBellEnter": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "door_bell"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "doorCreaky": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "door_creaky"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "doorCreakyLow": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "door_creaky"
+            },
+            {
+              "value": 10
+            }
+          ]
+        }
+      ]
+    },
+    "open": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "open"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "close": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "close"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "doorKnock": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "door_knock"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    },
+    "ravens": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "ravens"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "Northern hall",
+  "aliases": [],
+  "traitIds": [
+    "lib_room"
+  ],
+  "locationId": null,
+  "properties": {
+    "exits": {
+      "object": {
+        "south": {
+          "ref": "areas_city_hall1"
+        },
+        "north": {
+          "ref": "areas_city_square"
+        },
+        "east": {
+          "ref": "areas_city_halldoor2"
+        }
+      }
+    },
+    "ambiant": {
+      "value": "street"
+    },
+    "extraMatchObjects": {
+      "ref": "areas_city_halldoor2"
+    },
+    "description": {
+      "value": "The northern part of the Great Hall is flanked by a tower. The cobblestone road moves to the south and to the north here."
+    }
+  }
+}

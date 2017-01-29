@@ -1,0 +1,17 @@
+{
+  "name": "door",
+  "aliases": [],
+  "traitIds": [
+    "lib_door"
+  ],
+  "locationId": null,
+  "properties": {
+    "sides": {
+      "array": [
+        {
+          "ref": "areas_city_westgate"
+        }
+      ]
+    }
+  }
+}

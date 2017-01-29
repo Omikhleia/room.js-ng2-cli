@@ -1,0 +1,26 @@
+{
+  "name": "Square",
+  "aliases": [],
+  "traitIds": [
+    "lib_room"
+  ],
+  "locationId": null,
+  "properties": {
+    "exits": {
+      "object": {
+        "south": {
+          "ref": "areas_city_hall2"
+        }
+      }
+    },
+    "description": {
+      "value": "Buildings are now more sparse, whereas the road goes uphill. Soon, you reach a green space, where old oaks grows."
+    },
+    "ambiant": {
+      "value": "street"
+    },
+    "enterEffect": {
+      "value": "ravens"
+    }
+  }
+}

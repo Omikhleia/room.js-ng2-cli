@@ -1,0 +1,36 @@
+{
+  "name": "Traders gate",
+  "aliases": [],
+  "traitIds": [
+    "lib_room"
+  ],
+  "locationId": null,
+  "properties": {
+    "exits": {
+      "object": {
+        "west": {
+          "ref": "areas_city_eaststreet"
+        },
+        "northwest": {
+          "ref": "areas_city_eastdoor2"
+        },
+        "north": {
+          "ref": "areas_city_hall1"
+        }
+      }
+    },
+    "description": {
+      "value": "This is place is known as the Trader's Gate, where foreign merchants coming to the city declare their goods. A cobblestone road leads to the west, and an arch goes to the north."
+    },
+    "ambiant": {
+      "value": "street"
+    },
+    "extraMatchObjects": {
+      "array": [
+        {
+          "ref": "areas_city_eastdoor2"
+        }
+      ]
+    }
+  }
+}
