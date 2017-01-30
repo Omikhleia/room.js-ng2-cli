@@ -1,4 +1,4 @@
-import { Component, Type } from '@angular/core';
+import { Component, Type, ComponentRef } from '@angular/core';
 
 /**
  * A tab has a name (title), a type of child component, a flag indicating if it may
@@ -10,5 +10,6 @@ export interface Tab {
   content: Type<Component>,
   close: boolean,
   dirty?: boolean,
-  data?: any
+  data?: any,
+  component?: ComponentRef<any>
 }

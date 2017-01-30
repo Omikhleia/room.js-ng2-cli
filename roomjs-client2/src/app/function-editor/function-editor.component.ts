@@ -27,7 +27,11 @@ export class FunctionEditorComponent implements OnInit {
   ngOnInit() {
     this.src = this.data.src;
   }
-  
+
+  public onForwardEvent(event: KeyboardEvent) {
+    this.onKeyDown(event);
+  }
+
   private onChange() {
     this.dirty.emit(this.data.src !== this.src);
   }
@@ -50,8 +54,8 @@ export class FunctionEditorComponent implements OnInit {
       src: this.src,
       objectId: this.data.objectId,
     };
-    
-    setTimeout(() => { alert("Save not implemented yet") }, 0); // FIXME
+ 
+    setTimeout(() => { alert(`${this.data.objectId}: Save not implemented yet`) }, 0); // FIXME
     /*  
     socketService.saveVerb(params, response => {
       if (response === 'saved') {

@@ -36,7 +36,11 @@ export class VerbEditorComponent implements OnInit {
     this.preparg = this.data.verb.preparg;
   }
   
-  onModelChange() {
+  public onForwardEvent(event: KeyboardEvent) {
+    this.onKeyDown(event);
+  }
+
+  private onModelChange() {
     let dirty = this.pattern !== this.data.verb.pattern ||
                 this.dobjarg !== this.data.verb.dobjarg ||
                 this.preparg !== this.data.verb.preparg ||
@@ -44,8 +48,8 @@ export class VerbEditorComponent implements OnInit {
                 this.code !== this.data.verb.code;
     this.dirty.emit(dirty);
   }
-  
-  onKeyDown(event: KeyboardEvent) {
+
+  private onKeyDown(event: KeyboardEvent) {
     const key = event.keyCode;
     const meta = event.metaKey;
     const ctrl = event.ctrlKey;
@@ -71,7 +75,7 @@ export class VerbEditorComponent implements OnInit {
       verb: newVerb,
     };
     
-    setTimeout(() => { alert("Save not implemented yet") }, 0); // FIXME
+    setTimeout(() => { alert(`${this.data.objectId}: Save not implemented yet`) }, 0); // FIXME
     /*  
     socketService.saveVerb(params, response => {
       if (response === 'saved') {

@@ -79,6 +79,13 @@ export class TabsService implements OnDestroy {
       : true;
   }
 
+  eventForwardTab(index: number, event: KeyboardEvent) {
+    // If tab component exits and has global public handler, invoke it.
+    if (this.tabs[index - 1].component && this.tabs[index - 1].component.instance.onForwardEvent) {
+      this.tabs[index - 1].component.instance.onForwardEvent(event);
+    }
+  }
+
   ngOnDestroy() {
     // Clean-up subscriptions
     this.subscriptions.forEach((sub) => {

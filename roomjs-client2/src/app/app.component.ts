@@ -55,12 +55,13 @@ export class AppComponent implements OnInit {
     });
   }
   
-  // Set global keydown handler for search box
+  // Set global keydown handler for search box and tabs
   @HostListener('document:keydown', ['$event']) onKeyboardEvent(event: KeyboardEvent) {
     const key = event.keyCode;
     const meta = event.metaKey;
     const ctrl = event.ctrlKey;
     const pKey = key === 80;
+    const sKey = key === 83;
     const escapeKey = key === 27;
 
     // On Escape key, ensure search box is not displayed
@@ -73,7 +74,16 @@ export class AppComponent implements OnInit {
       if (this.allowSearch === true) {
         this.searchBoxVisible = true;
       }
-      // Prevent default handlers (e.g. standard Ctrl-p is "Print")
+      // Prevent default handlers (e.g. standard Ctrl-p may be "Print")
+      event.preventDefault();
+    }
+
+    // On Meta/Ctrl-s, pass event to active tab if search box is not on.
+    if ((meta && sKey) || (ctrl && sKey)) {
+      if (!this.searchBoxVisible) {
+        this.tabs.eventForwardTab(this.tab, event);
+      }
+      // Prevent default handlers (e.g. standard Ctrl-s may be "Save Page")
       event.preventDefault();
     }
   }
