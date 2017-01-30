@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
+import { SocketService } from '../socket.service';
+
 @Component({
   selector: 'app-verb-editor',
   templateUrl: './verb-editor.component.html',
@@ -25,7 +27,7 @@ export class VerbEditorComponent implements OnInit {
   private iobjarg: string;
   private preparg: string;
   
-  constructor() {
+  constructor(private socketService: SocketService) {
   }
 
   ngOnInit() {
@@ -35,20 +37,39 @@ export class VerbEditorComponent implements OnInit {
     this.iobjarg = this.data.verb.iobjarg;
     this.preparg = this.data.verb.preparg;
   }
-  
+
+  /**
+   * We want some key events to be application-global, and
+   * forwarded from the main application module to the currently
+   * active tab, if this public method exists.
+   */
   public onForwardEvent(event: KeyboardEvent) {
     this.onKeyDown(event);
   }
 
-  private onModelChange() {
-    let dirty = this.pattern !== this.data.verb.pattern ||
-                this.dobjarg !== this.data.verb.dobjarg ||
-                this.preparg !== this.data.verb.preparg ||
-                this.iobjarg !== this.data.verb.iobjarg ||
-                this.code !== this.data.verb.code;
+  /**
+   * Dirty flag logic for verbs.
+   */
+  private computeDirty(): boolean {
+    const dirty = this.pattern !== this.data.verb.pattern ||
+                  this.dobjarg !== this.data.verb.dobjarg ||
+                  this.preparg !== this.data.verb.preparg ||
+                  this.iobjarg !== this.data.verb.iobjarg ||
+                  this.code !== this.data.verb.code;
+    return dirty;
+  }
+
+  /**
+   * Check dirty flag on model change, and notify parent components.
+   */  
+  private onChange() {
+    const dirty = this.computeDirty();
     this.dirty.emit(dirty);
   }
 
+  /**
+   * Handle key events
+   */
   private onKeyDown(event: KeyboardEvent) {
     const key = event.keyCode;
     const meta = event.metaKey;
@@ -57,10 +78,15 @@ export class VerbEditorComponent implements OnInit {
 
     if ((ctrl && sKey) || (meta && sKey)) {
       event.preventDefault();
-      this.save();
+      if (this.computeDirty()) {
+        this.save();
+      }
     }
   }
-  
+
+  /**
+   * Save verb, invoking the socket service.
+   */  
   private save() {
     const newVerb = {
       name: this.data.verb.name,
@@ -75,9 +101,7 @@ export class VerbEditorComponent implements OnInit {
       verb: newVerb,
     };
     
-    setTimeout(() => { alert(`${this.data.objectId}: Save not implemented yet`) }, 0); // FIXME
-    /*  
-    socketService.saveVerb(params, response => {
+    this.socketService.saveVerb(params, response => {
       if (response === 'saved') {
         this.data.verb.code = this.code;
         this.data.verb.pattern = this.pattern;
@@ -86,11 +110,9 @@ export class VerbEditorComponent implements OnInit {
         this.data.verb.preparg = this.preparg;
         this.dirty.emit(false);        
       } else {
-        // eslint-disable-next-line no-alert
-        alert(response);
+        alert(response); // FIXME Have our own custom modal later
       }
-    }
-    */
+    });
   }
 
 }

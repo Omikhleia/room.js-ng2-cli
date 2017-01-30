@@ -2,11 +2,11 @@
   <div class='verb-editor-palette'>
     <label>
       <span>Match Pattern:</span>
-      <input type='text' [(ngModel)]="pattern" (ngModelChange)="onModelChange()">
+      <input type='text' [(ngModel)]="pattern" (ngModelChange)="onChange()">
     </label>
     <label>
       <span>Direct Object:</span>
-      <select [(ngModel)]="dobjarg" (ngModelChange)="onModelChange()">
+      <select [(ngModel)]="dobjarg" (ngModelChange)="onChange()">
         <option value='none'>none</option>
         <option value='this'>this</option>
         <option value='any'>any</option>
@@ -14,7 +14,7 @@
     </label>
     <label>
       <span>Preposition:</span>
-      <select [(ngModel)]="preparg" (ngModelChange)="onModelChange()">
+      <select [(ngModel)]="preparg" (ngModelChange)="onChange()">
         <option value='none'>none</option>
         <option value='any'>any</option>
         <option value='with/using'>with/using</option>
@@ -36,7 +36,7 @@
     </label>
     <label>
       <span>Indirect Object:</span>
-      <select [(ngModel)]="iobjarg" (ngModelChange)="onModelChange()">
+      <select [(ngModel)]="iobjarg" (ngModelChange)="onChange()">
         <option value='none'>none</option>
         <option value='this'>this</option>
         <option value='any'>any</option>
@@ -46,6 +46,6 @@
 
   <codemirror [(ngModel)]="code" 
               [config]="cmconfig"
-              (ngModelChange)="onModelChange()">
+              (ngModelChange)="onChange()">
   </codemirror>
 </div>

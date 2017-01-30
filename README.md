@@ -25,6 +25,6 @@ High level features and TODO list:
   - [ ] User settings control (UI)
 - [ ] Image/Map system
 - [ ] Inventory system
-- [ ] Verb/Function editing (as in original client)
+- [x] Verb/Function editing (as in original client)
   - [x] Look-up, code retrieval and display
-  - [ ] Save to game engine
+  - [x] Save to game engine

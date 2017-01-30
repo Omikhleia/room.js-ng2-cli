@@ -16,7 +16,7 @@ export class TabsBodyComponent {
   private tabsData: Tab[] = [];
   private currentTab: number = 1;
 
-  constructor(private tabs: TabsService){
+  constructor(private tabs: TabsService) {
     // Subscribe to changes to the list of tabs and the selected tab
     this.tabs.getTabs((data: Tab[]) => {
       this.tabsData = data;
