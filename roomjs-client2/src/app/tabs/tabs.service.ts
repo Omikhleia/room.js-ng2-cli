@@ -29,11 +29,20 @@ export class TabsService implements OnDestroy {
   }  
 
   public addTab(tab: Tab) {
-    this.tabs.push(tab);
-    // IMPORTANT: Some component may not initialize/render properly when not visible
-    // (notably Codemirror). Therefore, always make the new tab current.
-    this.setCurrentTab(this.tabs.length);
-    this.tabsSubject.next(this.tabs);
+    const tabIndex = this.tabs.findIndex((element: Tab) => {
+      return (element.title === tab.title)
+    });
+    if (tabIndex !== -1) {
+      // A tab by same name already exists, make it the current one.
+      this.setCurrentTab(tabIndex + 1);
+    } else {
+      // Add new tab
+      this.tabs.push(tab);
+      // IMPORTANT: Some component may not initialize/render properly when not visible
+      // (notably Codemirror). Therefore, always make the new tab current.
+      this.setCurrentTab(this.tabs.length);
+      this.tabsSubject.next(this.tabs);
+    }
   }
 
   public getTabs(fn) {
