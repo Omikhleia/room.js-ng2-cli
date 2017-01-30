@@ -11,7 +11,7 @@ export class VerbEditorComponent implements OnInit {
   
   private cmconfig: any = {
     lineNumbers: true,
-    tabSize: true,
+    tabSize: 2,
     indentWithTabs: false,
     matchBrackets: true,
     autoCloseBrackets: true,
