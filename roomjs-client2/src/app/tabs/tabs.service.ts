@@ -1,6 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 
+import { Tab } from './tabs.model';
+
 /**
  * Service for handling tabs
  */
@@ -8,8 +10,8 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class TabsService implements OnDestroy {
   // Observables
-  private tabs: any = [];
-  private tabsSubject = new Subject<any>();
+  private tabs: Tab[] = [];
+  private tabsSubject = new Subject<Tab[]>();
   private observableTabs = this.tabsSubject.asObservable();
 
   private currentTab: number = 1;
@@ -21,12 +23,12 @@ export class TabsService implements OnDestroy {
 
   constructor() { }
 
-  public setTabs(tabs) {
+  public setTabs(tabs: Tab[]) {
     this.tabs = tabs;
     this.tabsSubject.next(tabs);
   }  
 
-  public addTab(tab) {
+  public addTab(tab: Tab) {
     this.tabs.push(tab);
     // IMPORTANT: Some component may not initialize/render properly when not visible
     // (notably Codemirror). Therefore, always make the new tab current.

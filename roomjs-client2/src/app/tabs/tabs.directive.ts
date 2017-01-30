@@ -1,8 +1,9 @@
 import { Directive, Input, OnInit,
-         ViewContainerRef, 
+         ViewContainerRef, Component, Type,
          ComponentFactoryResolver, ComponentRef } from '@angular/core';
          
 import { TabsService } from './tabs.service';
+import { Tab } from './tabs.model';
 
 /**
  * The directive is set on each tab and is responsible for
@@ -15,9 +16,9 @@ import { TabsService } from './tabs.service';
   selector:'[tab]'
 })
 export class TabDirective implements OnInit {
-  @Input('content') content: any; // Component for contents (shall not change after init)
+  @Input('content') content: Type<Component>; // Component for contents (shall not change after init)
   @Input('index') index: number;  // Tab index
-  @Input('data') data: any;       // Data for contents
+  @Input('data') data: Tab;       // Data for contents
   
   constructor(
     private viewContainer: ViewContainerRef,
@@ -35,7 +36,6 @@ export class TabDirective implements OnInit {
     
     // Pass data to component (hence the cast to any just above)
     componentRef.instance.data = this.data;
-
     if (componentRef.instance.dirty) {
       // Has dirty flag, so subscribes to changes and ensure propagation
       // to the service.

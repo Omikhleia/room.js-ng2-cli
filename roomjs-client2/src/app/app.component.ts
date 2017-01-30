@@ -1,7 +1,7 @@
 import { Component, ComponentRef, ViewChild, HostListener, OnInit } from '@angular/core';
 
 import { SocketService, SessionEvent } from './socket.service';
-import { TabsService, TabsBodyComponent, TabsHeaderComponent } from './tabs/tabs';
+import { Tab, TabsService, TabsBodyComponent, TabsHeaderComponent } from './tabs/tabs';
  
 import { SearchComponent, SearchResult } from './search/search.component';
  
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   private searchBoxVisible: boolean = false;
 
   public tabsData = [
-    {title:'Client', content: ClientViewComponent, close: false, dirty: false }
+    {title:'Client', content: ClientViewComponent, close: false }
   ];
   
   constructor(private socketService: SocketService, private tabs: TabsService) {
@@ -84,7 +84,9 @@ export class AppComponent implements OnInit {
     // Add new tab
     this.tabs.addTab({
       title: searchResult.name, 
-      content: searchResult.component, close: true, dirty: false,
+      content: searchResult.component,
+      close: true,
+      dirty: false,
       data: searchResult.result
     });
   }

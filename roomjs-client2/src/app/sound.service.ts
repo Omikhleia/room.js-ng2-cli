@@ -8,8 +8,8 @@ import { Howl } from "howler";
 
 @Injectable()
 export class SoundService {
-  private sounds: any;
-  private ambiants: any;
+  private sounds: Map<string,Howl>;
+  private ambiants: Map<string,any>;
   private fadeDelay: number = 2000;
 
   constructor() {
