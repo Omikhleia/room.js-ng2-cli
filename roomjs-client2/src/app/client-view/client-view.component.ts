@@ -13,7 +13,7 @@ import * as ansi_up from 'ansi_up';
 
 @Component({
   selector: 'app-client-view',
-  providers: [TextService, SoundService],
+  providers: [TextService],
   entryComponents: [ DialogComponent, ButtonsComponent ],
   animations: [
     trigger(
