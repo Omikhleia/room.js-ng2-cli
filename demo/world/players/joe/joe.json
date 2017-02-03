@@ -1,0 +1,20 @@
+{
+  "name": "Joe",
+  "aliases": [],
+  "traitIds": [
+    "lib_player"
+  ],
+  "locationId": "areas_city_southstreet",
+  "userId": "joe",
+  "properties": {
+    "programmer": {
+      "value": true
+    },
+    "previousLocation": {
+      "object": null
+    },
+    "mode": {
+      "ref": "modes_evalmode"
+    }
+  }
+}
