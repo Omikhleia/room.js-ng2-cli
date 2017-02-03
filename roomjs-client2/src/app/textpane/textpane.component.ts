@@ -49,7 +49,8 @@ export class TextpaneComponent implements OnInit {
       }
       
       // URI-encoded on some browsers (e.g. Firefox), so ensure decoding
-      const command = decodeURIComponent(match[1]);
+      // Prefix with @ for direct playmode command
+      const command = '@' + decodeURIComponent(match[1]);
       
       // Emit command
       this.commandEntered.emit(command);
