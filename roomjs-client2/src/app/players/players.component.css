@@ -1,10 +1,14 @@
-.lists {
+.location {
   background: #3e313c;
   border-bottom: 1px solid #4d394b;
 }
-.lists div {
+.location div {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   color: white;
   font-weight: bold;
+  text-transform: uppercase;
   padding: 2px 10px 30px 10px;
 }
 .players {
@@ -18,4 +22,14 @@
   overflow: hidden;
   color: #ab9ba9;
   padding: 2px 10px;
+}
+.players .flag {
+  width: 1em;
+  display: inline-block;
+}
+.players .flag.online {
+  color: #38978D;
+}
+.players .name.offline {
+  font-style: italic;
 }

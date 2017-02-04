@@ -1,5 +1,5 @@
-<div class="lists">
-  <div>ROOM</div>
+<div class="location">
+  <div title="{{room}}">{{room}}</div>
 </div>
 <div class="players" slimScroll size="7px" 
                      height="50vh"
@@ -10,5 +10,8 @@
                      opacity=".5"
                      distance="3px"
                      color="#000">
-  <div *ngFor="let player of players" title="{{player}}">{{player}}</div>
+  <div *ngFor="let player of players" title="{{player.name}}">
+    <span class="flag" [ngClass]="{online: isOnline(player.flag)}">{{setPlayerFlag(player.flag)}}</span>
+    <span class="name" [ngClass]="{offline: !isOnline(player.flag)}">{{player.name}}</span>
+  </div>
 </div>

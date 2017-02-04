@@ -36,7 +36,8 @@ export class ClientViewComponent implements OnInit {
   @ViewChild(DialogAnchorDirective) dialogAnchor: DialogAnchorDirective;
   
   private prompt: string = '';
-  private players: string[] = [];
+  private players: any[] = [];
+  private room: string = 'LOCATION';
   private exits: string[] = [];
   private dialog: ComponentRef<any> = null;
   private showCmdLine: boolean = false;
@@ -64,6 +65,9 @@ export class ClientViewComponent implements OnInit {
         }
         if (message.exits) {
           this.exits = message.exits;
+        }
+        if (message.room) {
+          this.room = message.room;
         }
         message = message.text;
       }

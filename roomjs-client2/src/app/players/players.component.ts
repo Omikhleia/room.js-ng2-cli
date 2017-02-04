@@ -10,11 +10,24 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./players.component.css']
 })
 export class PlayersComponent implements OnInit {
-  @Input() players: string[];
+  @Input() players: any[];
+  @Input() room: string;
 
   constructor() { }
 
   ngOnInit() { 
+  }
+  
+  private setPlayerFlag(flag: number): string {
+    if (flag & 0x02) {
+      // Programmer
+      return '\u25CF';
+    }
+    return '\u25CB';
+  }
+  
+  private isOnline(flag): boolean {
+    return (flag & 0x01) !== 0
   }
 
 }
