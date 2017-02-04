@@ -18,12 +18,19 @@ import * as ansi_up from 'ansi_up';
 })
 export class TextpaneComponent implements OnInit {
   private lines: string[] = [];
+  private maxLines: number = 200; // FIXME TODO configurable
 
   @Output() commandEntered = new EventEmitter<string>();
 
   constructor(private textService: TextService) {
     textService.text$.subscribe( text => {
       this.lines.push(this.colorize(ansi_up.escape_for_html(text)));
+      
+      if (this.lines.length > this.maxLines) {
+        // Truncate old lines
+        const delta = this.lines.length - this.maxLines;
+        this.lines = this.lines.slice(delta);
+      }
     });
   }
   
