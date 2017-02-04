@@ -41,9 +41,6 @@ export class ClientViewComponent implements OnInit {
   private dialog: ComponentRef<any> = null;
   private showCmdLine: boolean = false;
   
-  private someData:any={};
-  private otherCompsData:any={}
-   
   constructor(private socketService: SocketService, 
               private textService: TextService,
               private soundService: SoundService,) {

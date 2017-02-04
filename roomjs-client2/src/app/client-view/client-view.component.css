@@ -3,6 +3,7 @@
 }
 .left {
   flex: 0 0 10%;
+  overflow-x: hidden;
 }
 .middle {
   flex: 1;
