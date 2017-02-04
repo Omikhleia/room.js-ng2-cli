@@ -2,7 +2,10 @@ function announceLeaveRoom(sender, recipient, direction) {
   const playersHere = this.contents.filter(obj => obj.player);
   const players = [];
   playersHere.forEach(plr => {
-    if (sender !== plr) { players.push(plr.name); }
+    if (sender !== plr) { 
+      const flag = (plr.programmer ? 0x02 : 0x00) | (plr.online ? 0x01 : 0x00);
+      players.push({ name: plr.name, flag });
+    }
   });
   
   var effect = null;

@@ -1,20 +1,23 @@
 {
-  "name": "Joe",
+  "name": "Dongann",
   "aliases": [],
   "traitIds": [
     "lib_player"
   ],
   "locationId": "areas_city_inn",
-  "userId": "joe",
+  "userId": "dongann",
   "properties": {
     "programmer": {
-      "value": true
+      "value": false
     },
     "previousLocation": {
       "object": null
     },
     "mode": {
-      "ref": "modes_evalmode"
+      "ref": "modes_playmode"
+    },
+    "progammer": {
+      "value": false
     }
   }
 }
