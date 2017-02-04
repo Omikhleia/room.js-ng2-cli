@@ -13,7 +13,7 @@ import * as ansi_up from 'ansi_up';
 
 @Component({
   selector: 'app-client-view',
-  providers: [TextService, SoundService],
+  providers: [TextService],
   entryComponents: [ DialogComponent, ButtonsComponent ],
   animations: [
     trigger(
@@ -41,9 +41,6 @@ export class ClientViewComponent implements OnInit {
   private dialog: ComponentRef<any> = null;
   private showCmdLine: boolean = false;
   
-  private someData:any={};
-  private otherCompsData:any={}
-   
   constructor(private socketService: SocketService, 
               private textService: TextService,
               private soundService: SoundService,) {

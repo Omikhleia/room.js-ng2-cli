@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Howl } from "howler";
+import { Howl, Howler } from "howler";
 
 /**
  * Sound service module.
@@ -17,8 +17,10 @@ export class SoundService {
     this.sounds = new Map();
     /* Keep a record of currently playing ambiant sounds */
     this.ambiants = new Map();
+    
+    this.volume(50);
   }
-
+  
   /**
    * Return a Howler sound object, registering it on first invocation.
    *
@@ -41,6 +43,18 @@ export class SoundService {
     }
     return sound;
   }
+  
+  private adjustVolume(volume: number): number {
+    let vol;
+    if (volume < 0) {
+      vol = 0;
+    } else if (volume > 100) {
+      vol = 100;
+    } else {
+      vol = volume;
+    }
+    return vol;
+  }
 
   /**
    * Play a set of sounds once.
@@ -52,15 +66,7 @@ export class SoundService {
     const sounds: any = new Map(array);
     sounds.forEach((volume: number, name: string) => {
       const sound = this.fetchSound(name);
-      let vol;
-      if (volume < 0) {
-        vol = 0;
-      } else if (volume > 100) {
-        vol = 100;
-      } else {
-        vol = volume;
-      }
-
+      const vol = this.adjustVolume(volume * 2);
       const id = sound.play();
       sound.volume(vol / 100, id);
     });
@@ -91,14 +97,7 @@ export class SoundService {
     // Then, enable all requested sounds
     sounds.forEach((volume: number, name: string) => {
       const ambiant = this.ambiants.get(name);
-      let vol: number;
-      if (volume < 0) {
-        vol = 0;
-      } else if (volume > 100) {
-        vol = 100;
-      } else {
-        vol = volume;
-      }
+      const vol = this.adjustVolume(volume * 2);
 
       if (ambiant === undefined) {
         // New ambiant sound: fade volume in.
@@ -127,5 +126,20 @@ export class SoundService {
     });
     // Reset map of ambiant sounds.
     this.ambiants = new Map();
+  }
+  
+  /**
+   * Set global volume.
+   */
+  volume(volume: number) {
+    let vol = this.adjustVolume(volume);
+    Howler.volume(vol / 100);
+  }
+
+  /**
+   * Global mute/unmute.
+   */  
+  mute(muted: boolean) {
+    Howler.mute(muted);
   }
 }

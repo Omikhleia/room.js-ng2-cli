@@ -36,7 +36,10 @@ export class MappaneComponent implements OnInit {
     if (!match) { 
       return true; 
     }
-    const command = match[1];
+    
+    // URI-encoded on some browsers (e.g. Firefox), so ensure decoding
+    // Prefix with @ for direct playmode command
+    const command = '@' + decodeURIComponent(match[1]);
     
     // Send command
     this.commandEntered.next(command);

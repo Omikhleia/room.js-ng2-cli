@@ -1,6 +1,7 @@
 import { Component, ComponentRef, ViewChild, HostListener, OnInit } from '@angular/core';
 
 import { SocketService, SessionEvent } from './socket.service';
+import { SoundService } from './sound.service';
 import { Tab, TabsService, TabsBodyComponent, TabsHeaderComponent } from './tabs/tabs';
  
 import { SearchComponent, SearchResult } from './search/search.component';
@@ -13,7 +14,7 @@ import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
-  providers:[ SocketService, TabsService ],
+  providers:[ SoundService, SocketService, TabsService ],
   entryComponents: [ ClientViewComponent, FunctionEditorComponent, VerbEditorComponent, SearchComponent ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']

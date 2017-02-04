@@ -21,6 +21,7 @@ import { TabDirective, TabsBodyComponent, TabsHeaderComponent } from './tabs/tab
 import { FunctionEditorComponent } from './function-editor/function-editor.component';
 import { SearchComponent } from './search/search.component';
 import { VerbEditorComponent } from './verb-editor/verb-editor.component';
+import { SoundSettingsComponent } from './sound-settings/sound-settings.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { VerbEditorComponent } from './verb-editor/verb-editor.component';
     CmdlineComponent,
     MappaneComponent,
     ClientViewComponent,
-    TabDirective, TabsBodyComponent, TabsHeaderComponent, FunctionEditorComponent, SearchComponent, VerbEditorComponent
+    TabDirective, TabsBodyComponent, TabsHeaderComponent, FunctionEditorComponent, SearchComponent, VerbEditorComponent, SoundSettingsComponent
   ],
   imports: [
     BrowserModule,
