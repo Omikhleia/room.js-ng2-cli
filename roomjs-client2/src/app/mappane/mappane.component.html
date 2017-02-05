@@ -3,7 +3,7 @@
        (click)="onClick($event)"
        xmlns="http://www.w3.org/1960/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <svg:g *ngFor="let block of blocks">
-      <svg:image xlink:href="./assets/images/g.png"
+      <svg:image xlink:href="./assets/images/ground.png"
                  [attr.x]="block.x" [attr.y]="block.y" 
                  height="300px" width="200px"></svg:image>
     </svg:g>
@@ -11,6 +11,9 @@
       <svg:image *ngIf="hasDir(block.dir)" [attr.xlink:href]="dirImage(block.dir)"
                  [attr.x]="block.x" [attr.y]="block.y" 
                  height="300px" width="200px"></svg:image>
+      <svg:image *ngIf="!hasDir(block.dir)" [attr.xlink:href]="dirWall(block.dir)"
+                 [attr.x]="block.x" [attr.y]="block.y" 
+                 height="300px" width="200px"></svg:image>                 
     </svg:g>
     <svg:g *ngFor="let door of doors">
       <svg:a class="link" *ngIf="hasDir(door.dir)" [attr.xlink:href]="dirCommand(door.dir)">

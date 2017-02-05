@@ -10,6 +10,8 @@ export class MappaneComponent implements OnInit {
   @Input() exits: string[];
   @Output() commandEntered = new EventEmitter<string>();
 
+  //['north', 'northeast', 'northwest', 'west', 'up', 'down', 'east', 'southwest', 'south', 'southeast']
+  
   private blocks: any = [
     {x: 200, y: 0, dir: 'northwest' },
     {x: 300, y: 50, dir: 'north' },
@@ -24,29 +26,39 @@ export class MappaneComponent implements OnInit {
   ];
   
   private exitBlocks: any = {
-    northwest: "wd.png",
-    north: "nd.png",
-    northeast: "nd.png",
-    west: "wd.png",
-    up: "ud.png",
-    down: "dd.png",
-    east: "ed.png",
-    southwest: "sd.png",
-    south: "sd.png",
-    southeast: "sd.png"
+    northwest: "nwdoor.png",
+    north: "ndoor.png",
+    northeast: "nedoor.png",
+    west: "wdoor.png",
+    up: "ustair.png",
+    down: "dstair.png",
+    east: "edoor.png",
+    southwest: "swdoor.png",
+    south: "sdoor.png",
+    southeast: "sedoor.png"
   };
 
+  private wallBlocks: any = {
+    northwest: "nwwall.png",
+    north: "nwall.png",
+    northeast: "newall.png",
+    west: "wwall.png",
+    east: "ewall.png",
+    southwest: "swwall.png",
+    south: "swall.png",
+    southeast: "sewall.png"
+ };
  private doors: any = [  
-    {x: 150, y: 125, dir: 'northwest' },
-    {x: 350, y: 175, dir: 'north' },
-    {x: 450, y: 225, dir: 'northeast' },
-    {x: 50, y: 175, dir: 'west' },
+    {x: 200, y: 150, dir: 'northwest' },
+    {x: 325, y: 187.5, dir: 'north' },
+    {x: 425, y: 262.5, dir: 'northeast' },
+    {x: 75, y: 187.5, dir: 'west' },
     {x: 175, y: 237.5, dir: 'up' },
-    {x: 220, y: 275, dir: 'down' },
-    {x: 350, y: 325, dir: 'east' },
-    {x: -50, y: 275, dir: 'southwest' },
-    {x: 50, y: 325, dir: 'south' },
-    {x: 250, y: 375, dir: 'southeast' }
+    {x: 220, y: 275.5, dir: 'down' },
+    {x: 325, y: 312.5, dir: 'east' },
+    {x: -25, y: 262.5, dir: 'southwest' },
+    {x: 75, y: 312.5, dir: 'south' },
+    {x: 200, y: 350, dir: 'southeast' }
  ];
     
   // Constructor  
@@ -99,6 +111,10 @@ export class MappaneComponent implements OnInit {
   private dirImage(dir: string): string {
     const prefix = './assets/images/';
     return prefix + this.exitBlocks[dir];
+  }
+  private dirWall(dir: string): string {
+    const prefix = './assets/images/';
+    return prefix + this.wallBlocks[dir];
   }
   
   private dirCommand(dir: string): string {
