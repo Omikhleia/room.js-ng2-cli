@@ -1,4 +1,18 @@
 .wrapper {
-    height: 40vh;
+    height: 50vh;
     padding: 5px;
+}
+
+.clickable {
+  fill-opacity: 0;
+  fill: #4b6e4e;
+}
+.link:focus {
+  outline: none;
+}
+.link::-moz-focus-outer {
+  border: 0;
+}
+.clickable:hover {
+  fill-opacity: 0.3;
 }

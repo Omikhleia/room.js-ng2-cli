@@ -1,39 +1,22 @@
 <div class="wrapper">
-  <p>Eventually, there will be a map here.</p>
-  <p>For now, just raw clickable directions.</p>
-  <svg style="height: 100%" version="1.1" viewBox="0 0 600 600" 
+  <svg style="height: 100%" version="1.1" viewBox="0 100 600 400" 
        (click)="onClick($event)"
        xmlns="http://www.w3.org/1960/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-
-    <svg:a *ngIf="hasDir('north')" xlink:href="#cmd[n]">
-      <svg:rect stroke="blue" x="202" y="2" width="196" height="196" fill-opacity="0"></svg:rect>
-    </svg:a>
-    <svg:a *ngIf="hasDir('south')" xlink:href="#cmd[s]">
-      <svg:rect stroke="blue" x="202" y="402" width="196" height="196" fill-opacity="0"></svg:rect>
-    </svg:a>
-    <svg:a *ngIf="hasDir('east')" xlink:href="#cmd[e]">
-      <svg:rect stroke="blue" x="402" y="202" width="196" height="196" fill-opacity="0"></svg:rect>
-    </svg:a>
-    <svg:a *ngIf="hasDir('west')" xlink:href="#cmd[w]">
-      <svg:rect stroke="blue" x="1" y="202" width="196" height="196" fill-opacity="0"></svg:rect>
-    </svg:a>
-    <svg:a *ngIf="hasDir('northwest')" xlink:href="#cmd[nw]">
-      <svg:rect stroke="blue" x="2" y="2" width="196" height="196" fill-opacity="0"></svg:rect>
-    </svg:a>
-    <svg:a *ngIf="hasDir('southwest')" xlink:href="#cmd[sw]">
-      <svg:rect stroke="blue" x="2" y="402" width="196" height="196" fill-opacity="0"></svg:rect>
-    </svg:a>
-    <svg:a *ngIf="hasDir('northeast')" xlink:href="#cmd[ne]">
-      <svg:rect stroke="blue" x="402" y="2" width="196" height="196" fill-opacity="0"></svg:rect>
-    </svg:a>
-    <svg:a *ngIf="hasDir('southeast')" xlink:href="#cmd[se]">
-      <svg:rect stroke="blue" x="402" y="402" width="196" height="196" fill-opacity="0"></svg:rect>
-    </svg:a>
-    <svg:a *ngIf="hasDir('up')" xlink:href="#cmd[u]">
-      <svg:rect stroke="blue" x="202" y="202" width="96" height="196" fill-opacity="0"></svg:rect>
-    </svg:a>
-    <svg:a *ngIf="hasDir('down')" xlink:href="#cmd[d]">
-      <svg:rect stroke="blue" x="302" y="202" width="96" height="196" fill-opacity="0"></svg:rect>
-    </svg:a>
+    <svg:g *ngFor="let block of blocks">
+      <svg:image xlink:href="./assets/images/g.png"
+                 [attr.x]="block.x" [attr.y]="block.y" 
+                 height="300px" width="200px"></svg:image>
+    </svg:g>
+    <svg:g *ngFor="let block of blocks">
+      <svg:image *ngIf="hasDir(block.dir)" [attr.xlink:href]="dirImage(block.dir)"
+                 [attr.x]="block.x" [attr.y]="block.y" 
+                 height="300px" width="200px"></svg:image>
+    </svg:g>
+    <svg:g *ngFor="let door of doors">
+      <svg:a class="link" *ngIf="hasDir(door.dir)" [attr.xlink:href]="dirCommand(door.dir)">
+        <svg:circle class="clickable" 
+                    [attr.cx]="door.x + 100" [attr.cy]="door.y + 30" r="25"></svg:circle>
+      </svg:a>
+    </svg:g>
   </svg>
 </div>
