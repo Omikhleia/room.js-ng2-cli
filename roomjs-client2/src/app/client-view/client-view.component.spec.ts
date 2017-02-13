@@ -3,6 +3,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
+import { FormsModule, NgForm } from '@angular/forms';
+
+import { SocketService } from '../socket.service';
+import { SoundService } from '../sound.service';
+
+import { TextpaneComponent } from '../textpane/textpane.component';
+import { PlayersComponent } from '../players/players.component';
+import { CmdlineComponent } from '../cmdline/cmdline.component';
+import { MappaneComponent } from '../mappane/mappane.component';
+
+import { DialogComponent } from '../dialog/dialog.component';
+import { ButtonsComponent } from '../buttons/buttons.component';
 import { ClientViewComponent } from './client-view.component';
 
 describe('ClientViewComponent', () => {
@@ -11,7 +23,13 @@ describe('ClientViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ClientViewComponent ]
+      declarations: [
+        DialogComponent, ButtonsComponent,
+        TextpaneComponent, PlayersComponent, CmdlineComponent, MappaneComponent,
+        ClientViewComponent 
+      ],
+      imports: [ FormsModule ],
+      providers: [ SocketService, SoundService ] // FIXME replace with mock-up for better testing      
     })
     .compileComponents();
   }));

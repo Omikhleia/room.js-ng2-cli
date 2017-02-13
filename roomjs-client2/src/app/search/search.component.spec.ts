@@ -3,6 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
+import { FormsModule }   from '@angular/forms';
+
+import { SlimScroll } from '../slimscroll.directive';
+import { SocketService } from '../socket.service';
 import { SearchComponent } from './search.component';
 
 describe('SearchComponent', () => {
@@ -11,7 +15,9 @@ describe('SearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchComponent ]
+      declarations: [ SlimScroll, SearchComponent ],
+      imports: [ FormsModule ],
+      providers: [ SocketService ] // FIXME replace with mock-up for better testing      
     })
     .compileComponents();
   }));
