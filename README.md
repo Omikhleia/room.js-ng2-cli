@@ -19,6 +19,7 @@ For that purpose, the client expects some JSON structures to be sent from the ga
 
 ## Installation
 Steps:
+
 1. install **room.js** referring to its documentation, then launch the server
 1. Install **room.js-ng2-cli**
 1. Replace the default demonstration world in Room.JS by the one provided with the client (*demo* subfolder)
