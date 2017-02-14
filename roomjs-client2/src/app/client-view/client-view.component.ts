@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ComponentRef,
+import { Component, OnInit, OnDestroy, Input, ViewChild, ComponentRef,
          style, animate, transition, trigger } from '@angular/core';
          
 import { SocketService, SessionEvent } from '../socket.service';
@@ -32,7 +32,7 @@ import * as ansi_up from 'ansi_up';
   templateUrl: './client-view.component.html',
   styleUrls: ['./client-view.component.css']
 })
-export class ClientViewComponent implements OnInit {
+export class ClientViewComponent implements OnInit, OnDestroy {
   @ViewChild(DialogAnchorDirective) dialogAnchor: DialogAnchorDirective;
   
   private prompt: string = '';
@@ -41,6 +41,7 @@ export class ClientViewComponent implements OnInit {
   private exits: string[] = [];
   private dialog: ComponentRef<any> = null;
   private showCmdLine: boolean = false;
+  private subscriptions = [];
   
   constructor(private socketService: SocketService, 
               private textService: TextService,
@@ -48,11 +49,12 @@ export class ClientViewComponent implements OnInit {
   }
      
   ngOnInit() {         
-    this.socketService.input$.subscribe( expectedInputs => {
+    let sub = this.socketService.input$.subscribe( expectedInputs => {
       this.dialog = this.dialogAnchor.createDialog(DialogComponent, expectedInputs);
     });
+    this.subscriptions.push(sub);
         
-    this.socketService.text$.subscribe( message => {
+    sub = this.socketService.text$.subscribe( message => {
       if (message && typeof message === 'object') {
         if (message.effect) {
           this.soundService.effect(message.effect);
@@ -69,6 +71,9 @@ export class ClientViewComponent implements OnInit {
         if (message.room) {
           this.room = message.room;
         }
+        if (message.contents) {
+          console.log("INVENTORY", message.contents);
+        }
         message = message.text;
       }
             
@@ -76,12 +81,14 @@ export class ClientViewComponent implements OnInit {
         this.textService.send(message.toString());
       }
     });
-        
-    this.socketService.mode$.subscribe( mode => {
+    this.subscriptions.push(sub);
+       
+    sub = this.socketService.mode$.subscribe( mode => {
       this.prompt = ansi_up.ansi_to_html(mode, { use_classes: true });
     });
-              
-    this.socketService.state$.subscribe( state => {
+    this.subscriptions.push(sub);
+             
+    sub = this.socketService.state$.subscribe( state => {
       // Close any pending dialog upon state change
       if (this.dialog) {
         this.dialog.destroy();
@@ -114,8 +121,16 @@ export class ClientViewComponent implements OnInit {
             break;
       }
     });
+    this.subscriptions.push(sub);
   }
-    
+
+  ngOnDestroy() {
+    // Clean-up subscriptions
+    this.subscriptions.forEach((sub) => {
+      sub.unsubscribe();
+    });
+  }
+
   private playOrCreate() {
     this.dialog = this.dialogAnchor.createButtons(ButtonsComponent, {
       inputs: [

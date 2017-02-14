@@ -1,4 +1,4 @@
-import { Component, ComponentRef, ViewChild, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 
 import { SocketService, SessionEvent } from './socket.service';
 import { SoundService } from './sound.service';
@@ -19,25 +19,27 @@ import { environment } from '../environments/environment';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit { 
+export class AppComponent implements OnInit, OnDestroy { 
   private serverUrl: string = environment.serverUrl;
   public tab: number = 1;
   private nbtabs: number = 0;
-  
+
   private allowSearch: boolean = false;
   private searchBoxVisible: boolean = false;
+
+  private subscription;
 
   public tabsData = [
     {title:'Client', content: ClientViewComponent, close: false }
   ];
-  
+
   constructor(private socketService: SocketService, private tabs: TabsService) {
   }
-    
+
   ngOnInit() {
     this.socketService.init(this.serverUrl);
     
-    this.socketService.state$.subscribe( state => {
+    this.subscription = this.socketService.state$.subscribe( state => {
       // Close any pending dialog upon state change
       this.searchBoxVisible = false;
       
@@ -55,7 +57,11 @@ export class AppComponent implements OnInit {
       this.tab = currentTab;
     });
   }
-  
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   // Set global keydown handler for search box and tabs
   @HostListener('document:keydown', ['$event']) onKeyboardEvent(event: KeyboardEvent) {
     const key = event.keyCode;

@@ -1,6 +1,4 @@
-import { Component, Output, EventEmitter,
-         AfterViewChecked, ElementRef, ViewChild,
-         OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 
 import { TextService } from '../text.service';
 import { SlimScroll }  from '../slimscroll.directive';
@@ -16,14 +14,17 @@ import * as ansi_up from 'ansi_up';
   templateUrl: './textpane.component.html',
   styleUrls: ['./textpane.component.css']
 })
-export class TextpaneComponent implements OnInit {
+export class TextpaneComponent implements OnInit, OnDestroy {
   private lines: string[] = [];
   private maxLines: number = 200; // FIXME TODO configurable
+  private subscription;
 
   @Output() commandEntered = new EventEmitter<string>();
 
-  constructor(private textService: TextService) {
-    textService.text$.subscribe( text => {
+  constructor(private textService: TextService) { }
+  
+  ngOnInit() {
+    this.subscription = this.textService.text$.subscribe( text => {
       this.lines.push(this.colorize(ansi_up.escape_for_html(text)));
       
       if (this.lines.length > this.maxLines) {
@@ -33,10 +34,11 @@ export class TextpaneComponent implements OnInit {
       }
     });
   }
-  
-  ngOnInit() {
-  }  
-    
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   private linkifyCommands(str: string) {
     const pattern = /#cmd\[(.*?)\]/g;
     return str.replace(pattern, (match, capture) => `<a href='${match}'>${capture}</a>`);

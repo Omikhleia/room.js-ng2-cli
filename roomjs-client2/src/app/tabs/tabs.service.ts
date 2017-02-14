@@ -99,7 +99,7 @@ export class TabsService implements OnDestroy {
     // Clean-up subscriptions
     this.subscriptions.forEach((sub) => {
       sub.unsubscribe();
-    })
+    });
   }
 
 }
