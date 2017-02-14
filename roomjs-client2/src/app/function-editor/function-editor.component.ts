@@ -1,29 +1,22 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { SocketService } from '../socket.service';
+import { BaseEditorComponent } from '../base-editor/base-editor.component';
+
+/**
+ * Editor component for functions.
+ */
 
 @Component({
   selector: 'app-function-editor',
   templateUrl: './function-editor.component.html',
   styleUrls: ['./function-editor.component.css']
 })
-export class FunctionEditorComponent implements OnInit {
-  @Input() data: any = {};
-  @Output() dirty = new EventEmitter<boolean>();
-  
-  private cmconfig: any = {
-    lineNumbers: true,
-    tabSize: 2,
-    indentWithTabs: false,
-    matchBrackets: true,
-    autoCloseBrackets: true,
-    scrollbarStyle: 'overlay',
-    theme: 'solarized light'
-  };
-  
+export class FunctionEditorComponent extends BaseEditorComponent implements OnInit { 
   private src: string;
   
   constructor(private socketService: SocketService) {
+    super();
   }
 
   ngOnInit() {
@@ -31,51 +24,17 @@ export class FunctionEditorComponent implements OnInit {
   }
 
   /**
-   * We want some key events to be application-global, and
-   * forwarded from the main application module to the currently
-   * active tab, if this public method exists.
-   */
-  public onForwardEvent(event: KeyboardEvent) {
-    this.onKeyDown(event);
-  }
-
-  /**
    * Dirty flag logic for function.
    */  
-  private computeDirty(): boolean {
+  protected computeDirty(): boolean {
     const dirty = this.data.src !== this.src;
     return dirty;
-  }
-
-  /**
-   * Check dirty flag on model change, and notify parent components.
-   */
-  private onChange() {
-    const dirty = this.computeDirty();
-    this.dirty.emit(dirty);
-  }
-
-  /**
-   * Handle key events
-   */
-  private onKeyDown(event: KeyboardEvent) {
-    const key = event.keyCode;
-    const meta = event.metaKey;
-    const ctrl = event.ctrlKey;
-    const sKey = key === 83;
-
-    if ((ctrl && sKey) || (meta && sKey)) {
-      event.preventDefault();
-      if (this.computeDirty()) {
-        this.save();
-      }
-    }
   }
   
   /**
    * Save function, invoking the socket service.
    */
-  private save() {
+  protected save() {
     const params = {
       name: this.data.name,
       src: this.src,

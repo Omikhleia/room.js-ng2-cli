@@ -18,8 +18,9 @@ import { CmdlineComponent } from './cmdline/cmdline.component';
 import { MappaneComponent } from './mappane/mappane.component';
 import { ClientViewComponent } from './client-view/client-view.component';
 import { TabDirective, TabsBodyComponent, TabsHeaderComponent } from './tabs/tabs';
-import { FunctionEditorComponent } from './function-editor/function-editor.component';
 import { SearchComponent } from './search/search.component';
+import { BaseEditorComponent } from './base-editor/base-editor.component';
+import { FunctionEditorComponent } from './function-editor/function-editor.component';
 import { VerbEditorComponent } from './verb-editor/verb-editor.component';
 import { SoundSettingsComponent } from './sound-settings/sound-settings.component';
 
@@ -35,7 +36,12 @@ import { SoundSettingsComponent } from './sound-settings/sound-settings.componen
     CmdlineComponent,
     MappaneComponent,
     ClientViewComponent,
-    TabDirective, TabsBodyComponent, TabsHeaderComponent, FunctionEditorComponent, SearchComponent, VerbEditorComponent, SoundSettingsComponent
+    TabDirective, TabsBodyComponent, TabsHeaderComponent,
+    SearchComponent, 
+    BaseEditorComponent,
+    FunctionEditorComponent,
+    VerbEditorComponent,
+    SoundSettingsComponent
   ],
   imports: [
     BrowserModule,

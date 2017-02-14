@@ -18,9 +18,10 @@ import { CmdlineComponent } from './cmdline/cmdline.component';
 import { MappaneComponent } from './mappane/mappane.component';
 import { ClientViewComponent } from './client-view/client-view.component';
 import { TabDirective, TabsBodyComponent, TabsHeaderComponent } from './tabs/tabs';
+import { BaseEditorComponent } from './base-editor/base-editor.component';
 import { FunctionEditorComponent } from './function-editor/function-editor.component';
-import { SearchComponent } from './search/search.component';
 import { VerbEditorComponent } from './verb-editor/verb-editor.component';
+import { SearchComponent } from './search/search.component';
 import { SoundSettingsComponent } from './sound-settings/sound-settings.component';
 
 describe('AppComponent', () => {
@@ -40,11 +41,14 @@ describe('AppComponent', () => {
         CmdlineComponent,
         MappaneComponent,
         ClientViewComponent,
-        TabDirective, 
-        TabsBodyComponent, 
-        TabsHeaderComponent, 
-        FunctionEditorComponent, SearchComponent, 
-        VerbEditorComponent, SoundSettingsComponent
+        TabDirective,
+        TabsBodyComponent,
+        TabsHeaderComponent,
+        SearchComponent,
+        BaseEditorComponent,
+        FunctionEditorComponent,
+        VerbEditorComponent,
+        SoundSettingsComponent
       ],  
       imports: [
         FormsModule,
@@ -60,16 +64,12 @@ describe('AppComponent', () => {
     fixture.detectChanges();
   });
   
-  it('should create the app', async(() => {
+  it('should create the app', () => {
     expect(app).toBeTruthy();
-  }));
+  });
 
-  // it(`should have as title 'app works!'`, async(() => {
-    // expect(app.title).toEqual('app works!');
-  // }));
-
-   it('should render title in a h1 tag', async(() => {
-     const compiled = fixture.debugElement.nativeElement;
-     expect(compiled.querySelector('h1').textContent).toContain('RoomJS angular2 client');
-   }));
+  it('should render title in a h1 tag', () => {
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('h1').textContent).toContain('RoomJS angular2 client');
+  });
 });

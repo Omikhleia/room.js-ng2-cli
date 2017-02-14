@@ -1,26 +1,18 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { SocketService } from '../socket.service';
+import { BaseEditorComponent } from '../base-editor/base-editor.component';
 
+/**
+ * Editor component for verbs.
+ */
+ 
 @Component({
   selector: 'app-verb-editor',
   templateUrl: './verb-editor.component.html',
   styleUrls: ['./verb-editor.component.css']
 })
-export class VerbEditorComponent implements OnInit {
-  @Input() data: any = {};
-  @Output() dirty = new EventEmitter<boolean>();
-  
-  private cmconfig: any = {
-    lineNumbers: true,
-    tabSize: 2,
-    indentWithTabs: false,
-    matchBrackets: true,
-    autoCloseBrackets: true,
-    scrollbarStyle: 'overlay',
-    theme: 'solarized light'
-  };
-
+export class VerbEditorComponent extends BaseEditorComponent implements OnInit {
   private code: string;
   private pattern: string;
   private dobjarg: string;
@@ -28,6 +20,7 @@ export class VerbEditorComponent implements OnInit {
   private preparg: string;
   
   constructor(private socketService: SocketService) {
+    super();
   }
 
   ngOnInit() {
@@ -39,18 +32,9 @@ export class VerbEditorComponent implements OnInit {
   }
 
   /**
-   * We want some key events to be application-global, and
-   * forwarded from the main application module to the currently
-   * active tab, if this public method exists.
-   */
-  public onForwardEvent(event: KeyboardEvent) {
-    this.onKeyDown(event);
-  }
-
-  /**
    * Dirty flag logic for verbs.
    */
-  private computeDirty(): boolean {
+  protected computeDirty(): boolean {
     const dirty = this.pattern !== this.data.verb.pattern ||
                   this.dobjarg !== this.data.verb.dobjarg ||
                   this.preparg !== this.data.verb.preparg ||
@@ -60,34 +44,9 @@ export class VerbEditorComponent implements OnInit {
   }
 
   /**
-   * Check dirty flag on model change, and notify parent components.
-   */  
-  private onChange() {
-    const dirty = this.computeDirty();
-    this.dirty.emit(dirty);
-  }
-
-  /**
-   * Handle key events
-   */
-  private onKeyDown(event: KeyboardEvent) {
-    const key = event.keyCode;
-    const meta = event.metaKey;
-    const ctrl = event.ctrlKey;
-    const sKey = key === 83;
-
-    if ((ctrl && sKey) || (meta && sKey)) {
-      event.preventDefault();
-      if (this.computeDirty()) {
-        this.save();
-      }
-    }
-  }
-
-  /**
    * Save verb, invoking the socket service.
    */  
-  private save() {
+  protected save() {
     const newVerb = {
       name: this.data.verb.name,
       pattern: this.pattern,
