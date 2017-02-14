@@ -11,7 +11,7 @@
       <svg:image *ngIf="hasDir(block.dir)" [attr.xlink:href]="dirImage(block.dir)"
                  [attr.x]="block.x" [attr.y]="block.y" 
                  height="300px" width="200px"></svg:image>
-      <svg:image *ngIf="!hasDir(block.dir)" [attr.xlink:href]="dirWall(block.dir)"
+      <svg:image *ngIf="!hasDir(block.dir) && hasWall(block.dir)" [attr.xlink:href]="dirWall(block.dir)"
                  [attr.x]="block.x" [attr.y]="block.y" 
                  height="300px" width="200px"></svg:image>                 
     </svg:g>

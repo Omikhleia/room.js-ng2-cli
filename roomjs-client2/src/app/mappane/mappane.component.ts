@@ -107,6 +107,13 @@ export class MappaneComponent implements OnInit {
     }
     return false;
   }
+
+  private hasWall(dir: string) {
+    if (this.wallBlocks[dir]) {
+      return true;
+    }
+    return false;
+  }
   
   private dirImage(dir: string): string {
     const prefix = './assets/images/';
