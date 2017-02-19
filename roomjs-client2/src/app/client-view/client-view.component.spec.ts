@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { FormsModule, NgForm } from '@angular/forms';
+import { DndModule } from 'ng2-dnd';
 
 import { SocketService } from '../socket.service';
 import { SoundService } from '../sound.service';
@@ -12,6 +13,7 @@ import { TextpaneComponent } from '../textpane/textpane.component';
 import { PlayersComponent } from '../players/players.component';
 import { CmdlineComponent } from '../cmdline/cmdline.component';
 import { MappaneComponent } from '../mappane/mappane.component';
+import { InventoryComponent } from '../inventory/inventory.component';
 
 import { DialogComponent } from '../dialog/dialog.component';
 import { ButtonsComponent } from '../buttons/buttons.component';
@@ -25,10 +27,10 @@ describe('ClientViewComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         DialogComponent, ButtonsComponent,
-        TextpaneComponent, PlayersComponent, CmdlineComponent, MappaneComponent,
+        TextpaneComponent, PlayersComponent, CmdlineComponent, MappaneComponent, InventoryComponent,
         ClientViewComponent 
       ],
-      imports: [ FormsModule ],
+      imports: [ FormsModule, DndModule.forRoot() ],
       providers: [ SocketService, SoundService ] // FIXME replace with mock-up for better testing      
     })
     .compileComponents();

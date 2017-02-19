@@ -5,15 +5,15 @@ import { DebugElement } from '@angular/core';
 
 import { DndModule } from 'ng2-dnd';
 
-import { PlayersComponent } from './players.component';
+import { InventoryComponent } from './inventory.component';
 
-describe('PlayersComponent', () => {
-  let component: PlayersComponent;
-  let fixture: ComponentFixture<PlayersComponent>;
+describe('InventoryComponent', () => {
+  let component: InventoryComponent;
+  let fixture: ComponentFixture<InventoryComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayersComponent ],
+      declarations: [ InventoryComponent ],
       imports: [
         DndModule.forRoot()
       ]
@@ -22,7 +22,7 @@ describe('PlayersComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayersComponent);
+    fixture = TestBed.createComponent(InventoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

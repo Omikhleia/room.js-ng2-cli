@@ -23,6 +23,7 @@ html {
   overflow-y: hidden;
 }
 
+/* Styles for ansiUp */
 
 .ansi-black-fg { color: black; }
 .ansi-bright-black-fg { color: #686a66; }
@@ -54,3 +55,33 @@ a:link { color: #427ab3; }
 a:visited { color: #427ab3; }
 a:hover { color: #84b0d8; }
 a:active { color: #d81e00; }
+
+/* Styles for ng2-dnd drag an drop module */
+
+/* dragged item */
+.dnd-drag-start {
+    -moz-transform:scale(0.8);
+    -webkit-transform:scale(0.8);
+    transform:scale(0.8);
+    opacity:0.7;
+    border: 1px dashed #000;
+}
+
+.dnd-drag-enter {
+    opacity:0.7;
+    border: 1px dashed #000;
+}
+
+/* drop target */
+.dnd-drag-over {
+    border: 1px dashed #fff;
+}
+
+.dnd-sortable-drag {
+  -moz-transform:scale(0.9);
+  -webkit-transform:scale(0.9);
+  transform:scale(0.9);
+  opacity:0.7;
+  border: 1px dashed #000;
+}
+

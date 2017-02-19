@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { CodemirrorModule } from 'ng2-codemirror-typescript/Codemirror';
+import { DndModule } from 'ng2-dnd';
 
 import { AppComponent } from './app.component';
 import { DialogAnchorDirective } from './dialoganchor.directive';
@@ -23,6 +24,7 @@ import { BaseEditorComponent } from './base-editor/base-editor.component';
 import { FunctionEditorComponent } from './function-editor/function-editor.component';
 import { VerbEditorComponent } from './verb-editor/verb-editor.component';
 import { SoundSettingsComponent } from './sound-settings/sound-settings.component';
+import { InventoryComponent } from './inventory/inventory.component';
 
 @NgModule({
   declarations: [
@@ -41,13 +43,15 @@ import { SoundSettingsComponent } from './sound-settings/sound-settings.componen
     BaseEditorComponent,
     FunctionEditorComponent,
     VerbEditorComponent,
-    SoundSettingsComponent
+    SoundSettingsComponent,
+    InventoryComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    CodemirrorModule
+    CodemirrorModule,
+    DndModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

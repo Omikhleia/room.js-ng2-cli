@@ -1,0 +1,66 @@
+.temporary {
+  background: rgb(95, 130, 88);
+}
+.inventory-container {
+  /* position: fixed; *//* Stay in place */
+  /*z-index: 1; *//* Sit on top */
+  /*left: 0;
+  top: 0;*/
+  /* width: 100%; */ /* Full width */
+  /* height: 100%; *//* Full height */
+  /* overflow: auto; *//* Enable scroll if needed */
+  /*background-color: rgb(0,0,0); *//* Fallback color */
+  /*background-color: rgba(0,0,0,0.05); *//* Black w/ opacity */
+  display: none;
+  position: absolute;
+  width: 100%;
+}
+.inventory-container.visible {
+  display: block;
+}
+.inventory-box {
+  z-index: 1;
+  box-shadow: 0px 0px 12px black;
+  width: 250px;
+  background: #202a2a;
+  color: white;
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 5px;
+  overflow: hidden;
+  xposition: fixed;
+  left: calc(50% - 125px);
+  top: 10px;
+}
+.inventory-box header {
+  border-bottom: 1px solid black;
+  color: white;
+  padding: 5px;
+  display: flex;
+  background: #369;
+}
+.inventory-box header .title {
+  flex-grow: 1;
+  cursor: default;
+}
+.inventory-box button {
+  font-weight: 700;
+  width: 100%;
+}
+.inventory-content {
+  padding: 2px 2px 0px 2px;
+}
+
+.stuff {
+  color: white;
+  background: #202a2a;
+  padding: 2px;
+}
+
+.stuff span {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background-size: 50px;
+  vertical-align: middle;
+}
