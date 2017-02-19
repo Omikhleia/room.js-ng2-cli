@@ -6,4 +6,5 @@ function take({ player, dobj, iobj, verbstr, argstr, dobjstr, prepstr, iobjstr }
 
   player.location.announce(this.announceTakeItem, player, this);
   this.location = player;
+  player.updateInventory();
 }

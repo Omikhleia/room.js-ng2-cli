@@ -9,6 +9,7 @@ function put({ player, dobj, iobj, verbstr, argstr, dobjstr, prepstr, iobjstr })
     if (this.canAccept(player, dobj)) {
       dobj.location = this;
       player.location.announce(this.announcePutItemContainer.bind(this), player, dobj);
+      player.updateInventory();
     }
   }
 }

@@ -21,24 +21,24 @@
       "file": "describeContents.js"
     },
     "putItemSurface": {
-      "verb": true,
       "file": "putItemSurface.js",
+      "verb": true,
       "pattern": "put",
       "dobjarg": "any",
       "preparg": "on top of/on/onto/upon",
       "iobjarg": "this"
     },
     "takeItemSurface": {
-      "verb": true,
       "file": "takeItemSurface.js",
+      "verb": true,
       "pattern": "take get",
       "dobjarg": "any",
       "preparg": "out of/from inside/from",
       "iobjarg": "this"
     },
     "lookOn": {
-      "verb": true,
       "file": "lookOn.js",
+      "verb": true,
       "pattern": "l*ook",
       "dobjarg": "none",
       "preparg": "on top of/on/onto/upon",

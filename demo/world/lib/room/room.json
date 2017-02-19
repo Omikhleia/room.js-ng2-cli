@@ -57,24 +57,24 @@
       "file": "onLeave.js"
     },
     "look": {
-      "verb": true,
       "file": "look.js",
+      "verb": true,
       "pattern": "l*ook",
       "dobjarg": "none",
       "preparg": "none",
       "iobjarg": "none"
     },
     "goDirection": {
-      "verb": true,
       "file": "goDirection.js",
+      "verb": true,
       "pattern": "g*o",
       "dobjarg": "any",
       "preparg": "none",
       "iobjarg": "none"
     },
     "go": {
-      "verb": true,
       "file": "go.js",
+      "verb": true,
       "pattern": "n*orth e*ast s*outh w*est u*p d*own ne se nw sw northeast northwest southeast southwest",
       "dobjarg": "none",
       "preparg": "none",

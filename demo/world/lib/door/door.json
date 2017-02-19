@@ -39,8 +39,8 @@
       "file": "onTraversal.js"
     },
     "knock": {
-      "verb": true,
       "file": "knock.js",
+      "verb": true,
       "pattern": "knock",
       "dobjarg": "none",
       "preparg": "at/to",

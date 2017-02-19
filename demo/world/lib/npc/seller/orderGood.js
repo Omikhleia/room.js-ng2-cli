@@ -20,6 +20,7 @@ function order({ player, dobj, iobj, verbstr, argstr, dobjstr, prepstr, iobjstr 
       // Give to player
       created.location = player;
       player.location.announce(this.announceSale.bind(this), player, created);
+      player.updateInventory();
     } else {
       // Handle the fun case where the player/programmer would have added the trait to himself...
       created.location = this.location;

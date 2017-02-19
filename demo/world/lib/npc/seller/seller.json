@@ -7,16 +7,16 @@
   "locationId": null,
   "properties": {
     "listGoods": {
-      "verb": true,
       "file": "listGoods.js",
+      "verb": true,
       "pattern": "list",
       "dobjarg": "none",
       "preparg": "none",
       "iobjarg": "none"
     },
     "orderGood": {
-      "verb": true,
       "file": "orderGood.js",
+      "verb": true,
       "pattern": "order buy",
       "dobjarg": "any",
       "preparg": "none",

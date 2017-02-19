@@ -11,8 +11,8 @@
       "value": 2
     },
     "eatOrDrink": {
-      "verb": true,
       "file": "eatOrDrink.js",
+      "verb": true,
       "pattern": "eat drink",
       "dobjarg": "this",
       "preparg": "none",

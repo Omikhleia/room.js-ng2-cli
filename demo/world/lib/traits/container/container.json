@@ -21,24 +21,24 @@
       "file": "describeContents.js"
     },
     "putItemContainer": {
-      "verb": true,
       "file": "putItemContainer.js",
+      "verb": true,
       "pattern": "put",
       "dobjarg": "any",
       "preparg": "in/inside/into",
       "iobjarg": "this"
     },
     "takeItemContainer": {
-      "verb": true,
       "file": "takeItemContainer.js",
+      "verb": true,
       "pattern": "take get",
       "dobjarg": "any",
       "preparg": "out of/from inside/from",
       "iobjarg": "this"
     },
     "lookInside": {
-      "verb": true,
       "file": "lookInside.js",
+      "verb": true,
       "pattern": "l*ook",
       "dobjarg": "none",
       "preparg": "in/inside/into",

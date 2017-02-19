@@ -12,5 +12,6 @@ function take({ player, dobj, iobj, verbstr, argstr, dobjstr, prepstr, iobjstr }
   } else {
     target.location = player;
     player.location.announce(this.announceTakeItemSurface.bind(this), player, target);
+    player.updateInventory();
   }
 }

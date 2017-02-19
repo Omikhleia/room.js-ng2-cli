@@ -28,5 +28,6 @@ function eatOrDrink({ player, dobj, iobj, verbstr, argstr, dobjstr, prepstr, iob
     if (this.destroyOnUse) {
       this.destroy();
     }
+    player.updateInventory();
   }
 }

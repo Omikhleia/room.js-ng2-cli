@@ -7,6 +7,7 @@ function drop({ player, dobj, iobj, verbstr, argstr, dobjstr, prepstr, iobjstr }
   if (player.location) {
     player.location.announce(this.announceDropItem, player, this);
     this.location = player.location;
+    player.updateInventory();
   } else {
     // Robustness: don't drop in the void
     player.tell("You can't do that here");

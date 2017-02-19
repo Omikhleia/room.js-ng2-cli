@@ -5,16 +5,16 @@
   "locationId": null,
   "properties": {
     "drop": {
-      "verb": true,
       "file": "drop.js",
+      "verb": true,
       "pattern": "drop",
       "dobjarg": "this",
       "preparg": "none",
       "iobjarg": "none"
     },
     "take": {
-      "verb": true,
       "file": "take.js",
+      "verb": true,
       "pattern": "take get",
       "dobjarg": "this",
       "preparg": "none",
