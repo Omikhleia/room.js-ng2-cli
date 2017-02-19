@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 
 import { FormsModule } from '@angular/forms';
 import { CodemirrorModule } from 'ng2-codemirror-typescript/Codemirror';
+import { DndModule } from 'ng2-dnd';
 
 import { DialogAnchorDirective } from './dialoganchor.directive';
 import { SlimScroll } from './slimscroll.directive';
@@ -16,6 +17,7 @@ import { TextpaneComponent } from './textpane/textpane.component';
 import { PlayersComponent } from './players/players.component';
 import { CmdlineComponent } from './cmdline/cmdline.component';
 import { MappaneComponent } from './mappane/mappane.component';
+import { InventoryComponent } from './inventory/inventory.component';
 import { ClientViewComponent } from './client-view/client-view.component';
 import { TabDirective, TabsBodyComponent, TabsHeaderComponent } from './tabs/tabs';
 import { BaseEditorComponent } from './base-editor/base-editor.component';
@@ -40,6 +42,7 @@ describe('AppComponent', () => {
         PlayersComponent,
         CmdlineComponent,
         MappaneComponent,
+        InventoryComponent,
         ClientViewComponent,
         TabDirective,
         TabsBodyComponent,
@@ -52,7 +55,8 @@ describe('AppComponent', () => {
       ],  
       imports: [
         FormsModule,
-        CodemirrorModule
+        CodemirrorModule,
+        DndModule.forRoot()
       ]
     })
     .compileComponents();

@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
+import { DndModule } from 'ng2-dnd';
+
 import { PlayersComponent } from './players.component';
 
 describe('PlayersComponent', () => {
@@ -11,7 +13,10 @@ describe('PlayersComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayersComponent ]
+      declarations: [ PlayersComponent ],
+      imports: [
+        DndModule.forRoot()
+      ]
     })
     .compileComponents();
   }));

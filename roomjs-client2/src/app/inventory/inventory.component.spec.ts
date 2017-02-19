@@ -3,6 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
+import { DndModule } from 'ng2-dnd';
+
 import { InventoryComponent } from './inventory.component';
 
 describe('InventoryComponent', () => {
@@ -11,7 +13,10 @@ describe('InventoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InventoryComponent ]
+      declarations: [ InventoryComponent ],
+      imports: [
+        DndModule.forRoot()
+      ]
     })
     .compileComponents();
   }));
