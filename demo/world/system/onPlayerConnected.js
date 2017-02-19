@@ -7,6 +7,8 @@ function onPlayerConnected(player) {
     }
     return color.bold.blue(`[${sender.name} enters the world]`);
   }, player);
+  
+  player.inventory({ player });
 
   player.renderPrompt();
   if (player.previousLocation) {
