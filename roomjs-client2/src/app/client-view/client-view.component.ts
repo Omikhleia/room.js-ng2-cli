@@ -39,6 +39,7 @@ export class ClientViewComponent implements OnInit, OnDestroy {
   private players: any[] = [];
   private room: string = 'LOCATION';
   private exits: string[] = [];
+  private inventory: string[] = [];
   private dialog: ComponentRef<any> = null;
   private showCmdLine: boolean = false;
   private subscriptions = [];
@@ -71,8 +72,8 @@ export class ClientViewComponent implements OnInit, OnDestroy {
         if (message.room) {
           this.room = message.room;
         }
-        if (message.contents) {
-          console.log("INVENTORY", message.contents);
+        if (message.inventory) {
+          this.inventory = message.inventory;
         }
         message = message.text;
       }
@@ -100,18 +101,21 @@ export class ClientViewComponent implements OnInit, OnDestroy {
         case SessionEvent.Disconnected:
             this.players = [];
             this.exits = [];
+            this.inventory = [];
             this.soundService.stop();
             // TODO DISABLE INPUT
             break;
         case SessionEvent.Connected:
             this.players = [];
             this.exits = [];
+            this.inventory = [];
             this.soundService.stop();
             this.loginOrCreate();
             break;
         case SessionEvent.Authenticated:
             this.players = [];
             this.exits = [];
+            this.inventory = [];
             this.soundService.stop();
             this.playOrCreate();
             break;

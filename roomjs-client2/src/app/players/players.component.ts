@@ -29,5 +29,10 @@ export class PlayersComponent implements OnInit {
   private isOnline(flag): boolean {
     return (flag & 0x01) !== 0
   }
+  
+  private onDrop(event: any, name: string) {
+    console.log("DROP " + event.dragData + " to " + name);
+    // FIXME DO SOME ACTION
+  }
 
 }
