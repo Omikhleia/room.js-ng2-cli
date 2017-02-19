@@ -30,4 +30,5 @@ function cloneAction(player, argstr) {
 
   // Move object in player inventory
   created.location = player;
+  player.updateInventory();
 }
