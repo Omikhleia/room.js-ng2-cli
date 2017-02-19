@@ -2,8 +2,18 @@ import { Component, Input, OnInit, OnChanges,
          state, trigger, transition, style, animate, keyframes } from '@angular/core';
 
 const items = {
-  'mug of ale': 'mug_of_ale.png',
-  'empty mug': 'empty_mug.png'
+  'empty mug': 'mug_empty.png',
+  'empty cup': 'cup_empty.png',
+  'empty glass': 'glass_empty.png',
+  'mug of ale': 'mug_ale.png',
+  'glass of wine': 'glass_full.png',
+  'cup of tea': 'cup_full.png',
+  'stick of bread': 'bread.png',
+  'grilled lamb chop': 'lamb.png',
+  'grilled pork tenderloin': 'pork.png',
+  'staff of creation': 'staff.png',
+  'antique key': 'key.png',
+  'lantern': 'lantern.png'
 };
 
 const unknownItem = 'unknown_item.png';

@@ -12,24 +12,23 @@
       <div class="title">Inventory</div>
     </header>
     <div class="inventory-content">
-     <div slimScroll size="7px" 
+      <div slimScroll size="7px" 
                       height="40vh"
-                      scrollToBottom="true"
                       railVisible="true"
                       alwaysVisible="true"
                       railColor="#bc94b7"
                       opacity=".5"
                       distance="3px"
                       color="#000">
-      <div *ngFor="let field of items">
-        <!--button (click)="onClicked(field.name)" class="btn btn-default">{{field.label}}</button -->
-        <div dnd-droppable (onDropSuccess)="onDrop($event, field)">
-          <div class="stuff" dnd-draggable [dragEnabled]="true" [dragData]="field">
-           <span [style.background-image]="'url(' + itemImage(field) + ')'"></span> {{field}}
+        <div *ngFor="let field of items">
+          <!--button (click)="onClicked(field.name)" class="btn btn-default">{{field.label}}</button -->
+          <div dnd-droppable (onDropSuccess)="onDrop($event, field)">
+            <div class="stuff" dnd-draggable [dragEnabled]="true" [dragData]="field">
+             <span [style.background-image]="'url(' + itemImage(field) + ')'"></span> {{field}}
+            </div>
           </div>
         </div>
       </div>
-     </div>
     </div>
   </div>
 </div>
