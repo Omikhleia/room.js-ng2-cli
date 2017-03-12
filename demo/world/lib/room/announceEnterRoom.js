@@ -1,5 +1,4 @@
 function announceEnterRoom(sender, recipient, direction) {
-  const image = this.id;
   const room = this.name;
   
   const playersHere = this.contents.filter(obj => obj.player);
@@ -16,6 +15,12 @@ function announceEnterRoom(sender, recipient, direction) {
   
   if (sender === recipient) {
     var exits = Object.keys(this.exits);
+    var contents = [];
+    this.contents.forEach(obj => {
+      if (!obj.player) {
+      	contents.push(obj.name);
+      }
+    });
     
     var ambiant;
     if ((this.ambiant) && sounds[this.ambiant]) {
@@ -24,10 +29,10 @@ function announceEnterRoom(sender, recipient, direction) {
       ambiant = [];
     }
     
-    if (effect) { return { ambiant, effect, players, image, room, exits }; }
-    return { ambiant, players, image, room, exits };
+    if (effect) { return { ambiant, effect, players, room, exits, contents }; }
+    return { ambiant, players, room, exits, contents };
   }
   
-  if (effect) { return { effect, players, image, text: `${sender.name} enters.` }; }  
-  return { players, image, text: `${sender.name} enters.` };
+  if (effect) { return { effect, players, text: `${sender.name} enters.` }; }  
+  return { players, text: `${sender.name} enters.` };
 }

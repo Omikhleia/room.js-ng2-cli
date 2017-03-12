@@ -79,6 +79,10 @@
       "dobjarg": "none",
       "preparg": "none",
       "iobjarg": "none"
+    },
+    "updateContents": {
+      "function": true,
+      "file": "updateContents.js"
     }
   }
 }

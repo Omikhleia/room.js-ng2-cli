@@ -24,7 +24,8 @@ function order({ player, dobj, iobj, verbstr, argstr, dobjstr, prepstr, iobjstr 
     } else {
       // Handle the fun case where the player/programmer would have added the trait to himself...
       created.location = this.location;
-      player.location.announce(this.announceOffer.bind(this), player, created);
+      this.location.announce(this.announceOffer.bind(this), player, created);
+      this.location.updateContents();
     }
   }
 }
