@@ -5,9 +5,13 @@
   flex: 0 0 10%;
   overflow-x: hidden;
 }
+.left2 {
+  flex: 0 0 15%;
+  overflow-x: hidden;
+}
 .middle {
   flex: 1;
 }
 .right {
-  flex: 0 0 40%;
+  flex: 0 0 30%;
 }

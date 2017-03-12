@@ -40,6 +40,7 @@ export class ClientViewComponent implements OnInit, OnDestroy {
   private room: string = 'LOCATION';
   private exits: string[] = [];
   private inventory: string[] = [];
+  private roomContents: string[] = [];
   private dialog: ComponentRef<any> = null;
   private showCmdLine: boolean = false;
   private subscriptions = [];
@@ -74,6 +75,9 @@ export class ClientViewComponent implements OnInit, OnDestroy {
         }
         if (message.inventory) {
           this.inventory = message.inventory;
+        }
+        if (message.contents) {
+          this.roomContents = message.contents;
         }
         message = message.text;
       }

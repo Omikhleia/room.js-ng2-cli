@@ -127,5 +127,10 @@ export class MappaneComponent implements OnInit {
   private dirCommand(dir: string): string {
     return `#cmd[${dir}]`;
   }
+  
+  private onDrop(event: any, target: string) {
+    console.log("DROP " + event.dragData + " to " + target);
+    // FIXME DO SOME ACTION
+  }
 
 }

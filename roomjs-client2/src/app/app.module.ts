@@ -25,6 +25,7 @@ import { FunctionEditorComponent } from './function-editor/function-editor.compo
 import { VerbEditorComponent } from './verb-editor/verb-editor.component';
 import { SoundSettingsComponent } from './sound-settings/sound-settings.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { RoomContentsComponent } from './room-contents/room-contents.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { InventoryComponent } from './inventory/inventory.component';
     FunctionEditorComponent,
     VerbEditorComponent,
     SoundSettingsComponent,
-    InventoryComponent
+    InventoryComponent,
+    RoomContentsComponent
   ],
   imports: [
     BrowserModule,

@@ -20,11 +20,12 @@ For that purpose, the client expects some JSON structures to be sent from the ga
 ## Installation
 Steps:
 
-1. install **room.js** referring to its documentation, then launch the server
+1. install **room.js** referring to its own documentation
 1. Install **room.js-ng2-cli**
 1. Replace the default demonstration world in Room.JS by the one provided with the client (*demo* subfolder)
-1. Edit the environment files in *roomjs-client2/src/environments* and configure the **serverURL** key to point to your own Room.JS instance (address and port)
+1. Start the server
 1. Go to *roomjs-client2* and run `npm install`
+1. Edit the environment files in *roomjs-client2/src/environments* and configure the **serverURL** key to point to your own Room.JS instance (address and port)
 1. Build and/or serve the client with Angular-CLI, as detailed in its own *README*
 
 ## Work in Progress
@@ -44,9 +45,9 @@ High level features and TODO list:
 - [ ] Image/Map system
   - [x] Isometric basic view
   - [ ] Environment specific assets (indoor, outdoor...)
-  - [ ] Room contents
+  - [x] Room contents
 - [ ] Inventory system
-  - [ ] View
+  - [x] View
   - [ ] Simple interactions (use item)
   - [ ] Drag and drop interations (use item on item)
   - [ ] Trade (with other players, etc.)

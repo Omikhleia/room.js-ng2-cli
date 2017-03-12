@@ -4,6 +4,9 @@
   <div class="left">
     <app-players [room]="room" [players]="players"></app-players>
   </div>
+  <div class="left2">
+    <app-room-contents [items]="roomContents"></app-room-contents>
+  </div>
   <div class="middle">
     <app-mappane [exits]="exits"
                  (commandEntered)="onCommand($event)"></app-mappane>
