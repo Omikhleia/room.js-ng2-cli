@@ -225,6 +225,20 @@
           ]
         }
       ]
+    },
+    "mouseSqueak": {
+      "array": [
+        {
+          "array": [
+            {
+              "value": "mouse_squeak"
+            },
+            {
+              "value": 20
+            }
+          ]
+        }
+      ]
     }
   }
 }
