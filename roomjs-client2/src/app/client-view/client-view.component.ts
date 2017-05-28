@@ -37,7 +37,7 @@ export class ClientViewComponent implements OnInit, OnDestroy {
   
   private prompt: string = '';
   private players: any[] = [];
-  private room: string = 'LOCATION';
+  private room: string = 'THE VOID';
   private exits: string[] = [];
   private inventory: string[] = [];
   private roomContents: string[] = [];
@@ -103,24 +103,15 @@ export class ClientViewComponent implements OnInit, OnDestroy {
       this.showCmdLine = false;
       switch(state) {
         case SessionEvent.Disconnected:
-            this.players = [];
-            this.exits = [];
-            this.inventory = [];
-            this.soundService.stop();
-            // TODO DISABLE INPUT
+            this.reset();
+            // FIXME: Disable input from links?
             break;
         case SessionEvent.Connected:
-            this.players = [];
-            this.exits = [];
-            this.inventory = [];
-            this.soundService.stop();
+            this.reset();
             this.loginOrCreate();
             break;
         case SessionEvent.Authenticated:
-            this.players = [];
-            this.exits = [];
-            this.inventory = [];
-            this.soundService.stop();
+            this.reset();
             this.playOrCreate();
             break;
         default:
@@ -137,6 +128,15 @@ export class ClientViewComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach((sub) => {
       sub.unsubscribe();
     });
+  }
+  
+  private reset() {
+    this.room = 'THE VOID';
+    this.players = [];
+    this.exits = [];
+    this.inventory = [];
+    this.roomContents = [];
+    this.soundService.stop();
   }
 
   private playOrCreate() {

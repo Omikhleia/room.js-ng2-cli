@@ -156,11 +156,12 @@ export class SocketService {
             // Reissue current state - Should be handled in game engine FIXME
             this.state.next(this.state.getValue());
         }
-    } else if (msg.toString().search(/from another login session/) !== -1) {
+    } 
+    // FIXED in upstream game engine.
+    /* else if (msg.toString().search(/from another login session/) !== -1) {
           // Game engine kicks player out without notifying Quit FIXME
-          console.log("FORCE QUIT");
-          this.state.next(SessionEvent.Authenticated);
-    }
+          //this.state.next(SessionEvent.Authenticated);
+    } */
   }
 
   private onSetPrompt(str : string) {
