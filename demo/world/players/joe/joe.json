@@ -2,9 +2,9 @@
   "name": "Joe",
   "aliases": [],
   "traitIds": [
-    "lib_player"
+    "lib.player"
   ],
-  "locationId": "areas_city_inn",
+  "locationId": "areas.city.inn",
   "userId": "joe",
   "properties": {
     "programmer": {
@@ -14,7 +14,7 @@
       "object": null
     },
     "mode": {
-      "ref": "modes_evalmode"
+      "ref": "modes.playmode"
     }
   }
 }

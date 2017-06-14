@@ -2,27 +2,27 @@
   "name": "Southern hall",
   "aliases": [],
   "traitIds": [
-    "lib_room"
+    "lib.room"
   ],
   "locationId": null,
   "properties": {
     "exits": {
       "object": {
         "south": {
-          "ref": "areas_city_tradersgate"
+          "ref": "areas.city.tradersgate"
         },
         "north": {
-          "ref": "areas_city_hall2"
+          "ref": "areas.city.hall2"
         },
         "east": {
-          "ref": "areas_city_halldoor1"
+          "ref": "areas.city.halldoor1"
         }
       }
     },
     "extraMatchObjects": {
       "array": [
         {
-          "ref": "areas_city_halldoor1"
+          "ref": "areas.city.halldoor1"
         }
       ]
     },

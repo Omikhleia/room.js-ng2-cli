@@ -2,14 +2,14 @@
   "name": "door",
   "aliases": [],
   "traitIds": [
-    "lib_door"
+    "lib.door"
   ],
   "locationId": null,
   "properties": {
     "sides": {
       "array": [
         {
-          "ref": "areas_city_hall1"
+          "ref": "areas.city.hall1"
         }
       ]
     }

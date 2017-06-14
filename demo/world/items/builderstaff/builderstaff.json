@@ -2,9 +2,9 @@
   "name": "staff of creation",
   "aliases": [],
   "traitIds": [
-    "lib_item"
+    "lib.item"
   ],
-  "locationId": "players_joe",
+  "locationId": "players.joe",
   "properties": {
     "description": {
       "value": "the magical staff of creation, for 'use' by builders"

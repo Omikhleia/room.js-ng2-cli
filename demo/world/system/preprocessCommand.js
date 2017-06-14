@@ -4,7 +4,7 @@ function preprocessCommand(player, input) {
     // Consider inputs starting with @ as direct play command
     // (whatever mode is active)
     const direct = input.substring(1);
-    return modes_playmode.preprocessCommand(direct);
+    return modes.playmode.preprocessCommand(direct);
   }
 
   return player.mode.preprocessCommand(input);

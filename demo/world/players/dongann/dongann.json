@@ -2,19 +2,19 @@
   "name": "Dongann",
   "aliases": [],
   "traitIds": [
-    "lib_player"
+    "lib.player"
   ],
-  "locationId": "areas_city_inn",
+  "locationId": null,
   "userId": "dongann",
   "properties": {
     "programmer": {
       "value": false
     },
     "previousLocation": {
-      "object": null
+      "ref": "areas.city.inn"
     },
     "mode": {
-      "ref": "modes_playmode"
+      "ref": "modes.playmode"
     },
     "progammer": {
       "value": false

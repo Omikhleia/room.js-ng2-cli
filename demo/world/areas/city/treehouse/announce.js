@@ -10,7 +10,7 @@ function announce(viewFn = views.noOp, sender, msg) {
   });
   // ... and propagate down.
   this.exits.down.announce((senderx, recipient, message) => {
-    if (recipient !== items_oaktree) {
+    if (recipient !== items.oaktree) {
       var m = viewFn(senderx, recipient, message);
       if (m.text) {
         m.text = color.gray('(From the tree) ') + m.text;

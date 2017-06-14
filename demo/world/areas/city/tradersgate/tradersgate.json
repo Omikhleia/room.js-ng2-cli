@@ -2,20 +2,20 @@
   "name": "Traders gate",
   "aliases": [],
   "traitIds": [
-    "lib_room"
+    "lib.room"
   ],
   "locationId": null,
   "properties": {
     "exits": {
       "object": {
         "west": {
-          "ref": "areas_city_eaststreet"
+          "ref": "areas.city.eaststreet"
         },
         "northwest": {
-          "ref": "areas_city_eastdoor2"
+          "ref": "areas.city.eastdoor2"
         },
         "north": {
-          "ref": "areas_city_hall1"
+          "ref": "areas.city.hall1"
         }
       }
     },
@@ -28,7 +28,7 @@
     "extraMatchObjects": {
       "array": [
         {
-          "ref": "areas_city_eastdoor2"
+          "ref": "areas.city.eastdoor2"
         }
       ]
     }

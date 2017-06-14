@@ -9,7 +9,7 @@ function tell(msg) {
       m = color.gray('(From the ground) ') + msg;
     }
     
-    areas_city_treehouse.contents.forEach(recipient => {
+    areas.city.treehouse.contents.forEach(recipient => {
       recipient.tell(m);
     });
   }

@@ -21,10 +21,10 @@ function buildAction(player, direction) {
   }
 
   // Build room
-  const idScheme = 'areas_instances_room';
+  const idScheme = 'areas.instances.room';
   const id = nextId(idScheme);
 
-  const created = lib_room.new(id);
+  const created = lib.room.new(id);
   created.name = 'Ordinary location';
   created.description = `The place is full of dust, with building materials left all over.
 That is the craft of ${player.name} the Builder, so maybe this is not unexpected.`;
