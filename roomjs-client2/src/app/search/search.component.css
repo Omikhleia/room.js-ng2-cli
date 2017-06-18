@@ -34,7 +34,8 @@
 }
 .dialog-box header .title {
   flex-grow: 1;
-  cursor: default;
+  user-select: none;
+  pointer-events: none;
 }
 .function:before {
   background: #094d09;
@@ -60,4 +61,8 @@
 
 .dialog-box .button.active {
   background: green;
+}
+
+.cursor-draggable  > header {
+  cursor: move;
 }

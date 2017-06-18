@@ -1,6 +1,6 @@
 <div class='dialog-modal'>
-  <div class="dialog-box">
-    <header><div class="title">Search</div></header>
+  <div class="dialog-box" appDraggable [appDraggableHandle]="draghandle">
+    <header #draghandle><div class="title">Search</div></header>
       <div class='searchbox'>
         <input #input class="form-control" [(ngModel)]="search"
                (keydown)="onKeyDown($event)"
