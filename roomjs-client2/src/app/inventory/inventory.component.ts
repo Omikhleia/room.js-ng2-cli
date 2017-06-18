@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges,
+import { Component, Input, OnInit, OnChanges, HostListener,
          state, trigger, transition, style, animate, keyframes } from '@angular/core';
 
 const items = {
@@ -41,6 +41,15 @@ export class InventoryComponent implements OnInit {
   @Input() items: string[] = [];
   private visible: boolean = false;
   private isChanged: string = 'stable';
+  
+  @HostListener('document:keydown', ['$event']) onKeyboardEvent(event: KeyboardEvent) {
+    const key = event.keyCode;
+    const escapeKey = key === 27;
+
+    if (escapeKey) {
+      this.visible = false;
+    }
+  }
 
   constructor() { }
 
@@ -60,6 +69,10 @@ export class InventoryComponent implements OnInit {
   private onClick(event : any) {
     this.visible = !this.visible;
     this.isChanged = 'stable';
+  }
+  
+  private onClose(event : any) {
+    this.visible = false;
   }
   
   private onDrop(event: any, item: string) {

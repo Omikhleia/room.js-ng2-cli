@@ -2,15 +2,6 @@
   background: rgb(95, 130, 88);
 }
 .inventory-container {
-  /* position: fixed; *//* Stay in place */
-  /*z-index: 1; *//* Sit on top */
-  /*left: 0;
-  top: 0;*/
-  /* width: 100%; */ /* Full width */
-  /* height: 100%; *//* Full height */
-  /* overflow: auto; *//* Enable scroll if needed */
-  /*background-color: rgb(0,0,0); *//* Fallback color */
-  /*background-color: rgba(0,0,0,0.05); *//* Black w/ opacity */
   display: none;
   position: absolute;
   width: 100%;
@@ -24,13 +15,10 @@
   width: 250px;
   background: #202a2a;
   color: white;
-  position: absolute;
+  position: relative;
   border: 1px solid black;
   border-radius: 5px;
   overflow: hidden;
-  xposition: fixed;
-  left: calc(50% - 125px);
-  top: 10px;
 }
 .inventory-box header {
   border-bottom: 1px solid black;
@@ -41,7 +29,8 @@
 }
 .inventory-box header .title {
   flex-grow: 1;
-  cursor: default;
+  pointer-events: none;
+  user-select: none;
 }
 .inventory-box button {
   font-weight: 700;
@@ -55,6 +44,8 @@
   color: white;
   background: #202a2a;
   padding: 2px;
+  user-select: none;
+  cursor: grab;
 }
 
 .stuff span {
@@ -63,4 +54,13 @@
   display: inline-block;
   background-size: 50px;
   vertical-align: middle;
+}
+
+.cursor-draggable  > header {
+  cursor: move;
+}
+
+.close-button:hover {
+  cursor: pointer;
+  color: #8c2a2a;
 }

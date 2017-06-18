@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { CodemirrorModule } from 'ng2-codemirror-typescript/Codemirror';
 import { DndModule } from 'ng2-dnd';
+import { Draggable } from 'ng2draggable/draggable.directive';
 
 import { AppComponent } from './app.component';
 import { DialogAnchorDirective } from './dialoganchor.directive';
@@ -29,6 +30,7 @@ import { RoomContentsComponent } from './room-contents/room-contents.component';
 
 @NgModule({
   declarations: [
+    Draggable,
     AppComponent,
     DialogAnchorDirective,
     DialogComponent,
