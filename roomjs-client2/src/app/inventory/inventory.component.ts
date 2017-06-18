@@ -13,7 +13,8 @@ const items = {
   'grilled pork tenderloin': 'pork.png',
   'staff of creation': 'staff.png',
   'antique key': 'key.png',
-  'lantern': 'lantern.png'
+  'lantern': 'lantern.png',
+  'pocket watch': 'pocketwatch.png'
 };
 
 const unknownItem = 'unknown_item.png';

@@ -20,7 +20,8 @@ const items = {
   'oak tree': 'tree.png',
   'Adam Baker': 'npc_baker.png',
   'Paul Butcher': 'npc_butcher.png',
-  'Sarah': 'npc_barmaid.png'
+  'Sarah': 'npc_barmaid.png',
+  'pocket watch': 'pocketwatch.png'
 };
 
 const unknownItem = 'unknown_item.png';
