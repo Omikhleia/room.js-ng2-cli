@@ -7,28 +7,26 @@
   </div>
 </div>
 <div class="inventory-container" [ngClass]="{'visible': visible}">
-  <div align="center">
-    <div align="left" class="inventory-box" 
-         [ng2-draggable]=true [ng2DraggableHandle]="draghandle">
-      <header #draghandle>
-        <div class="title">Inventory</div>
-        <div class="close-button" (click)="onClose()">✕</div>
-      </header>
-      <div class="inventory-content">
-        <div slimScroll size="7px" 
-                        height="40vh"
-                        railVisible="true"
-                        alwaysVisible="true"
-                        railColor="#bc94b7"
-                        opacity=".5"
-                        distance="3px"
-                        color="#000">
-          <div *ngFor="let field of items">
-            <!--button (click)="onClicked(field.name)" class="btn btn-default">{{field.label}}</button -->
-            <div dnd-droppable (onDropSuccess)="onDrop($event, field)">
-              <div class="stuff" dnd-draggable [dragEnabled]="true" [dragData]="field">
-               <span [style.background-image]="'url(' + itemImage(field) + ')'"></span> {{field}}
-              </div>
+  <div align="left" class="inventory-box" 
+       appDraggable [appDraggableHandle]="draghandle">
+    <header #draghandle>
+      <div class="title">Inventory</div>
+      <div class="close-button" (click)="onClose()">✕</div>
+    </header>
+    <div class="inventory-content">
+      <div slimScroll size="7px" 
+                      height="40vh"
+                      railVisible="true"
+                      alwaysVisible="true"
+                      railColor="#bc94b7"
+                      opacity=".5"
+                      distance="3px"
+                      color="#000">
+        <div *ngFor="let field of items">
+          <!--button (click)="onClicked(field.name)" class="btn btn-default">{{field.label}}</button -->
+          <div dnd-droppable (onDropSuccess)="onDrop($event, field)">
+            <div class="stuff" dnd-draggable [dragEnabled]="true" [dragData]="field">
+             <span [style.background-image]="'url(' + itemImage(field) + ')'"></span> {{field}}
             </div>
           </div>
         </div>

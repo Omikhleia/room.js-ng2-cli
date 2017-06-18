@@ -3,8 +3,7 @@
 }
 .inventory-container {
   display: none;
-  position: absolute;
-  width: 100%;
+  position: relative;
 }
 .inventory-container.visible {
   display: block;
@@ -19,6 +18,8 @@
   border: 1px solid black;
   border-radius: 5px;
   overflow: hidden;
+  left: calc(50% - 125px);
+  top: 10px;
 }
 .inventory-box header {
   border-bottom: 1px solid black;
@@ -60,6 +61,9 @@
   cursor: move;
 }
 
+.close-button {
+  user-select: none;
+}
 .close-button:hover {
   cursor: pointer;
   color: #8c2a2a;

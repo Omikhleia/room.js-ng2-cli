@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 
 import { CodemirrorModule } from 'ng2-codemirror-typescript/Codemirror';
 import { DndModule } from 'ng2-dnd';
-import { Draggable } from 'ng2draggable/draggable.directive';
 
 import { AppComponent } from './app.component';
 import { DialogAnchorDirective } from './dialoganchor.directive';
@@ -27,13 +26,14 @@ import { VerbEditorComponent } from './verb-editor/verb-editor.component';
 import { SoundSettingsComponent } from './sound-settings/sound-settings.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { RoomContentsComponent } from './room-contents/room-contents.component';
+import { DraggableDirective } from './draggable.directive';
 
 @NgModule({
   declarations: [
-    Draggable,
     AppComponent,
     DialogAnchorDirective,
     DialogComponent,
+    DraggableDirective,
     ButtonsComponent,
     TextpaneComponent,
     SlimScroll,
