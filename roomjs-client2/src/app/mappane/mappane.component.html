@@ -18,6 +18,7 @@
     <svg:g *ngFor="let door of doors">
       <svg:a class="link" *ngIf="hasDir(door.dir)" [attr.xlink:href]="dirCommand(door.dir)">
         <svg:circle class="clickable" dnd-droppable (onDropSuccess)="onDrop($event, door.dir)"
+                    [dropZones]="['exits']"
                     [attr.cx]="door.x + 100" [attr.cy]="door.y + 30" r="25"></svg:circle>
       </svg:a>
     </svg:g>

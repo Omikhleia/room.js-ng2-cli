@@ -41,20 +41,41 @@
   padding: 2px 2px 0px 2px;
 }
 
-.stuff {
+.item {
   color: white;
-  background: #202a2a;
-  padding: 2px;
-  user-select: none;
+  background: #3a4444;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   cursor: grab;
+  user-select: none;
 }
 
-.stuff span {
+.item span {
   width: 50px;
   height: 50px;
   display: inline-block;
   background-size: 50px;
   vertical-align: middle;
+}
+
+.itemspot {
+  color: white;
+  padding: 10px;
+  border: 1px solid #3a4444;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  user-select: none;
+}
+
+.dropentry {
+  border-color: white;
+  margin-bottom: 2px;
+}
+
+.dropspot {
+  margin-bottom: 2px;
 }
 
 .cursor-draggable  > header {

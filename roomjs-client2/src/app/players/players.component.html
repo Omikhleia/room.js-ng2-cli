@@ -11,7 +11,7 @@
                      distance="3px"
                      color="#000">
   <div *ngFor="let player of players" title="{{player.name}}"
-       dnd-droppable (onDropSuccess)="onDrop($event, player.name)">
+       dnd-droppable (onDropSuccess)="onDrop($event, player.name)" [dropZones]="['players']">
     <span class="flag" [ngClass]="{online: isOnline(player.flag)}">{{setPlayerFlag(player.flag)}}</span>
     <span class="name" [ngClass]="{offline: !isOnline(player.flag)}">{{player.name}}</span>
   </div>

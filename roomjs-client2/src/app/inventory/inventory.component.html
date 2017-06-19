@@ -14,6 +14,13 @@
       <div class="close-button" (click)="onClose()">✕</div>
     </header>
     <div class="inventory-content">
+      <div class="dropentry dropspot"
+           dnd-droppable (onDropSuccess)="onDrop($event, undefined)" 
+           [dropZones]="['inventory-item']">
+          <div class="itemspot" align="center">
+            <i>Empty slot</i>
+          </div>
+      </div>
       <div slimScroll size="7px" 
                       height="40vh"
                       railVisible="true"
@@ -23,10 +30,13 @@
                       distance="3px"
                       color="#000">
         <div *ngFor="let field of items">
-          <!--button (click)="onClicked(field.name)" class="btn btn-default">{{field.label}}</button -->
-          <div dnd-droppable (onDropSuccess)="onDrop($event, field)">
-            <div class="stuff" dnd-draggable [dragEnabled]="true" [dragData]="field">
-             <span [style.background-image]="'url(' + itemImage(field) + ')'"></span> {{field}}
+          <div class="dropentry"
+               dnd-droppable (onDropSuccess)="onDrop($event, field)" 
+               [dropZones]="['inventory']">
+            <div class="item" 
+                 dnd-draggable [dragEnabled]="true" [dragData]="field"
+                 [dropZones]="['room', 'players', 'inventory']">
+              <span [style.background-image]="'url(' + itemImage(field) + ')'"></span> {{field}}
             </div>
           </div>
         </div>

@@ -2,19 +2,41 @@
   padding: 2px 20px 0px 2px;
 }
 
-.stuff {
+.item {
   color: black;
   padding: 2px;
   background: #dedede;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  cursor: grab;
+  user-select: none;
 }
 
-.stuff span {
+.item span {
   width: 50px;
   height: 50px;
   display: inline-block;
   background-size: 50px;
   vertical-align: middle;
+}
+
+.itemspot {
+  color: black;
+  padding: 10px;
+  background: white;
+  border: 1px solid #dedede;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  user-select: none;
+}
+
+.dropentry {
+  border-color: black;
+  margin-bottom: 2px;
+}
+
+.dropspot {
+  margin-bottom: 2px;
 }

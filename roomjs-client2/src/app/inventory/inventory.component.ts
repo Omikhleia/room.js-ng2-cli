@@ -75,8 +75,12 @@ export class InventoryComponent implements OnInit {
     this.visible = false;
   }
   
-  private onDrop(event: any, item: string) {
-    console.log("DROP " + event.dragData + " onto " + item);
+  private onDrop(event: any, item?: string) {
+    if (item) {
+      console.log("PUT " + event.dragData + " INTO " + item);
+    } else {
+      console.log("GET " + event.dragData);
+    }
     // FIXME DO SOME ACTION
   }
   

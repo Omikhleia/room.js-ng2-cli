@@ -39,8 +39,12 @@ export class RoomContentsComponent implements OnInit {
   ngOnInit() {
   }
   
-  private onDrop(event: any, item: string) {
-    console.log("DROP " + event.dragData + " onto " + item);
+  private onDrop(event: any, item?: string) {
+    if (item) {
+      console.log("PUT " + event.dragData + " INTO " + item);
+    } else {
+      console.log("DROP " + event.dragData);
+    }
     // FIXME DO SOME ACTION
   }
   

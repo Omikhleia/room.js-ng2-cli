@@ -31,7 +31,7 @@ export class PlayersComponent implements OnInit {
   }
   
   private onDrop(event: any, name: string) {
-    console.log("DROP " + event.dragData + " to " + name);
+    console.log("GIVE " + event.dragData + " TO " + name);
     // FIXME DO SOME ACTION
   }
 

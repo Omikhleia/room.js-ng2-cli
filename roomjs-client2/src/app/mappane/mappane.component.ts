@@ -129,7 +129,9 @@ export class MappaneComponent implements OnInit {
   }
   
   private onDrop(event: any, target: string) {
-    console.log("DROP " + event.dragData + " to " + target);
+    // UNUSED AS OF YET
+    // No draggable with that droppable zone
+    console.log("DROP " + event.dragData + " TO " + target);
     // FIXME DO SOME ACTION
   }
 
