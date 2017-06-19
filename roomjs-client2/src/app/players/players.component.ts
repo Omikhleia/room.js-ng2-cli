@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { SocketService } from '../socket.service';
 
 /**
  * Component for displaying players present in the room.
@@ -13,7 +14,7 @@ export class PlayersComponent implements OnInit {
   @Input() players: any[];
   @Input() room: string;
 
-  constructor() { }
+  constructor(private socketService: SocketService) { }
 
   ngOnInit() { 
   }
@@ -31,8 +32,8 @@ export class PlayersComponent implements OnInit {
   }
   
   private onDrop(event: any, name: string) {
-    console.log("GIVE " + event.dragData + " TO " + name);
-    // FIXME DO SOME ACTION
+    this.socketService.send(`@give ${event.dragData} to ${name}`);
+    // FIXME HIDE @ (specific logic) ?
   }
 
 }

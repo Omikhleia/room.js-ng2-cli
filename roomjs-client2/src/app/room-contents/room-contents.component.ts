@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { SocketService } from '../socket.service';
 
 // FIXME Refactor later (inheritance with inventory, etc.)
 const items = {
@@ -34,24 +35,33 @@ const unknownItem = 'unknown_item.png';
 export class RoomContentsComponent implements OnInit {
   @Input() items: string[] = [];
 
-  constructor() { }
+  constructor(private socketService: SocketService) { }
 
   ngOnInit() {
   }
-  
+
+  private onActivate(item: string) {
+    this.socketService.send(`@look ${item}`);
+  }
+
   private onDrop(event: any, item?: string) {
     if (item) {
-      console.log("PUT " + event.dragData + " INTO " + item);
+      this.socketService.send(`@put ${event.dragData} into ${item}`);
     } else {
-      console.log("DROP " + event.dragData);
+      this.socketService.send(`@drop ${event.dragData}`);
     }
-    // FIXME DO SOME ACTION
+    // FIXME HIDE @ (specific logic) ?
+  }
+  
+  private itemName(item: string) {
+    return item.replace(/\.[0-9]+/, ''); // FIXME remove determiners...
   }
   
   private itemImage(item: string) {
+    const it: string = item.replace(/\.[0-9]+/, ''); // FIXME remove determiners...
     const prefix = './assets/images/items/';
-    if (items[item]) {
-      return prefix + items[item];
+    if (items[it]) {
+      return prefix + items[it];
     }
     return prefix + unknownItem;
   }

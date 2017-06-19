@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnChanges, HostListener,
          state, trigger, transition, style, animate, keyframes } from '@angular/core';
+import { SocketService } from '../socket.service';
 
 const items = {
   'empty mug': 'mug_empty.png',
@@ -51,7 +52,7 @@ export class InventoryComponent implements OnInit {
     }
   }
 
-  constructor() { }
+  constructor(private socketService: SocketService) { }
 
   ngOnInit() {
   }
@@ -75,19 +76,33 @@ export class InventoryComponent implements OnInit {
     this.visible = false;
   }
   
+  private onActivate(item: string) {
+    this.socketService.send(`@look ${item}`);
+  }
+  
+  private allowDrop(item?: string) {
+    // Don't drop an item on itself
+    return (dragData: any) => dragData !== item;
+  }
+  
   private onDrop(event: any, item?: string) {
     if (item) {
-      console.log("PUT " + event.dragData + " INTO " + item);
+      this.socketService.send(`@put ${event.dragData} into ${item}`);
     } else {
-      console.log("GET " + event.dragData);
+      this.socketService.send(`@get ${event.dragData}`);
     }
-    // FIXME DO SOME ACTION
+    // FIXME HIDE @ (specific logic) ?
+  }
+  
+  private itemName(item: string) {
+    return item.replace(/\.[0-9]+/, ''); // FIXME remove determiners...
   }
   
   private itemImage(item: string) {
+    const it: string = item.replace(/\.[0-9]+/, ''); // FIXME remove determiners...
     const prefix = './assets/images/items/';
-    if (items[item]) {
-      return prefix + items[item];
+    if (items[it]) {
+      return prefix + items[it];
     }
     return prefix + unknownItem;
   }

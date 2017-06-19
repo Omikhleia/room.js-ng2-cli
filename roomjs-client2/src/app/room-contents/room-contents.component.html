@@ -17,8 +17,10 @@
            dnd-droppable (onDropSuccess)="onDrop($event, field)" [dropZones]="['room']">
         <div class="item" 
              dnd-draggable [dragEnabled]="true" [dragData]="field" 
-             [dropZones]="['inventory', 'inventory-item']">
-         <span [style.background-image]="'url(' + itemImage(field) + ')'"></span> {{field}}
+             [dropZones]="['inventory-item']"
+             (dblclick)="onActivate(field)">
+         <span [style.background-image]="'url(' + itemImage(field) + ')'"></span> 
+         {{itemName(field)}}
         </div>
       </div>
     </div>

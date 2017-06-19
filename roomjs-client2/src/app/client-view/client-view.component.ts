@@ -73,11 +73,17 @@ export class ClientViewComponent implements OnInit, OnDestroy {
         if (message.room) {
           this.room = message.room;
         }
-        if (message.inventory) {
-          this.inventory = message.inventory;
-        }
-        if (message.contents) {
-          this.roomContents = message.contents;
+        if (message.inventory && message.contents) { // FIXME ugly, see dirtyDisambiguation...
+          let dis = this.dirtyDisambiguation(message.inventory, message.contents);
+          this.inventory = dis.inventory;
+          this.roomContents = dis.contents;
+        } else if (message.contents) {
+          const dis = this.dirtyDisambiguation(this.inventory, message.contents);
+          this.roomContents = dis.contents;
+        } else if (message.inventory) {
+          let dis = this.dirtyDisambiguation(message.inventory, this.roomContents);
+          this.inventory = dis.inventory;
+          this.roomContents = dis.contents;
         }
         message = message.text;
       }
@@ -121,6 +127,23 @@ export class ClientViewComponent implements OnInit, OnDestroy {
       }
     });
     this.subscriptions.push(sub);
+  }
+  
+  private dirtyDisambiguation(oldInventory: string[], oldContents: string[]): any {
+    // FIXME really dirty... Adding determiners for disambiguation
+    let set = {};
+    const renumbering: any = (item) => {
+      item = item.replace(/\.[0-9]+/, '');
+      if (!set[item]) {
+        set[item] = 1;
+      } else {
+        set[item]++;
+      }
+      return item + '.' + set[item];
+    };
+    const inventory = oldInventory.map(renumbering);
+    const contents = oldContents.map(renumbering);
+    return { inventory, contents };
   }
 
   ngOnDestroy() {

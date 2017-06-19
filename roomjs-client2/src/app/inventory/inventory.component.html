@@ -32,11 +32,14 @@
         <div *ngFor="let field of items">
           <div class="dropentry"
                dnd-droppable (onDropSuccess)="onDrop($event, field)" 
-               [dropZones]="['inventory']">
+               [dropZones]="['inventory']"
+               [allowDrop]="allowDrop(field)">
             <div class="item" 
                  dnd-draggable [dragEnabled]="true" [dragData]="field"
-                 [dropZones]="['room', 'players', 'inventory']">
-              <span [style.background-image]="'url(' + itemImage(field) + ')'"></span> {{field}}
+                 [dropZones]="['room', 'players', 'inventory']"
+                 (dblclick)="onActivate(field)">
+              <span [style.background-image]="'url(' + itemImage(field) + ')'"></span>
+              {{itemName(field)}}
             </div>
           </div>
         </div>
