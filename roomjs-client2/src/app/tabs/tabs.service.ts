@@ -14,7 +14,7 @@ export class TabsService implements OnDestroy {
   private tabsSubject = new Subject<Tab[]>();
   private observableTabs = this.tabsSubject.asObservable();
 
-  private currentTab: number = 1;
+  private currentTab = 1;
   private currentTabSubject = new Subject<number>();
   private observableCurrentTab = this.currentTabSubject.asObservable();
 
@@ -26,11 +26,11 @@ export class TabsService implements OnDestroy {
   public setTabs(tabs: Tab[]) {
     this.tabs = tabs;
     this.tabsSubject.next(tabs);
-  }  
+  }
 
   public addTab(tab: Tab) {
     const tabIndex = this.tabs.findIndex((element: Tab) => {
-      return (element.title === tab.title)
+      return (element.title === tab.title);
     });
     if (tabIndex !== -1) {
       // A tab by same name already exists, make it the current one.
@@ -46,7 +46,7 @@ export class TabsService implements OnDestroy {
   }
 
   public getTabs(fn) {
-    let sub = this.observableTabs.subscribe(fn);
+    const sub = this.observableTabs.subscribe(fn);
     this.subscriptions.push(sub);
   }
 
@@ -56,17 +56,17 @@ export class TabsService implements OnDestroy {
   }
 
   public getCurrentTab(fn) {
-    let sub = this.observableCurrentTab.subscribe(fn);
+    const sub = this.observableCurrentTab.subscribe(fn);
     this.subscriptions.push(sub);
   }
-  
+
   public setDirty(index: number, dirty: boolean) {
     this.tabs[index].dirty = dirty;
     this.tabsSubject.next(this.tabs);
   }
-  
+
   public closeTab(index) {
-    // Assumption: never remove the first tab...     
+    // Assumption: never remove the first tab...
     if (index !== 1) {
       if (this.canCloseTab(index - 1)) {
         this.setCurrentTab(index - 1);
@@ -75,7 +75,7 @@ export class TabsService implements OnDestroy {
       }
     }
   }
-  
+
   private canCloseTab(index: number) {
     const msg = [
       'Are you sure you want to close this tab?',

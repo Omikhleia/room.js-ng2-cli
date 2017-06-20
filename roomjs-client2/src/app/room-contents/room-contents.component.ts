@@ -40,11 +40,11 @@ export class RoomContentsComponent implements OnInit {
   ngOnInit() {
   }
 
-  private onActivate(item: string) {
+  public onActivate(item: string) {
     this.socketService.send(`@look ${item}`);
   }
 
-  private onDrop(event: any, item?: string) {
+  public onDrop(event: any, item?: string) {
     if (item) {
       this.socketService.send(`@put ${event.dragData} into ${item}`);
     } else {
@@ -52,12 +52,12 @@ export class RoomContentsComponent implements OnInit {
     }
     // FIXME HIDE @ (specific logic) ?
   }
-  
-  private itemName(item: string) {
+
+  public itemName(item: string) {
     return item.replace(/\.[0-9]+/, ''); // FIXME remove determiners...
   }
-  
-  private itemImage(item: string) {
+
+  public itemImage(item: string) {
     const it: string = item.replace(/\.[0-9]+/, ''); // FIXME remove determiners...
     const prefix = './assets/images/items/';
     if (items[it]) {

@@ -9,13 +9,13 @@ import { Tab } from './tabs.model';
  * It also has an optional close button, and in that case a 'dirty' indicator.
  */
 @Component({
-  selector:'tabs-header',
+  selector: 'app-tabs-header',
   templateUrl: './tabs-header.component.html',
   styleUrls: ['./tabs-header.component.css']
 })
 export class TabsHeaderComponent {
   private tabsData: Tab[] = [];
-  public currentTab: number = 1;
+  public currentTab = 1;
 
   constructor(private tabs: TabsService) {
      // Subscribe to changes to the list of tabs and the selected tab
@@ -27,11 +27,11 @@ export class TabsHeaderComponent {
     });
   }
 
-  private selectTab(index: number) {
+  public selectTab(index: number) {
     this.tabs.setCurrentTab(index);
   }
-  
-  private closeTab(index: number) {
+
+  public closeTab(index: number) {
     this.tabs.closeTab(index);
   }
 }

@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-/** 
+/**
  * Command line input
  */
- 
+
 export enum Keys { // FIXME
     UP = 38,
-    DOWN = 40, 
+    DOWN = 40,
     TAB = 9,
     V = 86,
     P = 80
@@ -21,15 +21,15 @@ export class CmdlineComponent implements OnInit {
   // Private variables
   private history: string[] = [];
   private currentHistory: number = -1;
-  private maxHistory: number = 200; // FIXME TODO configurable
-  private command: string;    
-  
+  private maxHistory = 200; // FIXME TODO configurable
+  public command: string;
+
   // Bindings
-  @Input()  prompt: string = '';
+  @Input()  prompt = '';
   @Output() commandEntered = new EventEmitter<string>();
   @Output() modeChange = new EventEmitter<number>();
 
-  // Constructor 
+  // Constructor
   constructor() { }
 
   ngOnInit() {
@@ -39,23 +39,23 @@ export class CmdlineComponent implements OnInit {
   private addToHistory(command: string) {
     this.history.unshift(command);
     if (this.history.length > this.maxHistory) {
-      this.truncateHistory(); 
+      this.truncateHistory();
     }
     this.currentHistory = -1;
   }
-   
+
   private truncateHistory() {
     this.history = this.history.slice(0, this.maxHistory);
   }
 
   // Event handlers
-  private onSubmit() {
+  public onSubmit() {
     this.commandEntered.next(this.command);
     this.addToHistory(this.command);
     this.command = '';
   }
-    
-  private onKeyDown(event: KeyboardEvent) {
+
+  public onKeyDown(event: KeyboardEvent) {
     const key = event.keyCode;
     const meta = event.metaKey;
     const ctrl = event.ctrlKey;
@@ -81,12 +81,12 @@ export class CmdlineComponent implements OnInit {
 
     return true;
   }
-   
-  private onHistoryRecall(key: number) {  
+
+  private onHistoryRecall(key: number) {
     if (this.history.length === 0) {
       return true;
     }
-    
+
     switch (key) {
       case Keys.UP: {
         if (this.currentHistory < this.history.length - 1) {

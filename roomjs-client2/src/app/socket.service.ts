@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Observable }      from "rxjs";
-import { Subject }         from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import * as io from "socket.io-client";
+import * as io from 'socket.io-client';
 
 /**
  * Socket service module.
  * Abstract communication with the Room.js server.
  */
- 
+
 // FIXME REFACTOR State automata far form perfect, lots of any, etc.
 export enum SessionEvent {
   Connected,
@@ -30,16 +30,16 @@ export class SocketService {
   text$ = this.textSubject.asObservable();
   mode$ = this.modeSubject.asObservable();
   input$ = this.inputSubject.asObservable();
-    
+
   private state = new BehaviorSubject<SessionEvent>(SessionEvent.Disconnected);
   state$ = this.state.asObservable();
-  
+
   constructor() { }
-  
-  init(host : string) {
-    let socketUrl = host;
+
+  init(host: string) {
+    const socketUrl = host;
     this.socket = io.connect(socketUrl);
-    
+
     // SocketIO standard events
     this.socket.on('connect', this.onConnect.bind(this));
     this.socket.on('connecting', this.onConnecting.bind(this));
@@ -50,7 +50,7 @@ export class SocketService {
     this.socket.on('reconnect_failed', this.onReconnectFailed.bind(this));
     this.socket.on('reconnect', this.onReconnect.bind(this));
     this.socket.on('reconnecting', this.onReconnecting.bind(this));
-    
+
     // RoomJS game engine events
     this.socket.on('output', this.onOutput.bind(this));
     this.socket.on('set-prompt', this.onSetPrompt.bind(this));
@@ -60,7 +60,7 @@ export class SocketService {
     this.socket.on('playing', this.onPlaying.bind(this));
     this.socket.on('quit', this.onQuit.bind(this));
   }
-    
+
   send(command: string) {
     this.socket.emit('input', command);
   }
@@ -68,19 +68,19 @@ export class SocketService {
   changeMode(direction: number) {
     this.socket.emit('tab-key-press', { direction });
   }
-  
+
   search(str: string, fn: any) {
     this.socket.emit('search', str, (results: any) => {
       fn(results);
     });
   }
-  
+
   getVerb(params: any, fn: any) {
     this.socket.emit('get-verb', params, data => {
-      fn(data);    
+      fn(data);
     });
   }
-  
+
   getFunction(params: any, fn: any) {
     this.socket.emit('get-function', params, data => {
       fn(data);
@@ -92,21 +92,21 @@ export class SocketService {
       fn(response);
     });
   }
-  
+
   saveFunction(params: any, fn: any) {
     this.socket.emit('save-function', params, response => {
       fn(response);
     });
   }
-  
+
   // Private methods
-    
-  private onConnect() { 
-    this.addLine(/*boldGreen*/('Connected!')); 
+
+  private onConnect() {
+    this.addLine(/*boldGreen*/('Connected!'));
     this.state.next(SessionEvent.Connected);
   }
 
-  private onConnecting() { 
+  private onConnecting() {
     this.addLine(/*gray*/('Connecting...'));
   }
 
@@ -115,48 +115,48 @@ export class SocketService {
     this.state.next(SessionEvent.Disconnected);
   }
 
-  private onConnectError() { 
+  private onConnectError() {
     this.addLine(/*boldRed*/('Connection to server failed.'));
   }
-  
-  private onConnectTimeout() { 
+
+  private onConnectTimeout() {
     this.addLine(/*boldRed*/('Connection to server timed-out.'));
   }
-  
-  private onError() { 
-    this.addLine(/*boldRed*/('An unknown error occurred.')); 
-  }
-  
-  private onReconnectFailed() { 
-    this.addLine(/*boldRed*/('Unable to reconnect to server.'));
-  }
-  
-  private onReconnect() {
-    this.addLine(/*boldGreen*/('Reconnected!')); 
-    this.state.next(SessionEvent.Connected);  
-  }
-    
-  private onReconnecting() {
-    this.addLine(/*boldGreen*/('Reconnecting...')); 
+
+  private onError() {
+    this.addLine(/*boldRed*/('An unknown error occurred.'));
   }
 
-  private onOutput(msg : any) {
+  private onReconnectFailed() {
+    this.addLine(/*boldRed*/('Unable to reconnect to server.'));
+  }
+
+  private onReconnect() {
+    this.addLine(/*boldGreen*/('Reconnected!'));
+    this.state.next(SessionEvent.Connected);
+  }
+
+  private onReconnecting() {
+    this.addLine(/*boldGreen*/('Reconnecting...'));
+  }
+
+  private onOutput(msg: any) {
     if (msg && msg.toString) {
       this.addLine(msg);
     }
-    
+
     if (this.state.getValue() !== SessionEvent.Playing) {
         // FIXME
         if ((msg.search(/Invalid/) !== -1)
             || (msg.search(/Passwords did not match/) !== -1)
-            || (msg.search(/Sorry/) != -1)
+            || (msg.search(/Sorry/) !== -1)
             || (msg.search(/You have no character/) !== -1)
             || (msg.search(/Character created/) !== -1)
             ) {
             // Reissue current state - Should be handled in game engine FIXME
             this.state.next(this.state.getValue());
         }
-    } 
+    }
     // FIXED in upstream game engine.
     /* else if (msg.toString().search(/from another login session/) !== -1) {
           // Game engine kicks player out without notifying Quit FIXME
@@ -164,7 +164,7 @@ export class SocketService {
     } */
   }
 
-  private onSetPrompt(str : string) {
+  private onSetPrompt(str: string) {
     this.modeSubject.next(str);
   }
 
@@ -187,8 +187,8 @@ export class SocketService {
   private onRequestInput(inputs: any, fn: any) {
     this.inputSubject.next({ inputs, fn });
   }
-  
-  private addLine(s : any) {
+
+  private addLine(s: any) {
     this.textSubject.next(s);
   }
 }

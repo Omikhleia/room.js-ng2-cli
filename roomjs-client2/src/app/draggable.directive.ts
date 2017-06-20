@@ -10,52 +10,54 @@ import { Directive, Input, ElementRef, HostListener, OnInit } from '@angular/cor
 export class DraggableDirective implements OnInit {
   private topStart: number;
   private leftStart: number;
-  private _allowDrag: boolean = true;
+  private _allowDrag = true;
   private md: boolean;
   private _handle: HTMLElement;
   private _area: HTMLElement;
 
   constructor(public element: ElementRef) {
     this._area = element.nativeElement.parentElement;
+    // FIXME this should rather be done in ngAfterViewInit()
   }
 
-  ngOnInit(){
+  ngOnInit() {
     // css changes
-    if(this._allowDrag){
+    if (this._allowDrag) {
       this.element.nativeElement.style.position = 'absolute';
       this.element.nativeElement.className += ' cursor-draggable';
     }
   }
 
   @HostListener('mousedown', ['$event'])
-  onMouseDown(event:MouseEvent) {
-    if(event.button === 2 || (this._handle !== undefined && event.target !== this._handle))
+  onMouseDown(event: MouseEvent) {
+    if (event.button === 2 || (this._handle !== undefined && event.target !== this._handle)) {
       return; // prevents right click drag, remove his if you don't want it
+    }
     this.md = true;
     this.topStart = event.clientY - this.element.nativeElement.offsetTop;
     this.leftStart = event.clientX - this.element.nativeElement.offsetLeft;
   }
 
   @HostListener('document:mouseup', [ '$event' ])
-  onMouseUp(event:MouseEvent) {
+  onMouseUp(event: MouseEvent) {
     this.md = false;
   }
 
   @HostListener('document:mousemove', ['$event'])
-  onMouseMove(event:MouseEvent) {
-    if( this.md && this._allowDrag ){
+  onMouseMove(event: MouseEvent) {
+    if ( this.md && this._allowDrag ) {
       this.doMove(event.clientY - this.topStart,
                   event.clientX - this.leftStart);
     }
   }
 
   @HostListener('document:mouseleave', ['$event'])
-  onMouseLeave(event:MouseEvent) {
+  onMouseLeave(event: MouseEvent) {
     this.md = false;
   }
 
   @HostListener('touchstart', ['$event'])
-  onTouchStart(event:TouchEvent) {
+  onTouchStart(event: TouchEvent) {
     this.md = true;
     this.topStart = event.changedTouches[0].clientY - this.element.nativeElement.offsetTop;
     this.leftStart = event.changedTouches[0].clientX - this.element.nativeElement.offsetLeft;
@@ -68,14 +70,14 @@ export class DraggableDirective implements OnInit {
   }
 
   @HostListener('document:touchmove', ['$event'])
-  onTouchMove(event:TouchEvent) {
-    if(this.md && this._allowDrag){
+  onTouchMove(event: TouchEvent) {
+    if (this.md && this._allowDrag) {
       this.doMove(event.changedTouches[0].clientY - this.topStart,
                   event.changedTouches[0].clientX - this.leftStart);
     }
     event.stopPropagation();
   }
-  
+
   private doMove(top, left) {
     if ((!this._area) || (this._area.clientTop < top)) {
     }
@@ -84,7 +86,7 @@ export class DraggableDirective implements OnInit {
        const maxTop = this.element.nativeElement.clientHeight; // Tricky
        top = top > minTop ? top : minTop;
        top = top < maxTop ? top : maxTop;
-       
+
        const minLeft = this._area.clientLeft;
        const maxLeft = this._area.clientLeft + this._area.clientWidth
                        - this.element.nativeElement.clientWidth;
@@ -96,21 +98,22 @@ export class DraggableDirective implements OnInit {
   }
 
   @Input('ng2-draggable')
-  set allowDrag(value:boolean){
+  set allowDrag(value: boolean){
     this._allowDrag = value;
-    if(this._allowDrag)
+    if (this._allowDrag) {
       this.element.nativeElement.className += ' cursor-draggable';
-    else
+    } else {
       this.element.nativeElement.className = this.element.nativeElement.className
-                                                  .replace(' cursor-draggable','');
+                                                  .replace(' cursor-draggable', '');
+    }
   }
 
-  @Input() 
+  @Input()
   set appDraggableHandle(handle: HTMLElement){
     this._handle = handle;
   }
-  
-  @Input() 
+
+  @Input()
   set appDragArea(handle: HTMLElement){
     this._area = handle;
   }

@@ -38,11 +38,11 @@ const unknownItem = 'unknown_item.png';
     ])
   ]
 })
-export class InventoryComponent implements OnInit {
+export class InventoryComponent implements OnInit, OnChanges {
   @Input() items: string[] = [];
-  private visible: boolean = false;
-  private isChanged: string = 'stable';
-  
+  public visible = false;
+  public isChanged = 'stable';
+
   @HostListener('document:keydown', ['$event']) onKeyboardEvent(event: KeyboardEvent) {
     const key = event.keyCode;
     const escapeKey = key === 27;
@@ -56,7 +56,7 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit() {
   }
-  
+
   ngOnChanges(event: any) {
     // Trigger animation
     if (!this.visible) {
@@ -66,26 +66,26 @@ export class InventoryComponent implements OnInit {
       this.visible = false;
     }
   }
-  
-  private onClick(event : any) {
+
+  public onClick(event: any) {
     this.visible = !this.visible;
     this.isChanged = 'stable';
   }
-  
-  private onClose(event : any) {
+
+  public onClose(event: any) {
     this.visible = false;
   }
-  
-  private onActivate(item: string) {
+
+  public onActivate(item: string) {
     this.socketService.send(`@look ${item}`);
   }
-  
-  private allowDrop(item?: string) {
+
+  public allowDrop(item?: string) {
     // Don't drop an item on itself
     return (dragData: any) => dragData !== item;
   }
-  
-  private onDrop(event: any, item?: string) {
+
+  public onDrop(event: any, item?: string) {
     if (item) {
       this.socketService.send(`@put ${event.dragData} into ${item}`);
     } else {
@@ -93,12 +93,12 @@ export class InventoryComponent implements OnInit {
     }
     // FIXME HIDE @ (specific logic) ?
   }
-  
-  private itemName(item: string) {
+
+  public itemName(item: string) {
     return item.replace(/\.[0-9]+/, ''); // FIXME remove determiners...
   }
-  
-  private itemImage(item: string) {
+
+  public itemImage(item: string) {
     const it: string = item.replace(/\.[0-9]+/, ''); // FIXME remove determiners...
     const prefix = './assets/images/items/';
     if (items[it]) {

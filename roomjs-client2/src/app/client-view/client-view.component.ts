@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, ViewChild, ComponentRef,
          style, animate, transition, trigger } from '@angular/core';
-         
+
 import { SocketService, SessionEvent } from '../socket.service';
 import { SoundService } from '../sound.service';
 import { TextService } from '../text.service';
@@ -34,28 +34,28 @@ import * as ansi_up from 'ansi_up';
 })
 export class ClientViewComponent implements OnInit, OnDestroy {
   @ViewChild(DialogAnchorDirective) dialogAnchor: DialogAnchorDirective;
-  
-  private prompt: string = '';
-  private players: any[] = [];
-  private room: string = 'THE VOID';
-  private exits: string[] = [];
-  private inventory: string[] = [];
-  private roomContents: string[] = [];
+
+  public prompt = '';
+  public players: any[] = [];
+  public room = 'THE VOID';
+  public exits: string[] = [];
+  public inventory: string[] = [];
+  public roomContents: string[] = [];
   private dialog: ComponentRef<any> = null;
-  private showCmdLine: boolean = false;
+  public showCmdLine = false;
   private subscriptions = [];
-  
-  constructor(private socketService: SocketService, 
+
+  constructor(private socketService: SocketService,
               private textService: TextService,
-              private soundService: SoundService,) {
+              private soundService: SoundService, ) {
   }
-     
-  ngOnInit() {         
+
+  ngOnInit() {
     let sub = this.socketService.input$.subscribe( expectedInputs => {
       this.dialog = this.dialogAnchor.createDialog(DialogComponent, expectedInputs);
     });
     this.subscriptions.push(sub);
-        
+
     sub = this.socketService.text$.subscribe( message => {
       if (message && typeof message === 'object') {
         if (message.effect) {
@@ -74,31 +74,31 @@ export class ClientViewComponent implements OnInit, OnDestroy {
           this.room = message.room;
         }
         if (message.inventory && message.contents) { // FIXME ugly, see dirtyDisambiguation...
-          let dis = this.dirtyDisambiguation(message.inventory, message.contents);
+          const dis = this.dirtyDisambiguation(message.inventory, message.contents);
           this.inventory = dis.inventory;
           this.roomContents = dis.contents;
         } else if (message.contents) {
           const dis = this.dirtyDisambiguation(this.inventory, message.contents);
           this.roomContents = dis.contents;
         } else if (message.inventory) {
-          let dis = this.dirtyDisambiguation(message.inventory, this.roomContents);
+          const dis = this.dirtyDisambiguation(message.inventory, this.roomContents);
           this.inventory = dis.inventory;
           this.roomContents = dis.contents;
         }
         message = message.text;
       }
-            
+
       if (message !== undefined) {
         this.textService.send(message.toString());
       }
     });
     this.subscriptions.push(sub);
-       
+
     sub = this.socketService.mode$.subscribe( mode => {
       this.prompt = ansi_up.ansi_to_html(mode, { use_classes: true });
     });
     this.subscriptions.push(sub);
-             
+
     sub = this.socketService.state$.subscribe( state => {
       // Close any pending dialog upon state change
       if (this.dialog) {
@@ -107,7 +107,7 @@ export class ClientViewComponent implements OnInit, OnDestroy {
       }
 
       this.showCmdLine = false;
-      switch(state) {
+      switch (state) {
         case SessionEvent.Disconnected:
             this.reset();
             // FIXME: Disable input from links?
@@ -128,10 +128,10 @@ export class ClientViewComponent implements OnInit, OnDestroy {
     });
     this.subscriptions.push(sub);
   }
-  
+
   private dirtyDisambiguation(oldInventory: string[], oldContents: string[]): any {
     // FIXME really dirty... Adding determiners for disambiguation
-    let set = {};
+    const set = {};
     const renumbering: any = (item) => {
       item = item.replace(/\.[0-9]+/, '');
       if (!set[item]) {
@@ -152,7 +152,7 @@ export class ClientViewComponent implements OnInit, OnDestroy {
       sub.unsubscribe();
     });
   }
-  
+
   private reset() {
     this.room = 'THE VOID';
     this.players = [];
@@ -166,47 +166,47 @@ export class ClientViewComponent implements OnInit, OnDestroy {
     this.dialog = this.dialogAnchor.createButtons(ButtonsComponent, {
       inputs: [
         {
-          label: "Create new character",
-          name: "create"
+          label: 'Create new character',
+          name: 'create'
         },
         {
-          label: "Play...",
-          name: "play"
+          label: 'Play...',
+          name: 'play'
         },
         {
-          label: "Logout",
-          name: "logout"
-        }            
-      ] 
+          label: 'Logout',
+          name: 'logout'
+        }
+      ]
     });
     this.dialog.instance.command.subscribe((s: string) => {
       this.socketService.send(s);
     });
   }
-    
+
   private loginOrCreate() {
     this.dialog = this.dialogAnchor.createButtons(ButtonsComponent, {
       inputs: [
         {
-          label: "Create new account",
-          name: "create"
+          label: 'Create new account',
+          name: 'create'
         },
         {
-          label: "Login",
-          name: "login"
-        }            
+          label: 'Login',
+          name: 'login'
+        }
       ]
     });
     this.dialog.instance.command.subscribe((s: string) => {
         this.socketService.send(s);
     });
   }
-    
-  private onCommand(event: any) {
+
+  public onCommand(event: any) {
     this.socketService.send(event);
   }
 
-  private onModeChange(event: any) {
+  public onModeChange(event: any) {
     this.socketService.changeMode(event);
   }
 }

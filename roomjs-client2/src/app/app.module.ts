@@ -8,7 +8,7 @@ import { DndModule } from 'ng2-dnd';
 
 import { AppComponent } from './app.component';
 import { DialogAnchorDirective } from './dialoganchor.directive';
-import { SlimScroll } from './slimscroll.directive';
+import { SlimScrollDirective } from './slimscroll.directive';
 
 import { DialogComponent } from './dialog/dialog.component';
 import { ButtonsComponent } from './buttons/buttons.component';
@@ -36,13 +36,13 @@ import { DraggableDirective } from './draggable.directive';
     DraggableDirective,
     ButtonsComponent,
     TextpaneComponent,
-    SlimScroll,
+    SlimScrollDirective,
     PlayersComponent,
     CmdlineComponent,
     MappaneComponent,
     ClientViewComponent,
     TabDirective, TabsBodyComponent, TabsHeaderComponent,
-    SearchComponent, 
+    SearchComponent,
     BaseEditorComponent,
     FunctionEditorComponent,
     VerbEditorComponent,

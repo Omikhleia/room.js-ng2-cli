@@ -1,3 +1,4 @@
+/* tslint:disable:no-bitwise */
 import { Component, OnInit, Input } from '@angular/core';
 import { SocketService } from '../socket.service';
 
@@ -16,22 +17,22 @@ export class PlayersComponent implements OnInit {
 
   constructor(private socketService: SocketService) { }
 
-  ngOnInit() { 
+  ngOnInit() {
   }
-  
-  private setPlayerFlag(flag: number): string {
+
+  public setPlayerFlag(flag: number): string {
     if (flag & 0x02) {
       // Programmer
       return '\u25CF';
     }
     return '\u25CB';
   }
-  
-  private isOnline(flag): boolean {
-    return (flag & 0x01) !== 0
+
+  public isOnline(flag): boolean {
+    return (flag & 0x01) !== 0;
   }
-  
-  private onDrop(event: any, name: string) {
+
+  public onDrop(event: any, name: string) {
     this.socketService.send(`@give ${event.dragData} to ${name}`);
     // FIXME HIDE @ (specific logic) ?
   }

@@ -21,14 +21,14 @@
             <i>Empty slot</i>
           </div>
       </div>
-      <div slimScroll size="7px" 
-                      height="40vh"
-                      railVisible="true"
-                      alwaysVisible="true"
-                      railColor="#bc94b7"
-                      opacity=".5"
-                      distance="3px"
-                      color="#000">
+      <div appSlimScroll size="7px" 
+                         height="40vh"
+                         railVisible="true"
+                         alwaysVisible="true"
+                         railColor="#bc94b7"
+                         opacity=".5"
+                         distance="3px"
+                         color="#000">
         <div *ngFor="let field of items">
           <div class="dropentry"
                dnd-droppable (onDropSuccess)="onDrop($event, field)" 

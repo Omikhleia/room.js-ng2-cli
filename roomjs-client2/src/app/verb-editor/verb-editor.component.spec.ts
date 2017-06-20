@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { FormsModule }   from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { CodemirrorModule } from 'ng2-codemirror-typescript/Codemirror';
 
 import { SocketService } from '../socket.service';
@@ -26,15 +26,15 @@ describe('VerbEditorComponent', () => {
     fixture = TestBed.createComponent(VerbEditorComponent);
     component = fixture.componentInstance;
     // TEST INPUT
-    component.data = { 
-      verb: { 
+    component.data = {
+      verb: {
         name: 'myVerb',
         code: 'function () {}',
         pattern: 'verb',
         dobjarg: 'any',
         iobjarg: 'any',
         preparg: 'any'
-      }, 
+      },
       objectId: 'fakeId'
     };
     fixture.detectChanges();

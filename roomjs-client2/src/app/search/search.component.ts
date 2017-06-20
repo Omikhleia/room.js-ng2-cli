@@ -7,7 +7,7 @@ import { VerbEditorComponent } from '../verb-editor/verb-editor.component';
 
 // FIXME Put all definitions elswhere...
 
-interface editorCallback { (data: any): void }
+type editorCallback = (data: any) => void;
 
 export class SearchResult {
   public objectId: string;
@@ -16,12 +16,6 @@ export class SearchResult {
   public kind: string;
   public result: any;
   public component: any;
-  
-  constructor(public data: any) {
-    this.objectId = data.objectId;
-    this.active = false;
-    this.name = this.computeName();
-  }
 
   static newFromResult(result) {
     if (result.function) {
@@ -32,6 +26,12 @@ export class SearchResult {
       return new VerbSearchResult(result);
     }
     throw new Error('Invalid result type.');
+  }
+
+  constructor(public data: any) {
+    this.objectId = data.objectId;
+    this.active = false;
+    this.name = this.computeName();
   }
 
   computeName(): string {
@@ -47,7 +47,7 @@ export class SearchResult {
 class FunctionSearchResult extends SearchResult {
   constructor(public data: any) {
     super(data);
-    this.kind = "function";
+    this.kind = 'function';
     this.component = FunctionEditorComponent;
   }
 
@@ -67,10 +67,10 @@ class FunctionSearchResult extends SearchResult {
 class VerbSearchResult extends SearchResult {
   constructor(public data: any) {
     super(data);
-    this.kind = "verb";
+    this.kind = 'verb';
     this.component = VerbEditorComponent;
   }
-  
+
   computeName(): string {
     return `${this.objectId}.${this.data.verb}`;
   }
@@ -95,18 +95,18 @@ export class SearchComponent implements OnInit, OnChanges {
 
   @Input() refocus: boolean;
   @Output() choice = new EventEmitter<string>();
-  
-  private search: string = '';
-  private prevSearch: string = '';
+
+  public search = '';
+  private prevSearch = '';
   private results: any = [];
-  private selectedIndex: number = 0;
-  private scrollTo: number = 0;
-   
+  public selectedIndex = 0;
+  public scrollTo = 0;
+
   constructor(private socketService: SocketService, private renderer: Renderer) { }
 
   ngOnInit() {
   }
-  
+
   ngOnChanges(changes: any) {
     if (changes.refocus && changes.refocus.currentValue === true) {
       // Asynchronously refocus the input field,
@@ -117,13 +117,13 @@ export class SearchComponent implements OnInit, OnChanges {
     }
   }
 
-  private onKeyDown(event: KeyboardEvent) {
+  public onKeyDown(event: KeyboardEvent) {
     const key = event.keyCode;
-    
+
     if (this.results.length === 0) {
       return;
     }
-    
+
     switch (key) {
       case 13: { // Enter key
         if (this.selectedIndex <= this.results.length) {
@@ -133,7 +133,7 @@ export class SearchComponent implements OnInit, OnChanges {
       }
       case 38: { // Up key
         if (this.selectedIndex > 0) {
-          this.selectedIndex -= 1;;
+          this.selectedIndex -= 1; ;
         } else {
           this.selectedIndex = this.results.length - 1;
         }
@@ -151,11 +151,11 @@ export class SearchComponent implements OnInit, OnChanges {
       }
     }
   }
-  
-  private onKeyUp(event: KeyboardEvent) {
+
+  public onKeyUp(event: KeyboardEvent) {
     const key = event.keyCode;
 
-    if (this.search != this.prevSearch) {
+    if (this.search !== this.prevSearch) {
       // Input has changed, lookup for new results
       this.socketService.search(this.search, (results: any) => {
         this.results = results.map(result => SearchResult.newFromResult(result));
@@ -165,16 +165,16 @@ export class SearchComponent implements OnInit, OnChanges {
       });
     }
   }
-  
-  private onClick(selected: any) {
+
+  public onClick(selected: any) {
     selected.openEditor(this.socketService, (choice) => {
       this.choice.emit(choice);
     });
   }
-  
+
   private selectionIntoView() {
     if (this.listElements) {
-      let listArray = this.listElements.toArray();
+      const listArray = this.listElements.toArray();
       if (this.selectedIndex < listArray.length) {
         // Pass offset to slim scrollbar...
         this.scrollTo = listArray[this.selectedIndex].nativeElement.offsetTop

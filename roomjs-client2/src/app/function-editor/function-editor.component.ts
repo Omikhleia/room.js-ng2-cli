@@ -12,9 +12,9 @@ import { BaseEditorComponent } from '../base-editor/base-editor.component';
   templateUrl: './function-editor.component.html',
   styleUrls: ['./function-editor.component.css']
 })
-export class FunctionEditorComponent extends BaseEditorComponent implements OnInit { 
-  private src: string;
-  
+export class FunctionEditorComponent extends BaseEditorComponent implements OnInit {
+  public src: string;
+
   constructor(private socketService: SocketService) {
     super();
   }
@@ -25,12 +25,12 @@ export class FunctionEditorComponent extends BaseEditorComponent implements OnIn
 
   /**
    * Dirty flag logic for function.
-   */  
+   */
   protected computeDirty(): boolean {
     const dirty = this.data.src !== this.src;
     return dirty;
   }
-  
+
   /**
    * Save function, invoking the socket service.
    */
@@ -40,7 +40,7 @@ export class FunctionEditorComponent extends BaseEditorComponent implements OnIn
       src: this.src,
       objectId: this.data.objectId,
     };
- 
+
     this.socketService.saveFunction(params, response => {
       if (response === 'saved') {
         this.data.src = this.src;
@@ -50,5 +50,5 @@ export class FunctionEditorComponent extends BaseEditorComponent implements OnIn
       }
     });
   }
-  
+
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Howl, Howler } from "howler";
+import { Howl, Howler } from 'howler';
 
 /**
  * Sound service module.
@@ -8,19 +8,19 @@ import { Howl, Howler } from "howler";
 
 @Injectable()
 export class SoundService {
-  private sounds: Map<string,Howl>;
-  private ambiants: Map<string,any>;
-  private fadeDelay: number = 2000;
+  private sounds: Map<string, Howl>;
+  private ambiants: Map<string, any>;
+  private fadeDelay = 2000;
 
   constructor() {
     /* Keep a record of cached sounds */
     this.sounds = new Map();
     /* Keep a record of currently playing ambiant sounds */
     this.ambiants = new Map();
-    
+
     this.volume(50);
   }
-  
+
   /**
    * Return a Howler sound object, registering it on first invocation.
    *
@@ -43,7 +43,7 @@ export class SoundService {
     }
     return sound;
   }
-  
+
   private adjustVolume(volume: number): number {
     let vol;
     if (volume < 0) {
@@ -127,18 +127,18 @@ export class SoundService {
     // Reset map of ambiant sounds.
     this.ambiants = new Map();
   }
-  
+
   /**
    * Set global volume.
    */
   volume(volume: number) {
-    let vol = this.adjustVolume(volume);
+    const vol = this.adjustVolume(volume);
     Howler.volume(vol / 100);
   }
 
   /**
    * Global mute/unmute.
-   */  
+   */
   mute(muted: boolean) {
     Howler.mute(muted);
   }

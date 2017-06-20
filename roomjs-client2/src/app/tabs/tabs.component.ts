@@ -8,13 +8,13 @@ import { Tab } from './tabs.model';
  */
 
 @Component({
-  selector: 'tabs-body',
+  selector: 'app-tabs-body',
   templateUrl: './tabs.component.html',
-  styleUrls:['./tabs.component.css'],
+  styleUrls: ['./tabs.component.css'],
 })
 export class TabsBodyComponent {
   private tabsData: Tab[] = [];
-  private currentTab: number = 1;
+  public currentTab = 1;
 
   constructor(private tabs: TabsService) {
     // Subscribe to changes to the list of tabs and the selected tab

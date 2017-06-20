@@ -1,6 +1,6 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { Observable } from "rxjs";
-import { Subject }    from 'rxjs/Subject';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 
 /**
  * At this stage, just a basic service emitting textual
@@ -11,14 +11,14 @@ import { Subject }    from 'rxjs/Subject';
 export class TextService {
   private textSubject = new Subject<string>();
   public text$ = this.textSubject.asObservable();
-  
+
   constructor() { }
 
   /**
    * Convenience method.
    * @param s   textual content
    */
-  send(s : string) {
+  send(s: string) {
     this.textSubject.next(s);
   }
 }

@@ -1,5 +1,5 @@
-import { Directive, 
-         ViewContainerRef, 
+import { Directive,
+         ViewContainerRef,
          ComponentFactoryResolver, ComponentFactory, ComponentRef,
          Renderer } from '@angular/core';
 import { DialogComponent } from './dialog/dialog.component';
@@ -23,14 +23,14 @@ export class DialogAnchorDirective {
   /**
    * Creates a dialog components with the expected input fields
    */
-  createDialog(dialogComponent: { new(renderer : Renderer): DialogComponent }, 
+  createDialog(dialogComponent: { new(renderer: Renderer): DialogComponent },
                expected: any): ComponentRef<DialogComponent> {
     this.viewContainer.clear();
 
-    let dialogComponentFactory = 
+    const dialogComponentFactory =
       this.componentFactoryResolver.resolveComponentFactory(dialogComponent);
-    let dialogComponentRef = this.viewContainer.createComponent(dialogComponentFactory);
-        
+    const dialogComponentRef = this.viewContainer.createComponent(dialogComponentFactory);
+
     dialogComponentRef.instance.fields = expected.inputs;
     dialogComponentRef.instance.callback = expected.fn;
     return dialogComponentRef;
@@ -38,17 +38,17 @@ export class DialogAnchorDirective {
 
   /**
    * Creates a dialog components with the action buttons
-   */  
-  createButtons(buttonsComponent: { new(): ButtonsComponent }, 
+   */
+  createButtons(buttonsComponent: { new(): ButtonsComponent },
                 expected: any): ComponentRef<ButtonsComponent> {
     this.viewContainer.clear();
 
-    let dialogComponentFactory = 
+    const dialogComponentFactory =
       this.componentFactoryResolver.resolveComponentFactory(buttonsComponent);
-    let dialogComponentRef = this.viewContainer.createComponent(dialogComponentFactory);
-        
+    const dialogComponentRef = this.viewContainer.createComponent(dialogComponentFactory);
+
     dialogComponentRef.instance.fields = expected.inputs;
     return dialogComponentRef;
   }
-  
+
 }

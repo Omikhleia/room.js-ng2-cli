@@ -8,7 +8,7 @@ import { CodemirrorModule } from 'ng2-codemirror-typescript/Codemirror';
 import { DndModule } from 'ng2-dnd';
 
 import { DialogAnchorDirective } from './dialoganchor.directive';
-import { SlimScroll } from './slimscroll.directive';
+import { SlimScrollDirective } from './slimscroll.directive';
 
 import { DialogComponent } from './dialog/dialog.component';
 import { ButtonsComponent } from './buttons/buttons.component';
@@ -38,7 +38,7 @@ describe('AppComponent', () => {
         DialogComponent,
         ButtonsComponent,
         TextpaneComponent,
-        SlimScroll,
+        SlimScrollDirective,
         PlayersComponent,
         CmdlineComponent,
         MappaneComponent,
@@ -52,7 +52,7 @@ describe('AppComponent', () => {
         FunctionEditorComponent,
         VerbEditorComponent,
         SoundSettingsComponent
-      ],  
+      ],
       imports: [
         FormsModule,
         CodemirrorModule,
@@ -67,7 +67,7 @@ describe('AppComponent', () => {
     app = fixture.componentInstance;
     fixture.detectChanges();
   });
-  
+
   it('should create the app', () => {
     expect(app).toBeTruthy();
   });

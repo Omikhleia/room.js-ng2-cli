@@ -13,7 +13,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class BaseEditorComponent {
   @Input() data: any = {};
   @Output() dirty = new EventEmitter<boolean>();
-  
+
   protected cmconfig: any = {
     lineNumbers: true,
     tabSize: 2,
@@ -37,7 +37,7 @@ export class BaseEditorComponent {
 
   /**
    * Dirty flag logic for function.
-   */  
+   */
   protected computeDirty(): boolean {
     throw new Error('Must be subclassed.');
   }
@@ -45,7 +45,7 @@ export class BaseEditorComponent {
   /**
    * Check dirty flag on model change, and notify parent components.
    */
-  private onChange() {
+  public onChange() {
     const dirty = this.computeDirty();
     this.dirty.emit(dirty);
   }

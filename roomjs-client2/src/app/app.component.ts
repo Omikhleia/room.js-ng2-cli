@@ -3,9 +3,9 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { SocketService, SessionEvent } from './socket.service';
 import { SoundService } from './sound.service';
 import { Tab, TabsService, TabsBodyComponent, TabsHeaderComponent } from './tabs/tabs';
- 
+
 import { SearchComponent, SearchResult } from './search/search.component';
- 
+
 import { ClientViewComponent} from './client-view/client-view.component';
 import { FunctionEditorComponent } from './function-editor/function-editor.component';
 import { VerbEditorComponent } from './verb-editor/verb-editor.component';
@@ -14,23 +14,23 @@ import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
-  providers:[ SoundService, SocketService, TabsService ],
+  providers: [ SoundService, SocketService, TabsService ],
   entryComponents: [ ClientViewComponent, FunctionEditorComponent, VerbEditorComponent, SearchComponent ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy { 
+export class AppComponent implements OnInit, OnDestroy {
   private serverUrl: string = environment.serverUrl;
-  public tab: number = 1;
-  private nbtabs: number = 0;
+  public tab = 1;
+  private nbtabs = 0;
 
-  private allowSearch: boolean = false;
-  private searchBoxVisible: boolean = false;
+  private allowSearch = false;
+  public searchBoxVisible = false;
 
   private subscription;
 
   public tabsData = [
-    {title:'Client', content: ClientViewComponent, close: false }
+    {title: 'Client', content: ClientViewComponent, close: false }
   ];
 
   constructor(private socketService: SocketService, private tabs: TabsService) {
@@ -38,11 +38,11 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.socketService.init(this.serverUrl);
-    
+
     this.subscription = this.socketService.state$.subscribe( state => {
       // Close any pending dialog upon state change
       this.searchBoxVisible = false;
-      
+
       // Allow search dialog in playing mode only
       if (state === SessionEvent.Playing) {
         this.allowSearch = true;
@@ -53,7 +53,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.tabs.setTabs(this.tabsData);
     this.tabs.setCurrentTab(1);
-    this.tabs.getCurrentTab((currentTab)=>{
+    this.tabs.getCurrentTab((currentTab) => {
       this.tab = currentTab;
     });
   }
@@ -94,18 +94,18 @@ export class AppComponent implements OnInit, OnDestroy {
       event.preventDefault();
     }
   }
-      
-  private onSearchResult(searchResult: SearchResult) {
+
+  public onSearchResult(searchResult: SearchResult) {
     // Close search box upon result
     this.searchBoxVisible = false;
     // Add new tab
     this.tabs.addTab({
-      title: searchResult.name, 
+      title: searchResult.name,
       content: searchResult.component,
       close: true,
       dirty: false,
       data: searchResult.result
     });
   }
-  
+
 }

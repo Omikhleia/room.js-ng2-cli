@@ -28,10 +28,10 @@ describe('ClientViewComponent', () => {
       declarations: [
         DialogComponent, ButtonsComponent,
         TextpaneComponent, PlayersComponent, CmdlineComponent, MappaneComponent, InventoryComponent,
-        ClientViewComponent 
+        ClientViewComponent
       ],
       imports: [ FormsModule, DndModule.forRoot() ],
-      providers: [ SocketService, SoundService ] // FIXME replace with mock-up for better testing      
+      providers: [ SocketService, SoundService ] // FIXME replace with mock-up for better testing
     })
     .compileComponents();
   }));

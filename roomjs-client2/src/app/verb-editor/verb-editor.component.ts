@@ -6,19 +6,19 @@ import { BaseEditorComponent } from '../base-editor/base-editor.component';
 /**
  * Editor component for verbs.
  */
- 
+
 @Component({
   selector: 'app-verb-editor',
   templateUrl: './verb-editor.component.html',
   styleUrls: ['./verb-editor.component.css']
 })
 export class VerbEditorComponent extends BaseEditorComponent implements OnInit {
-  private code: string;
-  private pattern: string;
-  private dobjarg: string;
-  private iobjarg: string;
-  private preparg: string;
-  
+  public code: string;
+  public pattern: string;
+  public dobjarg: string;
+  public iobjarg: string;
+  public preparg: string;
+
   constructor(private socketService: SocketService) {
     super();
   }
@@ -45,7 +45,7 @@ export class VerbEditorComponent extends BaseEditorComponent implements OnInit {
 
   /**
    * Save verb, invoking the socket service.
-   */  
+   */
   protected save() {
     const newVerb = {
       name: this.data.verb.name,
@@ -59,7 +59,7 @@ export class VerbEditorComponent extends BaseEditorComponent implements OnInit {
       objectId: this.data.objectId,
       verb: newVerb,
     };
-    
+
     this.socketService.saveVerb(params, response => {
       if (response === 'saved') {
         this.data.verb.code = this.code;
@@ -67,7 +67,7 @@ export class VerbEditorComponent extends BaseEditorComponent implements OnInit {
         this.data.verb.dobjarg = this.dobjarg;
         this.data.verb.iobjarg = this.iobjarg;
         this.data.verb.preparg = this.preparg;
-        this.dirty.emit(false);        
+        this.dirty.emit(false);
       } else {
         alert(response); // FIXME Have our own custom modal later
       }

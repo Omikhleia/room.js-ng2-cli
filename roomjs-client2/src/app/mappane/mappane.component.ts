@@ -10,8 +10,9 @@ export class MappaneComponent implements OnInit {
   @Input() exits: string[];
   @Output() commandEntered = new EventEmitter<string>();
 
-  //['north', 'northeast', 'northwest', 'west', 'up', 'down', 'east', 'southwest', 'south', 'southeast']
-  
+  // ['north', 'northeast', 'northwest', 'west', 'up', 'down', 'east',
+  //  'southwest', 'south', 'southeast']
+
   private blocks: any = [
     {x: 200, y: 0, dir: 'northwest' },
     {x: 300, y: 50, dir: 'north' },
@@ -24,31 +25,31 @@ export class MappaneComponent implements OnInit {
     {x: 100, y: 150, dir: 'south' },
     {x: 200, y: 200, dir: 'southeast' }
   ];
-  
+
   private exitBlocks: any = {
-    northwest: "nwdoor.png",
-    north: "ndoor.png",
-    northeast: "nedoor.png",
-    west: "wdoor.png",
-    up: "ustair.png",
-    down: "dstair.png",
-    east: "edoor.png",
-    southwest: "swdoor.png",
-    south: "sdoor.png",
-    southeast: "sedoor.png"
+    northwest: 'nwdoor.png',
+    north: 'ndoor.png',
+    northeast: 'nedoor.png',
+    west: 'wdoor.png',
+    up: 'ustair.png',
+    down: 'dstair.png',
+    east: 'edoor.png',
+    southwest: 'swdoor.png',
+    south: 'sdoor.png',
+    southeast: 'sedoor.png'
   };
 
   private wallBlocks: any = {
-    northwest: "nwwall.png",
-    north: "nwall.png",
-    northeast: "newall.png",
-    west: "wwall.png",
-    east: "ewall.png",
-    southwest: "swwall.png",
-    south: "swall.png",
-    southeast: "sewall.png"
+    northwest: 'nwwall.png',
+    north: 'nwall.png',
+    northeast: 'newall.png',
+    west: 'wwall.png',
+    east: 'ewall.png',
+    southwest: 'swwall.png',
+    south: 'swall.png',
+    southeast: 'sewall.png'
  };
- private doors: any = [  
+ private doors: any = [
     {x: 200, y: 150, dir: 'northwest' },
     {x: 325, y: 187.5, dir: 'north' },
     {x: 425, y: 262.5, dir: 'northeast' },
@@ -60,15 +61,15 @@ export class MappaneComponent implements OnInit {
     {x: 75, y: 312.5, dir: 'south' },
     {x: 200, y: 350, dir: 'southeast' }
  ];
-    
-  // Constructor  
+
+  // Constructor
   constructor() { }
 
   ngOnInit() {
   }
-  
+
   // Event handlers
-  private onClick(event: any) {
+  public onClick(event: any) {
     // Check for command
     let hash;
     if (event.target.hash) {
@@ -81,57 +82,57 @@ export class MappaneComponent implements OnInit {
       // SVG element with parent link (e.g. surrounded with a SVG <a>
       hash = event.target.parentElement.getAttribute('xlink:href');
     }
-    
+
     const pattern = /#cmd\[(.*?)\]/g;
     const match = pattern.exec(hash);
-    if (!match) { 
-      return true; 
+    if (!match) {
+      return true;
     }
-    
+
     // URI-encoded on some browsers (e.g. Firefox), so ensure decoding
     // Prefix with @ for direct playmode command
     const command = '@' + decodeURIComponent(match[1]);
-    
+
     // Send command
     this.commandEntered.next(command);
-    
+
     // Prevent default link handlers
     event.preventDefault();
     return false;
   }
-  
+
   // Private methods
-  private hasDir(dir: string) {
+  public hasDir(dir: string) {
     if (this.exits && this.exits.indexOf(dir) !== -1) {
       return true;
     }
     return false;
   }
 
-  private hasWall(dir: string) {
+  public hasWall(dir: string) {
     if (this.wallBlocks[dir]) {
       return true;
     }
     return false;
   }
-  
-  private dirImage(dir: string): string {
+
+  public dirImage(dir: string): string {
     const prefix = './assets/images/';
     return prefix + this.exitBlocks[dir];
   }
-  private dirWall(dir: string): string {
+  public dirWall(dir: string): string {
     const prefix = './assets/images/';
     return prefix + this.wallBlocks[dir];
   }
-  
-  private dirCommand(dir: string): string {
+
+  public dirCommand(dir: string): string {
     return `#cmd[${dir}]`;
   }
-  
-  private onDrop(event: any, target: string) {
+
+  public onDrop(event: any, target: string) {
     // UNUSED AS OF YET
     // No draggable with that droppable zone
-    console.log("DROP " + event.dragData + " TO " + target);
+    // "DROP " + event.dragData + " TO " + target;
     // FIXME DO SOME ACTION
   }
 

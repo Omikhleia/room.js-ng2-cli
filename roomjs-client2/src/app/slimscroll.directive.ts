@@ -1,8 +1,10 @@
-import { Directive, Renderer, HostListener, Input, OnInit, OnDestroy, ElementRef } from "@angular/core";
+/* tslint:disable:no-bitwise */
+import { Directive, Renderer, HostListener, Input, OnInit, OnDestroy, ElementRef } from '@angular/core';
 
 /**
  * Slim scrollbar
  * Modified version from angular-io-slimscroll, see "PATCH" comments (quick-and-dirty)
+ * Also changed small coding style relate things (not marked PATCH), to please 'ng lint'
  */
 
 interface SlimScrollOptions {
@@ -82,43 +84,60 @@ interface SlimScrollOptions {
 }
 
 const defaults: SlimScrollOptions = {
-  width: "auto",
-  height: "250px",
-  size: "7px",
-  color: "#000",
-  position: "right",
-  distance: "1px",
-  start: "top",
+  width: 'auto',
+  height: '250px',
+  size: '7px',
+  color: '#000',
+  position: 'right',
+  distance: '1px',
+  start: 'top',
   opacity: .4,
   transition: .3,
   scrollToBottom: false, // PATCH
   alwaysVisible: false,
   disableFadeOut: false,
   railVisible: false,
-  railColor: "#333",
+  railColor: '#333',
   railOpacity: .2,
-  railClass: "slimScrollRail",
-  barClass: "slimScrollBar",
-  wrapperClass: "slimScrollDiv",
+  railClass: 'slimScrollRail',
+  barClass: 'slimScrollBar',
+  wrapperClass: 'slimScrollDiv',
   allowPageScroll: false,
   wheelStep: 20,
   touchScrollStep: 200,
-  borderRadius: "7px",
-  railBorderRadius: "7px",
+  borderRadius: '7px',
+  railBorderRadius: '7px',
   scrollTo: 0
 };
 
 @Directive({
-  selector: "[slimScroll]"
+  selector: '[appSlimScroll]'
 })
-export class SlimScroll implements OnInit, OnDestroy {
+export class SlimScrollDirective implements OnInit, OnDestroy {
+  private _me: HTMLElement;
+  private _bar: HTMLDivElement;
+  private _rail: HTMLDivElement;
+  private _renderer: Renderer;
+  private _isOverPanel: boolean;
+  private _isOverBar: boolean;
+  private _isDragg: boolean;
+  private _touchDif: number;
+  private _barHeight: number;
+  private _percentScroll: number;
+  private _lastScroll: number;
+  private _minBarHeight = 30;
+  private _releaseScroll = false;
+  private _options: SlimScrollOptions;
+  private _previousHeight: number;
+  private _queueHide: NodeJS.Timer;
+  private _changesTracker: NodeJS.Timer;
 
   constructor(renderer: Renderer, elementRef: ElementRef) {
     this._renderer = renderer;
     this._me = elementRef.nativeElement;
     this._options = Object.assign( {}, defaults);
   }
-  
+
   ngOnInit(): void {
     this.init();
   }
@@ -129,7 +148,7 @@ export class SlimScroll implements OnInit, OnDestroy {
     }
   }
 
-  @HostListener("window:resize", ["$event"])
+  @HostListener('window:resize', ['$event'])
   onResize(): void {
     this.init();
   }
@@ -225,13 +244,13 @@ export class SlimScroll implements OnInit, OnDestroy {
   @Input() set scrollTo(value: number) {
     this._options.scrollTo = value || defaults.scrollTo;
   }
-  
+
   /* BEGIN PATCH */
   @Input() set scrollToBottom(value: boolean) {
     this._options.scrollToBottom = value || defaults.scrollToBottom;
   }
   /* END PATCH */
-  
+
   /* BEGIN PATCH */
   @Input() set forceScroll(value: number) {
     // Ignore before scroll bar is initialized
@@ -273,7 +292,7 @@ export class SlimScroll implements OnInit, OnDestroy {
     if (e.wheelDelta) { delta = -e.wheelDelta / 120; }
     if (e.detail) { delta = e.detail / 3; }
 
-    let target = e.target || e.currentTarget || e.relatedTarget;
+    const target = e.target || e.currentTarget || e.relatedTarget;
     if (this.hasParentClass(target, this._options.wrapperClass)) {
       // scroll content
       this.scrollContent(delta, true);
@@ -286,11 +305,10 @@ export class SlimScroll implements OnInit, OnDestroy {
 
   private attachWheel(target: Window): void {
     if (window.addEventListener) {
-      target.addEventListener("DOMMouseScroll", (e: WheelEvent) => this.onWheel(e), false);
-      target.addEventListener("mousewheel", (e: WheelEvent) => this.onWheel(e), false);
-    }
-    else {
-      document.addEventListener("mousewheel", (e: WheelEvent) => this.onWheel(e), false);
+      target.addEventListener('DOMMouseScroll', (e: WheelEvent) => this.onWheel(e), false);
+      target.addEventListener('mousewheel', (e: WheelEvent) => this.onWheel(e), false);
+    } else {
+      document.addEventListener('mousewheel', (e: WheelEvent) => this.onWheel(e), false);
     }
   }
 
@@ -303,8 +321,7 @@ export class SlimScroll implements OnInit, OnDestroy {
     if (this._percentScroll === ~~this._percentScroll) {
       // release wheel
       this._releaseScroll = this._options.allowPageScroll;
-    }
-    else {
+    } else {
       this._releaseScroll = false;
     }
 
@@ -317,8 +334,8 @@ export class SlimScroll implements OnInit, OnDestroy {
       return;
     }
 
-    this._renderer.setElementStyle(this._bar, "opacity", this._options.opacity.toString());
-    this._renderer.setElementStyle(this._rail, "opacity", this._options.railOpacity.toString());
+    this._renderer.setElementStyle(this._bar, 'opacity', this._options.opacity.toString());
+    this._renderer.setElementStyle(this._rail, 'opacity', this._options.railOpacity.toString());
   }
 
   private hideBar(): void {
@@ -326,8 +343,8 @@ export class SlimScroll implements OnInit, OnDestroy {
     if (!this._options.alwaysVisible) {
       this._queueHide = setTimeout(() => {
         if (!(this._options.disableFadeOut && this._isOverPanel) && !this._isOverBar && !this._isDragg) {
-          this._renderer.setElementStyle(this._bar, "opacity", "0");
-          this._renderer.setElementStyle(this._rail, "opacity", "0");
+          this._renderer.setElementStyle(this._bar, 'opacity', '0');
+          this._renderer.setElementStyle(this._rail, 'opacity', '0');
         }
       }, 1000);
     }
@@ -336,7 +353,7 @@ export class SlimScroll implements OnInit, OnDestroy {
   private scrollContent(y: number, isWheel: boolean, isJump: boolean = false): void {
     this._releaseScroll = false;
     let delta = y;
-    let maxTop = this._me.offsetHeight - this._bar.offsetHeight;
+    const maxTop = this._me.offsetHeight - this._bar.offsetHeight;
 
     if (isWheel) {
       // move bar with mouse wheel
@@ -352,7 +369,7 @@ export class SlimScroll implements OnInit, OnDestroy {
       delta = (y > 0) ? Math.ceil(delta) : Math.floor(delta);
 
       // scroll the scrollbar
-      this._renderer.setElementStyle(this._bar, "top", delta + "px");
+      this._renderer.setElementStyle(this._bar, 'top', delta + 'px');
     }
 
     // calculate actual scroll amount
@@ -363,7 +380,7 @@ export class SlimScroll implements OnInit, OnDestroy {
       delta = y;
       let offsetTop = delta / this._me.scrollHeight * this._me.offsetHeight;
       offsetTop = Math.min(Math.max(offsetTop, 0), maxTop);
-      this._renderer.setElementStyle(this._bar, "top", offsetTop + "px");
+      this._renderer.setElementStyle(this._bar, 'top', offsetTop + 'px');
     }
 
     // scroll content
@@ -378,12 +395,15 @@ export class SlimScroll implements OnInit, OnDestroy {
 
   private getBarHeight(): void {
     // calculate scrollbar height and make sure it is not too small
-    this._barHeight = Math.max(this._me.offsetHeight / (this._me.scrollHeight === 0 ? 1 : this._me.scrollHeight) * this._me.offsetHeight, this._minBarHeight);
-    this._renderer.setElementStyle(this._bar, "height", this._barHeight + "px");
+    this._barHeight = Math.max(this._me.offsetHeight / (
+                               this._me.scrollHeight === 0 ? 1 :
+                               this._me.scrollHeight) * this._me.offsetHeight,
+                               this._minBarHeight);
+    this._renderer.setElementStyle(this._bar, 'height', this._barHeight + 'px');
 
     // hide scrollbar if content is not long enough
-    let display = this._barHeight === this._me.offsetHeight ? "none" : "block";
-    this._renderer.setElementStyle(this._bar, "display", display);
+    const display = this._barHeight === this._me.offsetHeight ? 'none' : 'block';
+    this._renderer.setElementStyle(this._bar, 'display', display);
   }
 
   private refresh(): void {
@@ -391,77 +411,76 @@ export class SlimScroll implements OnInit, OnDestroy {
     // BEGIN PATCH
     if (this._options.scrollToBottom) {
       // Scroll to bottom on refresh
-      this._renderer.setElementStyle(this._bar, "top", this._me.offsetHeight - this._bar.offsetHeight + "px");
+      this._renderer.setElementStyle(this._bar, 'top', this._me.offsetHeight - this._bar.offsetHeight + 'px');
       this.scrollContent(0, true);
     }
     // END PATCH
 
     // Pass height: auto to an existing slimscroll object to force a resize after contents have changed
-    if ("height" in this._options && this._options.height === "auto") {
-      this._renderer.setElementStyle(this._me.parentElement, "height", "auto");
-      this._renderer.setElementStyle(this._me, "height", "auto");
-      let height = this._me.parentElement.clientHeight;
-      this._renderer.setElementStyle(this._me.parentElement, "height", height + "px");
-      this._renderer.setElementStyle(this._me, "height", height + "px");
-    } else if ("height" in this._options) {
-      let h = this._options.height;
-      this._renderer.setElementStyle(this._me.parentElement, "height", h);
-      this._renderer.setElementStyle(this._me, "height", h);
+    if ('height' in this._options && this._options.height === 'auto') {
+      this._renderer.setElementStyle(this._me.parentElement, 'height', 'auto');
+      this._renderer.setElementStyle(this._me, 'height', 'auto');
+      const height = this._me.parentElement.clientHeight;
+      this._renderer.setElementStyle(this._me.parentElement, 'height', height + 'px');
+      this._renderer.setElementStyle(this._me, 'height', height + 'px');
+    } else if ('height' in this._options) {
+      const h = this._options.height;
+      this._renderer.setElementStyle(this._me.parentElement, 'height', h);
+      this._renderer.setElementStyle(this._me, 'height', h);
     }
 
   }
 
   private setup(): void {
     // wrap content
-    let wrapper = document.createElement("div");
+    const wrapper = document.createElement('div');
     this._renderer.setElementClass(wrapper, this._options.wrapperClass, true);
-    this._renderer.setElementStyle(wrapper, "position", "relative");
-    this._renderer.setElementStyle(wrapper, "overflow", "hidden");
-    this._renderer.setElementStyle(wrapper, "width", this._options.width);
-    this._renderer.setElementStyle(wrapper, "height", this._options.height);
+    this._renderer.setElementStyle(wrapper, 'position', 'relative');
+    this._renderer.setElementStyle(wrapper, 'overflow', 'hidden');
+    this._renderer.setElementStyle(wrapper, 'width', this._options.width);
+    this._renderer.setElementStyle(wrapper, 'height', this._options.height);
 
     // update style for the div
-    this._renderer.setElementStyle(this._me, "overflow", "hidden");
-    this._renderer.setElementStyle(this._me, "width", this._options.width);
-    this._renderer.setElementStyle(this._me, "height", this._options.height);
+    this._renderer.setElementStyle(this._me, 'overflow', 'hidden');
+    this._renderer.setElementStyle(this._me, 'width', this._options.width);
+    this._renderer.setElementStyle(this._me, 'height', this._options.height);
 
     // create scrollbar rail
-    this._rail = document.createElement("div");
+    this._rail = document.createElement('div');
     this._renderer.setElementClass(this._rail, this._options.railClass, true);
-    this._renderer.setElementStyle(this._rail, "width", this._options.size);
-    this._renderer.setElementStyle(this._rail, "height", "100%");
-    this._renderer.setElementStyle(this._rail, "position", "absolute");
-    this._renderer.setElementStyle(this._rail, "top", "0");
-    this._renderer.setElementStyle(this._rail, "display", this._options.railVisible ? "block" : "none");
-    this._renderer.setElementStyle(this._rail, "border-radius", this._options.railBorderRadius);
-    this._renderer.setElementStyle(this._rail, "background", this._options.railColor);
-    this._renderer.setElementStyle(this._rail, "opacity", this._options.railOpacity.toString());
-    this._renderer.setElementStyle(this._rail, "transition", `opacity ${this._options.transition}s`);
-    this._renderer.setElementStyle(this._rail, "z-index", "90");
+    this._renderer.setElementStyle(this._rail, 'width', this._options.size);
+    this._renderer.setElementStyle(this._rail, 'height', '100%');
+    this._renderer.setElementStyle(this._rail, 'position', 'absolute');
+    this._renderer.setElementStyle(this._rail, 'top', '0');
+    this._renderer.setElementStyle(this._rail, 'display', this._options.railVisible ? 'block' : 'none');
+    this._renderer.setElementStyle(this._rail, 'border-radius', this._options.railBorderRadius);
+    this._renderer.setElementStyle(this._rail, 'background', this._options.railColor);
+    this._renderer.setElementStyle(this._rail, 'opacity', this._options.railOpacity.toString());
+    this._renderer.setElementStyle(this._rail, 'transition', `opacity ${this._options.transition}s`);
+    this._renderer.setElementStyle(this._rail, 'z-index', '90');
 
     // create scrollbar
-    this._bar = document.createElement("div");
+    this._bar = document.createElement('div');
     this._renderer.setElementClass(this._bar, this._options.barClass, true);
-    this._renderer.setElementStyle(this._bar, "background", this._options.color);
-    this._renderer.setElementStyle(this._bar, "width", this._options.size);
-    this._renderer.setElementStyle(this._bar, "position", "absolute");
-    this._renderer.setElementStyle(this._bar, "top", "0");
-    this._renderer.setElementStyle(this._bar, "opacity", this._options.opacity.toString());
-    this._renderer.setElementStyle(this._bar, "transition", `opacity ${this._options.transition}s`);
-    this._renderer.setElementStyle(this._bar, "display", this._options.alwaysVisible ? "block" : "none");
-    this._renderer.setElementStyle(this._bar, "border-radius", this._options.borderRadius);
-    this._renderer.setElementStyle(this._bar, "webkit-border-radius", this._options.borderRadius);
-    this._renderer.setElementStyle(this._bar, "moz-border-radius", this._options.borderRadius);
-    this._renderer.setElementStyle(this._bar, "z-index", "99");
+    this._renderer.setElementStyle(this._bar, 'background', this._options.color);
+    this._renderer.setElementStyle(this._bar, 'width', this._options.size);
+    this._renderer.setElementStyle(this._bar, 'position', 'absolute');
+    this._renderer.setElementStyle(this._bar, 'top', '0');
+    this._renderer.setElementStyle(this._bar, 'opacity', this._options.opacity.toString());
+    this._renderer.setElementStyle(this._bar, 'transition', `opacity ${this._options.transition}s`);
+    this._renderer.setElementStyle(this._bar, 'display', this._options.alwaysVisible ? 'block' : 'none');
+    this._renderer.setElementStyle(this._bar, 'border-radius', this._options.borderRadius);
+    this._renderer.setElementStyle(this._bar, 'webkit-border-radius', this._options.borderRadius);
+    this._renderer.setElementStyle(this._bar, 'moz-border-radius', this._options.borderRadius);
+    this._renderer.setElementStyle(this._bar, 'z-index', '99');
 
     // set position
-    if (this._options.position === "right") {
-      this._renderer.setElementStyle(this._rail, "right", this._options.distance);
-      this._renderer.setElementStyle(this._bar, "right", this._options.distance);
-    }
-    else {
-      this._renderer.setElementStyle(this._rail, "left", this._options.distance);
-      this._renderer.setElementStyle(this._bar, "left", this._options.distance);
+    if (this._options.position === 'right') {
+      this._renderer.setElementStyle(this._rail, 'right', this._options.distance);
+      this._renderer.setElementStyle(this._bar, 'right', this._options.distance);
+    } else {
+      this._renderer.setElementStyle(this._rail, 'left', this._options.distance);
+      this._renderer.setElementStyle(this._bar, 'left', this._options.distance);
     }
 
     // wrap it
@@ -471,7 +490,7 @@ export class SlimScroll implements OnInit, OnDestroy {
 
     if (this._options.scrollTo > 0) {
       // jump to a static point
-      let offset = this._options.scrollTo;
+      const offset = this._options.scrollTo;
       // scroll content by the given offset
       this.scrollContent(offset, false, true);
     }
@@ -480,83 +499,83 @@ export class SlimScroll implements OnInit, OnDestroy {
     this._me.parentElement.appendChild(this._bar);
     this._me.parentElement.appendChild(this._rail);
 
-    this._bar.addEventListener("mousedown", e => {
+    this._bar.addEventListener('mousedown', e => {
       this._isDragg = true;
 
       // disable text selection
-      this._renderer.setElementStyle(document.querySelector('body'), "-webkit-user-select", "none");
-      this._renderer.setElementStyle(document.querySelector('body'), "-moz-user-select", "none");
-      this._renderer.setElementStyle(document.querySelector('body'), "-ms-user-select", "none");
-      this._renderer.setElementStyle(document.querySelector('body'), "user-select", "none");
+      this._renderer.setElementStyle(document.querySelector('body'), '-webkit-user-select', 'none');
+      this._renderer.setElementStyle(document.querySelector('body'), '-moz-user-select', 'none');
+      this._renderer.setElementStyle(document.querySelector('body'), '-ms-user-select', 'none');
+      this._renderer.setElementStyle(document.querySelector('body'), 'user-select', 'none');
 
-      let t = parseFloat(this._bar.style.top);
-      let pageY = e.pageY;
+      const t = parseFloat(this._bar.style.top);
+      const pageY = e.pageY;
 
-      let mousemoveEvent = (event: MouseEvent) => {
-        let currTop = t + event.pageY - pageY;
-        this._renderer.setElementStyle(this._bar, "top", (currTop >= 0 ? currTop : 0) + "px");
-        let position = this._bar.getClientRects()[0];
+      const mousemoveEvent = (event: MouseEvent) => {
+        const currTop = t + event.pageY - pageY;
+        this._renderer.setElementStyle(this._bar, 'top', (currTop >= 0 ? currTop : 0) + 'px');
+        const position = this._bar.getClientRects()[0];
         if (position) {
           this.scrollContent(0, position.top > 0);
         }
       };
 
-      let mouseupEvent = () => {
+      const mouseupEvent = () => {
         this._isDragg = false;
 
         // return normal text selection
-        this._renderer.setElementStyle(document.querySelector('body'), "-webkit-user-select", "initial");
-        this._renderer.setElementStyle(document.querySelector('body'), "-moz-user-select", "initial");
-        this._renderer.setElementStyle(document.querySelector('body'), "-ms-user-select", "initial");
-        this._renderer.setElementStyle(document.querySelector('body'), "user-select", "initial");
+        this._renderer.setElementStyle(document.querySelector('body'), '-webkit-user-select', 'initial');
+        this._renderer.setElementStyle(document.querySelector('body'), '-moz-user-select', 'initial');
+        this._renderer.setElementStyle(document.querySelector('body'), '-ms-user-select', 'initial');
+        this._renderer.setElementStyle(document.querySelector('body'), 'user-select', 'initial');
 
         this.hideBar();
 
-        document.removeEventListener("mousemove", mousemoveEvent, false);
-        document.removeEventListener("mouseup", mouseupEvent, false);
+        document.removeEventListener('mousemove', mousemoveEvent, false);
+        document.removeEventListener('mouseup', mouseupEvent, false);
       };
 
-      document.addEventListener("mousemove", mousemoveEvent, false);
-      document.addEventListener("mouseup", mouseupEvent, false);
+      document.addEventListener('mousemove', mousemoveEvent, false);
+      document.addEventListener('mouseup', mouseupEvent, false);
 
       return false;
     }, false);
 
     // on rail over
-    this._rail.addEventListener("mouseenter", () => this.showBar(), false);
-    this._rail.addEventListener("mouseleave", () => this.hideBar(), false);
+    this._rail.addEventListener('mouseenter', () => this.showBar(), false);
+    this._rail.addEventListener('mouseleave', () => this.hideBar(), false);
 
     // on bar over
-    this._bar.addEventListener("mouseenter", () => this._isOverBar = true, false);
-    this._bar.addEventListener("mouseleave", () => this._isOverBar = false, false);
+    this._bar.addEventListener('mouseenter', () => this._isOverBar = true, false);
+    this._bar.addEventListener('mouseleave', () => this._isOverBar = false, false);
 
     // show on parent mouseover
-    this._me.addEventListener("mouseenter", () => {
+    this._me.addEventListener('mouseenter', () => {
       this._isOverPanel = true;
       this.showBar();
       this.hideBar();
     }, false);
-    this._me.addEventListener("mouseleave", () => {
+    this._me.addEventListener('mouseleave', () => {
       this._isOverPanel = false;
       this.hideBar();
     }, false);
 
     // support for mobile
-    this._me.addEventListener("touchstart", e => {
+    this._me.addEventListener('touchstart', e => {
       if (e.touches.length) {
         // record where touch started
         this._touchDif = e.touches[0].pageY;
       }
     }, false);
 
-    this._me.addEventListener("touchmove", e => {
+    this._me.addEventListener('touchmove', e => {
       // prevent scrolling the page if necessary
       if (!this._releaseScroll) {
         e.preventDefault();
       }
       if (e.touches.length) {
         // see how far user swiped
-        let diff = (this._touchDif - e.touches[0].pageY) / this._options.touchScrollStep;
+        const diff = (this._touchDif - e.touches[0].pageY) / this._options.touchScrollStep;
         // scroll content
         this.scrollContent(diff, true);
         this._touchDif = e.touches[0].pageY;
@@ -569,16 +588,16 @@ export class SlimScroll implements OnInit, OnDestroy {
     this.hideBar();
 
     // check start position
-    if (this._options.start === "bottom") {
+    if (this._options.start === 'bottom') {
       // scroll content to bottom
-      this._renderer.setElementStyle(this._bar, "top", this._me.offsetHeight - this._bar.offsetHeight + "px");
+      this._renderer.setElementStyle(this._bar, 'top', this._me.offsetHeight - this._bar.offsetHeight + 'px');
       this.scrollContent(0, true);
     }
 
     // attach scroll events
     this.attachWheel(window);
 
-    // check whether it changes in content 
+    // check whether it changes in content
     this.trackPanelHeightChanged();
   }
 
@@ -586,29 +605,10 @@ export class SlimScroll implements OnInit, OnDestroy {
     // ensure we are not binding it again
     if (this._bar && this._rail) {
       this.refresh();
-    }
-    else {
+    } else {
       this.setup();
     }
   }
 
-  private _me: HTMLElement;
-  private _bar: HTMLDivElement;
-  private _rail: HTMLDivElement;
-  private _renderer: Renderer;
-  private _isOverPanel: boolean;
-  private _isOverBar: boolean;
-  private _isDragg: boolean;
-  private _touchDif: number;
-  private _barHeight: number;
-  private _percentScroll: number;
-  private _lastScroll: number;
-  private _minBarHeight = 30;
-  private _releaseScroll = false;
-  private _options: SlimScrollOptions;
-  private _previousHeight: number;
-  private _queueHide: NodeJS.Timer;
-  private _changesTracker: NodeJS.Timer;
-  
 }
 

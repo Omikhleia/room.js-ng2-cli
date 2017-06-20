@@ -1,7 +1,7 @@
 <div class="tabs">
   <div class="tabs-body">
     <div class="tab" *ngFor="let _tab of tabsData; let i=index" [ngClass]="{visible: (i+1) == currentTab}">
-      <div class="tab-content" tab [ref]="_tab" [content]="_tab.content" [data]="_tab.data" [index]="i">
+      <div class="tab-content" appTab [ref]="_tab" [content]="_tab.content" [data]="_tab.data" [index]="i">
     </div>
   </div>
 </div>

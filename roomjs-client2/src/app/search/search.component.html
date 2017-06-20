@@ -6,15 +6,15 @@
                (keydown)="onKeyDown($event)"
                (keyup)="onKeyUp($event)" type="text"/>
       </div>
-      <div slimScroll size="7px" 
-                      height="40vh"
-                      railVisible="true"
-                      disableFadeOut="true"
-                      railColor="#bc94b7"
-                      opacity=".5"
-                      distance="3px"
-                      color="#000"
-                      forceScroll="{{scrollTo}}">
+      <div appSlimScroll size="7px" 
+                         height="40vh"
+                         railVisible="true"
+                         disableFadeOut="true"
+                         railColor="#bc94b7"
+                         opacity=".5"
+                         distance="3px"
+                         color="#000"
+                         forceScroll="{{scrollTo}}">
         <div class="dialog-content">
           <div class='results'>
             <div #results *ngFor="let result of results; let i = index">

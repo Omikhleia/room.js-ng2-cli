@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 
 import { TextService } from '../text.service';
-import { SlimScroll }  from '../slimscroll.directive';
 
 import * as ansi_up from 'ansi_up';
 
@@ -16,17 +15,17 @@ import * as ansi_up from 'ansi_up';
 })
 export class TextpaneComponent implements OnInit, OnDestroy {
   private lines: string[] = [];
-  private maxLines: number = 200; // FIXME TODO configurable
+  private maxLines = 200; // FIXME TODO configurable
   private subscription;
 
   @Output() commandEntered = new EventEmitter<string>();
 
   constructor(private textService: TextService) { }
-  
+
   ngOnInit() {
     this.subscription = this.textService.text$.subscribe( text => {
       this.lines.push(this.colorize(ansi_up.escape_for_html(text)));
-      
+
       if (this.lines.length > this.maxLines) {
         // Truncate old lines
         const delta = this.lines.length - this.maxLines;
@@ -47,8 +46,8 @@ export class TextpaneComponent implements OnInit, OnDestroy {
   private colorize(str: string) {
     return this.linkifyCommands(ansi_up.ansi_to_html(str, { use_classes: true }));
   }
-    
-  private onClick(event: any) {
+
+  public onClick(event: any) {
     if (event.target && event.target.hash) {
       // Check for command pattern
       const pattern = /#cmd\[(.*?)\]/g;
@@ -56,11 +55,11 @@ export class TextpaneComponent implements OnInit, OnDestroy {
       if (!match) {
         return;
       }
-      
+
       // URI-encoded on some browsers (e.g. Firefox), so ensure decoding
       // Prefix with @ for direct playmode command
       const command = '@' + decodeURIComponent(match[1]);
-      
+
       // Emit command
       this.commandEntered.emit(command);
       event.preventDefault();
