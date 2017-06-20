@@ -1,6 +1,6 @@
 # RoomjsClient
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.25.5.
+This project was generated with [angular-cli](https://github.com/angular/angular-cli), initially with version 1.0.0-beta.25.5, later manually updated to 1.1.2.
 
 ## Development server
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
