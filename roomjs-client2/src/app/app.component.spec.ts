@@ -9,6 +9,7 @@ import { DndModule } from 'ng2-dnd';
 
 import { DialogAnchorDirective } from './dialoganchor.directive';
 import { SlimScrollDirective } from './slimscroll.directive';
+import { DraggableDirective } from './draggable.directive';
 
 import { DialogComponent } from './dialog/dialog.component';
 import { ButtonsComponent } from './buttons/buttons.component';
@@ -18,6 +19,7 @@ import { PlayersComponent } from './players/players.component';
 import { CmdlineComponent } from './cmdline/cmdline.component';
 import { MappaneComponent } from './mappane/mappane.component';
 import { InventoryComponent } from './inventory/inventory.component';
+import { RoomContentsComponent } from './room-contents/room-contents.component';
 import { ClientViewComponent } from './client-view/client-view.component';
 import { TabDirective, TabsBodyComponent, TabsHeaderComponent } from './tabs/tabs';
 import { BaseEditorComponent } from './base-editor/base-editor.component';
@@ -36,6 +38,7 @@ describe('AppComponent', () => {
         AppComponent,
         DialogAnchorDirective,
         DialogComponent,
+        DraggableDirective,
         ButtonsComponent,
         TextpaneComponent,
         SlimScrollDirective,
@@ -43,6 +46,7 @@ describe('AppComponent', () => {
         CmdlineComponent,
         MappaneComponent,
         InventoryComponent,
+        RoomContentsComponent,
         ClientViewComponent,
         TabDirective,
         TabsBodyComponent,

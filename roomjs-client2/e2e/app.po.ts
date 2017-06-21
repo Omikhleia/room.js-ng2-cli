@@ -1,7 +1,10 @@
 import { browser, element, by } from 'protractor';
 
 export class RoomjsClientPage {
+
   navigateTo() {
+    browser.waitForAngularEnabled(false);
+
     return browser.get('/');
   }
 

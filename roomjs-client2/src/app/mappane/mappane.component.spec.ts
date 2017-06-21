@@ -3,6 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
+import { DndModule } from 'ng2-dnd';
+
+import { DraggableDirective } from '../draggable.directive';
+
 import { MappaneComponent } from './mappane.component';
 
 describe('MappaneComponent', () => {
@@ -11,7 +15,10 @@ describe('MappaneComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MappaneComponent ]
+      declarations: [ DraggableDirective, MappaneComponent ],
+      imports: [
+        DndModule.forRoot()
+      ],
     })
     .compileComponents();
   }));

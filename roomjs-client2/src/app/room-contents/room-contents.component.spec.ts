@@ -5,6 +5,8 @@ import { DebugElement } from '@angular/core';
 
 import { DndModule } from 'ng2-dnd';
 
+import { SocketService } from '../socket.service';
+
 import { RoomContentsComponent } from './room-contents.component';
 
 describe('RoomContentsComponent', () => {
@@ -16,7 +18,8 @@ describe('RoomContentsComponent', () => {
       declarations: [ RoomContentsComponent ],
       imports: [
         DndModule.forRoot()
-      ]
+      ],
+      providers: [ SocketService ] // FIXME replace with mock-up for better testing
     })
     .compileComponents();
   }));

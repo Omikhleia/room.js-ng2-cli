@@ -5,6 +5,10 @@ import { DebugElement } from '@angular/core';
 
 import { DndModule } from 'ng2-dnd';
 
+import { DraggableDirective } from '../draggable.directive';
+
+import { SocketService } from '../socket.service';
+
 import { InventoryComponent } from './inventory.component';
 
 describe('InventoryComponent', () => {
@@ -13,10 +17,11 @@ describe('InventoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InventoryComponent ],
+      declarations: [ DraggableDirective, InventoryComponent ],
       imports: [
         DndModule.forRoot()
-      ]
+      ],
+      providers: [ SocketService ] // FIXME replace with mock-up for better testing
     })
     .compileComponents();
   }));

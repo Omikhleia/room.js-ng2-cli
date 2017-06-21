@@ -6,6 +6,8 @@ import { DebugElement } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { DndModule } from 'ng2-dnd';
 
+import { DraggableDirective } from '../draggable.directive';
+
 import { SocketService } from '../socket.service';
 import { SoundService } from '../sound.service';
 
@@ -14,6 +16,7 @@ import { PlayersComponent } from '../players/players.component';
 import { CmdlineComponent } from '../cmdline/cmdline.component';
 import { MappaneComponent } from '../mappane/mappane.component';
 import { InventoryComponent } from '../inventory/inventory.component';
+import { RoomContentsComponent } from '../room-contents/room-contents.component';
 
 import { DialogComponent } from '../dialog/dialog.component';
 import { ButtonsComponent } from '../buttons/buttons.component';
@@ -26,8 +29,10 @@ describe('ClientViewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
+        DraggableDirective,
         DialogComponent, ButtonsComponent,
         TextpaneComponent, PlayersComponent, CmdlineComponent, MappaneComponent, InventoryComponent,
+        RoomContentsComponent,
         ClientViewComponent
       ],
       imports: [ FormsModule, DndModule.forRoot() ],

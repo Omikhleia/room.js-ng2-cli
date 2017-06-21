@@ -5,6 +5,8 @@ import { DebugElement } from '@angular/core';
 
 import { DndModule } from 'ng2-dnd';
 
+import { SocketService } from '../socket.service';
+
 import { PlayersComponent } from './players.component';
 
 describe('PlayersComponent', () => {
@@ -16,7 +18,8 @@ describe('PlayersComponent', () => {
       declarations: [ PlayersComponent ],
       imports: [
         DndModule.forRoot()
-      ]
+      ],
+      providers: [ SocketService ] // FIXME replace with mock-up for better testing
     })
     .compileComponents();
   }));

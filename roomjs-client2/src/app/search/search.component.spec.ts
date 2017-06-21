@@ -6,6 +6,7 @@ import { DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { SlimScrollDirective } from '../slimscroll.directive';
+import { DraggableDirective } from '../draggable.directive';
 import { SocketService } from '../socket.service';
 import { SearchComponent } from './search.component';
 
@@ -15,7 +16,7 @@ describe('SearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SlimScrollDirective, SearchComponent ],
+      declarations: [ SlimScrollDirective, DraggableDirective, SearchComponent,  ],
       imports: [ FormsModule ],
       providers: [ SocketService ] // FIXME replace with mock-up for better testing
     })
