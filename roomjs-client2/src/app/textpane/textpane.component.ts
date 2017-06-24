@@ -14,7 +14,7 @@ import * as ansi_up from 'ansi_up';
   styleUrls: ['./textpane.component.css']
 })
 export class TextpaneComponent implements OnInit, OnDestroy {
-  private lines: string[] = [];
+  public lines: string[] = [];
   private maxLines = 200; // FIXME TODO configurable
   private subscription;
 

@@ -81,6 +81,12 @@ export class SocketService {
     });
   }
 
+  getText(params: any, fn: any) {
+    this.socket.emit('get-text', params, data => {
+      fn(data);
+    });
+  }
+
   getFunction(params: any, fn: any) {
     this.socket.emit('get-function', params, data => {
       fn(data);
@@ -89,6 +95,12 @@ export class SocketService {
 
   saveVerb(params: any, fn: any) {
     this.socket.emit('save-verb', params, response => {
+      fn(response);
+    });
+  }
+
+  saveText(params: any, fn: any) {
+    this.socket.emit('save-text', params, response => {
       fn(response);
     });
   }

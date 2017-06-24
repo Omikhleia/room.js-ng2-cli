@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ToasterService } from 'angular2-toaster';
 import { SocketService } from '../socket.service';
-import { BaseEditorComponent } from '../base-editor/base-editor.component';
+import { BaseEditorComponent } from './base-editor.component';
 
 /**
  * Editor component for functions.
@@ -14,13 +15,27 @@ import { BaseEditorComponent } from '../base-editor/base-editor.component';
 })
 export class FunctionEditorComponent extends BaseEditorComponent implements OnInit {
   public src: string;
+  public cmconfig: any = {
+    lineNumbers: true,
+    tabSize: 2,
+    indentWithTabs: false,
+    matchBrackets: true,
+    autoCloseBrackets: true,
+    scrollbarStyle: 'overlay',
+    theme: 'solarized light'
+  };
 
-  constructor(private socketService: SocketService) {
+  constructor(private socketService: SocketService, private toasterService: ToasterService) {
     super();
   }
 
   ngOnInit() {
     this.src = this.data.src;
+  }
+
+  public onChange() {
+    // Make ng lint happy...
+    super.onChange()
   }
 
   /**
@@ -35,6 +50,7 @@ export class FunctionEditorComponent extends BaseEditorComponent implements OnIn
    * Save function, invoking the socket service.
    */
   protected save() {
+  console.log(this.data);
     const params = {
       name: this.data.name,
       src: this.src,
@@ -43,10 +59,13 @@ export class FunctionEditorComponent extends BaseEditorComponent implements OnIn
 
     this.socketService.saveFunction(params, response => {
       if (response === 'saved') {
+        this.toasterService.pop('success', 'Saved',
+                                `${this.data.objectId}.${this.data.name} saved` );
         this.data.src = this.src;
         this.dirty.emit(false);
       } else {
-        alert(response); // FIXME Have our own custom modal later
+        this.toasterService.pop('error', 'Save error',
+                                `${this.data.objectId}: ${response}`);
       }
     });
   }

@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
+import { ToasterModule } from 'angular2-toaster';
 
 import { SlimScrollDirective } from '../slimscroll.directive';
 import { DraggableDirective } from '../draggable.directive';
@@ -17,7 +18,7 @@ describe('SearchComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SlimScrollDirective, DraggableDirective, SearchComponent,  ],
-      imports: [ FormsModule ],
+      imports: [ FormsModule, ToasterModule ],
       providers: [ SocketService ] // FIXME replace with mock-up for better testing
     })
     .compileComponents();

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ToasterService } from 'angular2-toaster';
 import { SocketService } from '../socket.service';
-import { BaseEditorComponent } from '../base-editor/base-editor.component';
+import { BaseEditorComponent } from './base-editor.component';
 
 /**
  * Editor component for verbs.
@@ -18,8 +19,17 @@ export class VerbEditorComponent extends BaseEditorComponent implements OnInit {
   public dobjarg: string;
   public iobjarg: string;
   public preparg: string;
+  public cmconfig: any = {
+    lineNumbers: true,
+    tabSize: 2,
+    indentWithTabs: false,
+    matchBrackets: true,
+    autoCloseBrackets: true,
+    scrollbarStyle: 'overlay',
+    theme: 'solarized light'
+  };
 
-  constructor(private socketService: SocketService) {
+  constructor(private socketService: SocketService, private toasterService: ToasterService) {
     super();
   }
 
@@ -29,6 +39,11 @@ export class VerbEditorComponent extends BaseEditorComponent implements OnInit {
     this.dobjarg = this.data.verb.dobjarg;
     this.iobjarg = this.data.verb.iobjarg;
     this.preparg = this.data.verb.preparg;
+  }
+
+  public onChange() {
+    // Make ng lint happy...
+    super.onChange()
   }
 
   /**
@@ -62,6 +77,8 @@ export class VerbEditorComponent extends BaseEditorComponent implements OnInit {
 
     this.socketService.saveVerb(params, response => {
       if (response === 'saved') {
+        this.toasterService.pop('success', 'Saved',
+                                `${this.data.objectId}.${this.data.verb.name} saved` )
         this.data.verb.code = this.code;
         this.data.verb.pattern = this.pattern;
         this.data.verb.dobjarg = this.dobjarg;
@@ -69,8 +86,8 @@ export class VerbEditorComponent extends BaseEditorComponent implements OnInit {
         this.data.verb.preparg = this.preparg;
         this.dirty.emit(false);
       } else {
-        alert(response); // FIXME Have our own custom modal later
-      }
+        this.toasterService.pop('error', 'Save error',
+                                `${this.data.objectId}: ${response}`);      }
     });
   }
 

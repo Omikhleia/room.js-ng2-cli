@@ -1,4 +1,4 @@
-import { Directive, Input, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Directive, Input, ElementRef, HostListener, OnInit, AfterViewInit } from '@angular/core';
 /*
  * Modified version from https://github.com/cedvdb/ng2draggable
  * - Constrain moved div within parent bounds.
@@ -7,7 +7,7 @@ import { Directive, Input, ElementRef, HostListener, OnInit } from '@angular/cor
 @Directive({
   selector: '[appDraggable]'
 })
-export class DraggableDirective implements OnInit {
+export class DraggableDirective implements OnInit, AfterViewInit {
   private topStart: number;
   private leftStart: number;
   private _allowDrag = true;
@@ -16,8 +16,6 @@ export class DraggableDirective implements OnInit {
   private _area: HTMLElement;
 
   constructor(public element: ElementRef) {
-    this._area = element.nativeElement.parentElement;
-    // FIXME this should rather be done in ngAfterViewInit()
   }
 
   ngOnInit() {
@@ -26,6 +24,10 @@ export class DraggableDirective implements OnInit {
       this.element.nativeElement.style.position = 'absolute';
       this.element.nativeElement.className += ' cursor-draggable';
     }
+  }
+
+  ngAfterViewInit() {
+    this._area = this.element.nativeElement.parentElement;
   }
 
   @HostListener('mousedown', ['$event'])

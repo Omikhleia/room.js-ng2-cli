@@ -1,9 +1,11 @@
 import { Component, Output, EventEmitter, OnInit,
          Input, ViewChild, ViewChildren, ElementRef, Renderer, OnChanges } from '@angular/core';
+import { ToasterService } from 'angular2-toaster';
 
 import { SocketService } from '../socket.service';
-import { FunctionEditorComponent } from '../function-editor/function-editor.component';
-import { VerbEditorComponent } from '../verb-editor/verb-editor.component';
+import { FunctionEditorComponent } from '../editors/function-editor.component';
+import { TextEditorComponent } from '../editors/text-editor.component';
+import { VerbEditorComponent } from '../editors/verb-editor.component';
 
 // FIXME Put all definitions elswhere...
 
@@ -19,11 +21,14 @@ export class SearchResult {
 
   static newFromResult(result) {
     if (result.function) {
-      // eslint-disable-next-line no-use-before-define
+      // eslint-disable-next-line no-use-before-define -- FIXME ng lint complains
       return new FunctionSearchResult(result);
     } else if (result.verb) {
-      // eslint-disable-next-line no-use-before-define
+      // eslint-disable-next-line no-use-before-define -- FIXME ng lint complains
       return new VerbSearchResult(result);
+    } else if (result.text) {
+      // eslint-disable-next-line no-use-before-define -- FIXME ng lint complains
+      return new TextSearchResult(result);
     }
     throw new Error('Invalid result type.');
   }
@@ -58,6 +63,26 @@ class FunctionSearchResult extends SearchResult {
   openEditor(socketService: SocketService, fn: editorCallback) {
     const params = { objectId: this.objectId, name: this.data.function };
     socketService.getFunction(params, data => {
+      this.result = data;
+      fn(this);
+    });
+  }
+}
+
+class TextSearchResult extends SearchResult {
+  constructor(public data: any) {
+    super(data);
+    this.kind = 'text';
+    this.component = TextEditorComponent;
+  }
+
+  computeName(): string {
+    return `${this.objectId}.${this.data.text}`;
+  }
+
+  openEditor(socketService: SocketService, fn: editorCallback) {
+    const params = { objectId: this.objectId, name: this.data.text };
+    socketService.getText(params, data => {
       this.result = data;
       fn(this);
     });
@@ -102,7 +127,8 @@ export class SearchComponent implements OnInit, OnChanges {
   public selectedIndex = 0;
   public scrollTo = 0;
 
-  constructor(private socketService: SocketService, private renderer: Renderer) { }
+  constructor(private socketService: SocketService, private renderer: Renderer,
+              private toasterService: ToasterService) { }
 
   ngOnInit() {
   }
@@ -168,7 +194,12 @@ export class SearchComponent implements OnInit, OnChanges {
 
   public onClick(selected: any) {
     selected.openEditor(this.socketService, (choice) => {
-      this.choice.emit(choice);
+      if (choice.result) {
+        this.choice.emit(choice);
+      } else {
+        // Retrieval failed, server returned null
+        this.toasterService.pop('error', 'Fetch error', `Cannot retrieve ${selected.name}`);
+      }
     });
   }
 

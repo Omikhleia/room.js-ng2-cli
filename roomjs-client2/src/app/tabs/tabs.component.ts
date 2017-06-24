@@ -13,7 +13,7 @@ import { Tab } from './tabs.model';
   styleUrls: ['./tabs.component.css'],
 })
 export class TabsBodyComponent {
-  private tabsData: Tab[] = [];
+  public tabsData: Tab[] = [];
   public currentTab = 1;
 
   constructor(private tabs: TabsService) {

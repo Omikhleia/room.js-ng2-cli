@@ -53,6 +53,14 @@
   padding: 1px 3px 0px 3px;
   margin-right: 8px;
 }
+.text:before {
+  background: #3932b4;
+  font-size: 70%;
+  text-transform: uppercase;
+  content: "T";
+  padding: 1px 3px 0px 3px;
+  margin-right: 8px;
+}
 .dialog-box .button {
   font-weight: 700;
   width: 100%;

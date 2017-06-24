@@ -29,7 +29,9 @@ export class DialogComponent implements OnInit, AfterViewInit {
     // Asynchronously refocus the input field,
     // to give a chance for Angular to first show the dialog.
     setTimeout(() => {
-      this.renderer.invokeElementMethod(this.inputElement.nativeElement, 'focus', []);
+      if (this.inputElement) {
+        this.renderer.invokeElementMethod(this.inputElement.nativeElement, 'focus', []);
+      }
     }, 0);
   }
 

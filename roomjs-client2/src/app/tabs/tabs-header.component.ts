@@ -14,7 +14,7 @@ import { Tab } from './tabs.model';
   styleUrls: ['./tabs-header.component.css']
 })
 export class TabsHeaderComponent {
-  private tabsData: Tab[] = [];
+  public tabsData: Tab[] = [];
   public currentTab = 1;
 
   constructor(private tabs: TabsService) {

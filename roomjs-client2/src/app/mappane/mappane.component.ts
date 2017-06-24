@@ -13,7 +13,7 @@ export class MappaneComponent implements OnInit {
   // ['north', 'northeast', 'northwest', 'west', 'up', 'down', 'east',
   //  'southwest', 'south', 'southeast']
 
-  private blocks: any = [
+  public blocks: any = [
     {x: 200, y: 0, dir: 'northwest' },
     {x: 300, y: 50, dir: 'north' },
     {x: 400, y: 100, dir: 'northeast' },
@@ -26,7 +26,7 @@ export class MappaneComponent implements OnInit {
     {x: 200, y: 200, dir: 'southeast' }
   ];
 
-  private exitBlocks: any = {
+  public exitBlocks: any = {
     northwest: 'nwdoor.png',
     north: 'ndoor.png',
     northeast: 'nedoor.png',
@@ -39,7 +39,7 @@ export class MappaneComponent implements OnInit {
     southeast: 'sedoor.png'
   };
 
-  private wallBlocks: any = {
+  public wallBlocks: any = {
     northwest: 'nwwall.png',
     north: 'nwall.png',
     northeast: 'newall.png',
@@ -48,8 +48,9 @@ export class MappaneComponent implements OnInit {
     southwest: 'swwall.png',
     south: 'swall.png',
     southeast: 'sewall.png'
- };
- private doors: any = [
+  };
+
+  public doors: any = [
     {x: 200, y: 150, dir: 'northwest' },
     {x: 325, y: 187.5, dir: 'north' },
     {x: 425, y: 262.5, dir: 'northeast' },
@@ -60,7 +61,7 @@ export class MappaneComponent implements OnInit {
     {x: -25, y: 262.5, dir: 'southwest' },
     {x: 75, y: 312.5, dir: 'south' },
     {x: 200, y: 350, dir: 'southeast' }
- ];
+  ];
 
   // Constructor
   constructor() { }

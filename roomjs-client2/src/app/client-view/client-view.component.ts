@@ -47,7 +47,7 @@ export class ClientViewComponent implements OnInit, OnDestroy {
 
   constructor(private socketService: SocketService,
               private textService: TextService,
-              private soundService: SoundService, ) {
+              private soundService: SoundService ) {
   }
 
   ngOnInit() {

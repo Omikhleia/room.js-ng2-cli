@@ -4,6 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { FormsModule, NgForm } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DndModule } from 'ng2-dnd';
 
 import { DraggableDirective } from '../draggable.directive';
@@ -35,7 +36,10 @@ describe('ClientViewComponent', () => {
         RoomContentsComponent,
         ClientViewComponent
       ],
-      imports: [ FormsModule, DndModule.forRoot() ],
+      imports: [
+        FormsModule,
+        BrowserAnimationsModule,
+        DndModule.forRoot() ],
       providers: [ SocketService, SoundService ] // FIXME replace with mock-up for better testing
     })
     .compileComponents();

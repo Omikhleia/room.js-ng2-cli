@@ -26,7 +26,8 @@
         "styles.css",
          "../node_modules/codemirror/lib/codemirror.css",
          "../node_modules/codemirror/addon/scroll/simplescrollbars.css",
-         "../node_modules/codemirror/theme/solarized.css"
+         "../node_modules/codemirror/theme/solarized.css",
+         "../node_modules/angular2-toaster/toaster.css"
       ],
       "scripts": [
         "../node_modules/codemirror/lib/codemirror.js",

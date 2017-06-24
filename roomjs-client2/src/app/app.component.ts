@@ -7,15 +7,17 @@ import { Tab, TabsService, TabsBodyComponent, TabsHeaderComponent } from './tabs
 import { SearchComponent, SearchResult } from './search/search.component';
 
 import { ClientViewComponent} from './client-view/client-view.component';
-import { FunctionEditorComponent } from './function-editor/function-editor.component';
-import { VerbEditorComponent } from './verb-editor/verb-editor.component';
+import { FunctionEditorComponent } from './editors/function-editor.component';
+import { TextEditorComponent } from './editors/text-editor.component';
+import { VerbEditorComponent } from './editors/verb-editor.component';
 
 import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
   providers: [ SoundService, SocketService, TabsService ],
-  entryComponents: [ ClientViewComponent, FunctionEditorComponent, VerbEditorComponent, SearchComponent ],
+  entryComponents: [ ClientViewComponent, FunctionEditorComponent,
+                     TextEditorComponent, VerbEditorComponent, SearchComponent ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
