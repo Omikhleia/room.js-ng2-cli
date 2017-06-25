@@ -94,21 +94,33 @@ export class SocketService {
   }
 
   saveVerb(params: any, fn: any) {
-    this.socket.emit('save-verb', params, response => {
-      fn(response);
-    });
+    if (this.socket.disconnected) {
+      fn('server disconnected');
+    } else {
+      this.socket.emit('save-verb', params, response => {
+        fn(response);
+      });
+    }
   }
 
   saveText(params: any, fn: any) {
-    this.socket.emit('save-text', params, response => {
-      fn(response);
-    });
+    if (this.socket.disconnected) {
+      fn('server disconnected');
+    } else {
+      this.socket.emit('save-text', params, response => {
+        fn(response);
+      });
+    }
   }
 
   saveFunction(params: any, fn: any) {
-    this.socket.emit('save-function', params, response => {
-      fn(response);
-    });
+    if (this.socket.disconnected) {
+      fn('server disconnected');
+    } else {
+      this.socket.emit('save-function', params, response => {
+        fn(response);
+      });
+    }
   }
 
   // Private methods
