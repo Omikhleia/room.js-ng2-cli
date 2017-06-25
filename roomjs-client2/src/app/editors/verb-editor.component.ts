@@ -86,8 +86,8 @@ export class VerbEditorComponent extends BaseEditorComponent implements OnInit {
         this.data.verb.preparg = this.preparg;
         this.dirty.emit(false);
       } else {
-        this.toasterService.pop('error', 'Save error',
-                                `${this.data.objectId}: ${response}`);      }
+        this.toasterService.pop('error', 'Save error', response);
+      }
     });
   }
 

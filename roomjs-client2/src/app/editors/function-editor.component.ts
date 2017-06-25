@@ -10,8 +10,8 @@ import { BaseEditorComponent } from './base-editor.component';
 
 @Component({
   selector: 'app-function-editor',
-  templateUrl: './function-editor.component.html',
-  styleUrls: ['./function-editor.component.css']
+  templateUrl: './base-editor.component.html',
+  styleUrls: ['./base-editor.component.css']
 })
 export class FunctionEditorComponent extends BaseEditorComponent implements OnInit {
   public src: string;
@@ -50,7 +50,6 @@ export class FunctionEditorComponent extends BaseEditorComponent implements OnIn
    * Save function, invoking the socket service.
    */
   protected save() {
-  console.log(this.data);
     const params = {
       name: this.data.name,
       src: this.src,
@@ -64,8 +63,7 @@ export class FunctionEditorComponent extends BaseEditorComponent implements OnIn
         this.data.src = this.src;
         this.dirty.emit(false);
       } else {
-        this.toasterService.pop('error', 'Save error',
-                                `${this.data.objectId}: ${response}`);
+        this.toasterService.pop('error', 'Save error', response);
       }
     });
   }

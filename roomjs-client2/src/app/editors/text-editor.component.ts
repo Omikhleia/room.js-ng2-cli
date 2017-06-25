@@ -9,9 +9,9 @@ import { BaseEditorComponent } from './base-editor.component';
  */
 
 @Component({
-  selector: 'app-function-editor',
-  templateUrl: './function-editor.component.html',
-  styleUrls: ['./function-editor.component.css']
+  selector: 'app-text-editor',
+  templateUrl: './base-editor.component.html',
+  styleUrls: ['./base-editor.component.css']
 })
 export class TextEditorComponent extends BaseEditorComponent implements OnInit {
   public src: string;
@@ -64,8 +64,7 @@ export class TextEditorComponent extends BaseEditorComponent implements OnInit {
         this.data.src = this.src;
         this.dirty.emit(false);
       } else {
-        this.toasterService.pop('error', 'Save error',
-                                `${this.data.objectId}: ${response}`);
+        this.toasterService.pop('error', 'Save error', response);
       }
     });
   }
