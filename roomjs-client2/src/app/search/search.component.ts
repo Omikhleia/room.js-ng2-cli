@@ -203,6 +203,10 @@ export class SearchComponent implements OnInit, OnChanges {
     });
   }
 
+  public onClose() {
+    this.choice.emit(null);
+  }
+
   private selectionIntoView() {
     if (this.listElements) {
       const listArray = this.listElements.toArray();

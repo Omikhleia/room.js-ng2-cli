@@ -1,29 +1,32 @@
-<div class='dialog-modal'>
+<div class='dialog'>
   <div class="dialog-box" appDraggable [appDraggableHandle]="draghandle">
-    <header #draghandle><div class="title">Search</div></header>
-      <div class='searchbox'>
-        <input #input class="form-control" [(ngModel)]="search"
-               (keydown)="onKeyDown($event)"
-               (keyup)="onKeyUp($event)" type="text"/>
-      </div>
+    <header #draghandle>
+      <div class="title">Search</div>
+      <div class="close-button" (click)="onClose()">✕</div>
+    </header>
+    <div class='searchbox'>
+      <input #input class="form-control" [(ngModel)]="search"
+             (keydown)="onKeyDown($event)"
+             (keyup)="onKeyUp($event)" type="text"/>
+    </div>
       <div appSlimScroll size="7px" 
-                         height="40vh"
-                         railVisible="true"
-                         disableFadeOut="true"
-                         railColor="#bc94b7"
-                         opacity=".5"
-                         distance="3px"
-                         color="#000"
-                         forceScroll="{{scrollTo}}">
-        <div class="dialog-content">
-          <div class='results'>
-            <div #results *ngFor="let result of results; let i = index">
-              <span class="{{result.kind}} button btn btn-primary"
-                    [ngClass]="{active: i === selectedIndex}"
-                    (click)="onClick(result)">{{result.name}}</span>
-            </div>
+                       height="40vh"
+                       railVisible="true"
+                       disableFadeOut="true"
+                       railColor="#bc94b7"
+                       opacity=".5"
+                       distance="3px"
+                       color="#000"
+                       forceScroll="{{scrollTo}}">
+      <div class="dialog-content">
+        <div class='results'>
+          <div #results *ngFor="let result of results; let i = index">
+            <span class="{{result.kind}} button btn btn-primary"
+                  [ngClass]="{active: i === selectedIndex}"
+                  (click)="onClick(result)">{{result.name}}</span>
           </div>
-       </div>
-     </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

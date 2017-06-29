@@ -97,17 +97,20 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  public onSearchResult(searchResult: SearchResult) {
+  public onSearchResult(searchResult?: SearchResult) {
     // Close search box upon result
     this.searchBoxVisible = false;
-    // Add new tab
-    this.tabs.addTab({
-      title: searchResult.name,
-      content: searchResult.component,
-      close: true,
-      dirty: false,
-      data: searchResult.result
-    });
+
+    if (searchResult) {
+      // Add new tab
+      this.tabs.addTab({
+        title: searchResult.name,
+        content: searchResult.component,
+        close: true,
+        dirty: false,
+        data: searchResult.result
+      });
+    }
   }
 
 }
