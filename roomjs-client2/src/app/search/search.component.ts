@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit, OnChanges {
   @ViewChildren('results') listElements;
 
   @Input() refocus: boolean;
-  @Output() choice = new EventEmitter<string>();
+  @Output() choice = new EventEmitter<SearchResult>();
 
   public search = '';
   private prevSearch = '';
