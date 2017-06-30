@@ -3,111 +3,8 @@ import { Component, Output, EventEmitter, OnInit,
 import { ToasterService } from 'angular2-toaster';
 
 import { SocketService } from '../socket.service';
-import { FunctionEditorComponent } from '../editors/function-editor.component';
-import { TextEditorComponent } from '../editors/text-editor.component';
-import { VerbEditorComponent } from '../editors/verb-editor.component';
 
-// FIXME Put all definitions elswhere...
-
-type editorCallback = (data: any) => void;
-
-export class SearchResult {
-  public objectId: string;
-  public active: boolean;
-  public name: string;
-  public kind: string;
-  public result: any;
-  public component: any;
-
-  static newFromResult(result) {
-    if (result.function) {
-      // eslint-disable-next-line no-use-before-define -- FIXME ng lint complains
-      return new FunctionSearchResult(result);
-    } else if (result.verb) {
-      // eslint-disable-next-line no-use-before-define -- FIXME ng lint complains
-      return new VerbSearchResult(result);
-    } else if (result.text) {
-      // eslint-disable-next-line no-use-before-define -- FIXME ng lint complains
-      return new TextSearchResult(result);
-    }
-    throw new Error('Invalid result type.');
-  }
-
-  constructor(public data: any) {
-    this.objectId = data.objectId;
-    this.active = false;
-    this.name = this.computeName();
-  }
-
-  computeName(): string {
-    throw new Error('Must be subclassed.');
-  }
-
-  // FIXME Inappropriate name
-  openEditor(socketService: SocketService, fn: editorCallback) {
-    throw new Error('Must be subclassed.');
-  }
-}
-
-class FunctionSearchResult extends SearchResult {
-  constructor(public data: any) {
-    super(data);
-    this.kind = 'function';
-    this.component = FunctionEditorComponent;
-  }
-
-  computeName(): string {
-    return `${this.objectId}.${this.data.function}`;
-  }
-
-  openEditor(socketService: SocketService, fn: editorCallback) {
-    const params = { objectId: this.objectId, name: this.data.function };
-    socketService.getFunction(params, data => {
-      this.result = data;
-      fn(this);
-    });
-  }
-}
-
-class TextSearchResult extends SearchResult {
-  constructor(public data: any) {
-    super(data);
-    this.kind = 'text';
-    this.component = TextEditorComponent;
-  }
-
-  computeName(): string {
-    return `${this.objectId}.${this.data.text}`;
-  }
-
-  openEditor(socketService: SocketService, fn: editorCallback) {
-    const params = { objectId: this.objectId, name: this.data.text };
-    socketService.getText(params, data => {
-      this.result = data;
-      fn(this);
-    });
-  }
-}
-
-class VerbSearchResult extends SearchResult {
-  constructor(public data: any) {
-    super(data);
-    this.kind = 'verb';
-    this.component = VerbEditorComponent;
-  }
-
-  computeName(): string {
-    return `${this.objectId}.${this.data.verb}`;
-  }
-
-  openEditor(socketService: SocketService, fn: editorCallback) {
-    const params = { objectId: this.objectId, name: this.data.verb };
-    socketService.getVerb(params, data => {
-      this.result = data;
-      fn(this);
-    });
-  }
-}
+import { SearchResult } from './search.class';
 
 @Component({
   selector: 'app-search',
@@ -123,7 +20,7 @@ export class SearchComponent implements OnInit, OnChanges {
 
   public search = '';
   private prevSearch = '';
-  private results: any = [];
+  private results: SearchResult[] = [];
   public selectedIndex = 0;
   public scrollTo = 0;
 
@@ -192,8 +89,8 @@ export class SearchComponent implements OnInit, OnChanges {
     }
   }
 
-  public onClick(selected: any) {
-    selected.openEditor(this.socketService, (choice) => {
+  public onClick(selected: SearchResult) {
+    selected.fetchResult(this.socketService).then(choice => {
       if (choice.result) {
         this.choice.emit(choice);
       } else {
@@ -217,5 +114,4 @@ export class SearchComponent implements OnInit, OnChanges {
       }
     }
   }
-
 }

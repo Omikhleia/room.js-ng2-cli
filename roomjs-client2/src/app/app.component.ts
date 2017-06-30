@@ -4,7 +4,8 @@ import { SocketService, SessionEvent } from './socket.service';
 import { SoundService } from './sound.service';
 import { Tab, TabsService, TabsBodyComponent, TabsHeaderComponent } from './tabs/tabs';
 
-import { SearchComponent, SearchResult } from './search/search.component';
+import { SearchComponent } from './search/search.component';
+import { SearchResult } from './search/search.class';
 
 import { ClientViewComponent} from './client-view/client-view.component';
 import { FunctionEditorComponent } from './editors/function-editor.component';

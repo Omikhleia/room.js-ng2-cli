@@ -75,21 +75,27 @@ export class SocketService {
     });
   }
 
-  getVerb(params: any, fn: any) {
-    this.socket.emit('get-verb', params, data => {
-      fn(data);
+  getVerb(params: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('get-verb', params, data => {
+        resolve(data);
+      });
     });
   }
 
-  getText(params: any, fn: any) {
-    this.socket.emit('get-text', params, data => {
-      fn(data);
+  getText(params: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('get-text', params, data => {
+        resolve(data);
+      });
     });
   }
 
-  getFunction(params: any, fn: any) {
-    this.socket.emit('get-function', params, data => {
-      fn(data);
+  getFunction(params: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('get-function', params, data => {
+        resolve(data);
+      });
     });
   }
 
