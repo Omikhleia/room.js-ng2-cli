@@ -4,14 +4,14 @@
   "traitIds": [
     "lib.item"
   ],
-  "locationId": "players.joe",
+  "locationId": "areas.start.heaven",
   "properties": {
     "description": {
       "value": "the magical staff of creation, for 'use' by builders"
     },
     "use": {
-      "verb": true,
       "file": "use.js",
+      "verb": true,
       "pattern": "use",
       "dobjarg": "this",
       "preparg": "at/to",

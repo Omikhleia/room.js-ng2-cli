@@ -1,6 +1,6 @@
 <div class="wrapper">
   <div class="cmdline">
-    <form (submit)="onSubmit()" (keydown)="onKeyDown($event)" #f="ngForm">
+    <form (submit)="onSubmit()" (keydown)="onKeyDown($event)" #f="ngForm" ngNativeValidate>
       <label for='input' [innerHTML]="prompt"></label>
       <input class="form-control" autocomplete="off" type="text" 
              [(ngModel)]="command" name="input" required>

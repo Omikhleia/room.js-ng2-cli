@@ -4,7 +4,7 @@
   "traitIds": [
     "lib.item"
   ],
-  "locationId": "players.bill",
+  "locationId": "areas.start.heaven",
   "properties": {
     "play": {
       "file": "play.js",

@@ -2,23 +2,23 @@
   <div class="dialog-box">
     <header><div class="title">{{title}}</div></header>
     <div class="dialog-content">
-      <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <form (ngSubmit)="onSubmit(f)" #f="ngForm" ngNativeValidate>
         <div class="form-group">
           <p *ngFor="let field of fields; let i = index">
             <label for='{{field.name}}'>{{titleCase(field.label)}}</label>
             <select *ngIf="field.options; else input" 
                     class="form-control" name="{{field.name}}" 
-                    ngModel>
+                    ngModel required>
               <option value="" disabled>Select a character</option>
               <option *ngFor="let option of field.options" 
                     [attr.value]="option"
                     class="form-control">{{option}}</option>
             </select>
             <ng-template #input>
-            <input *ngIf="i === 0" #focus class="form-control" 
-                   type="{{field.type}}" name="{{field.name}}" required ngModel>
-            <input *ngIf="i !== 0" class="form-control" 
-                   type="{{field.type}}" name="{{field.name}}" required ngModel>
+              <input *ngIf="i === 0" #focus class="form-control" 
+                     type="{{field.type}}" name="{{field.name}}" required ngModel>
+              <input *ngIf="i !== 0" class="form-control" 
+                     type="{{field.type}}" name="{{field.name}}" required ngModel>
             </ng-template>
           </p>
         </div>
