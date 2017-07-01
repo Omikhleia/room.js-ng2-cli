@@ -34,7 +34,7 @@
     "howler": "^2.0.2",
     "ng2-codemirror": "^1.1.2",
     "ng2-codemirror-typescript": "^1.0.2",
-    "ng2-dnd": "^4.0.2",
+    "ng2-dnd": "~4.0.2",
     "rxjs": "^5.1.0",
     "socket.io-client": "^2.0.3",
     "zone.js": "^0.8.12"
