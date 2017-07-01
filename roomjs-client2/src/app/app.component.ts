@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 
 import { SocketService, SessionEvent } from './socket.service';
 import { SoundService } from './sound.service';
+import { ImageService } from './image.service';
 import { Tab, TabsService, TabsBodyComponent, TabsHeaderComponent } from './tabs/tabs';
 
 import { SearchComponent } from './search/search.component';
@@ -16,7 +17,7 @@ import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
-  providers: [ SoundService, SocketService, TabsService ],
+  providers: [ SoundService, SocketService, TabsService, ImageService ],
   entryComponents: [ ClientViewComponent, FunctionEditorComponent,
                      TextEditorComponent, VerbEditorComponent, SearchComponent ],
   templateUrl: './app.component.html',
@@ -36,7 +37,9 @@ export class AppComponent implements OnInit, OnDestroy {
     {title: 'Client', content: ClientViewComponent, close: false }
   ];
 
-  constructor(private socketService: SocketService, private tabs: TabsService) {
+  constructor(private socketService: SocketService, 
+              private imageService: ImageService,
+              private tabs: TabsService) {
   }
 
   ngOnInit() {
