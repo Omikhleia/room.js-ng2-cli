@@ -37,7 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
     {title: 'Client', content: ClientViewComponent, close: false }
   ];
 
-  constructor(private socketService: SocketService, 
+  constructor(private socketService: SocketService,
               private imageService: ImageService,
               private tabs: TabsService) {
   }
