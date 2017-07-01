@@ -22,7 +22,8 @@ const items = {
   'Adam Baker': 'npc_baker.png',
   'Paul Butcher': 'npc_butcher.png',
   'Sarah': 'npc_barmaid.png',
-  'pocket watch': 'pocketwatch.png'
+  'pocket watch': 'pocketwatch.png',
+  'guitar': 'guitar.png'
 };
 
 const unknownItem = 'unknown_item.png';

@@ -15,7 +15,8 @@ const items = {
   'staff of creation': 'staff.png',
   'antique key': 'key.png',
   'lantern': 'lantern.png',
-  'pocket watch': 'pocketwatch.png'
+  'pocket watch': 'pocketwatch.png',
+  'guitar': 'guitar.png'
 };
 
 const unknownItem = 'unknown_item.png';
